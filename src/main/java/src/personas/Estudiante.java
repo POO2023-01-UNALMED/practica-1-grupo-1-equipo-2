@@ -1,12 +1,14 @@
 package personas;
 
+import Calendario.*;
+
 public class Estudiante extends personas{
 	public String nombre;
 	public int ID_estudiante;
-	public materia materias_insctritas;
+	public Materia materias_insctritas;
 	
 	
-	public Estudiante ( String nombre, int ID_estudiante,  materia materias_insctritas) {
+	public Estudiante ( String nombre, int ID_estudiante,  Materia materias_insctritas) {
 		this.nombre = nombre;
 		this.ID_estudiante = ID_estudiante;
 		this.materias_insctritas = materias_insctritas;
@@ -29,10 +31,10 @@ public class Estudiante extends personas{
 	}
 	
 	
-	public materia getMaterias_inscritas() {
+	public Materia getMaterias_inscritas() {
 		return materias_insctritas;
 	}
-	public void setMaterias_Insctritas(materia materias_inscritas) {
+	public void setMaterias_Insctritas(Materia materias_inscritas) {
 		this.materias_insctritas = materias_inscritas;
 	}
 	
