@@ -10,7 +10,7 @@ public class Profesor extends personas {
 	public String Email;
 	
 	//constructor
-	public profesor (String nombre, int ID_profesor, Materia materias_asignadas) {
+	public void profesor (String nombre, int ID_profesor, Materia materias_asignadas, String Email) {
 		this.nombre=nombre;
 		this.ID_profesor = ID_profesor;
 		this.materias_asignadas= materias_asignadas;
