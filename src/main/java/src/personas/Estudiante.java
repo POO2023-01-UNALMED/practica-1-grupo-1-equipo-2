@@ -7,9 +7,9 @@ import Calendario.*;
 public class Estudiante extends Persona{
 	public String nombre;
 	public int ID_estudiante;
-	public Materia materias_insctritas;
+	public ArrayList<Materia> materias_insctritas;
 	
-	protected ArrayList<Materia> materias_Asignadas;
+	protected ArrayList<Materia> materias_inscritas;
 	
 	
 	//public Estudiante ( String nombre, int ID_estudiante,  Materia materias_insctritas) {
@@ -17,9 +17,9 @@ public class Estudiante extends Persona{
 		//this.ID_estudiante = ID_estudiante;
 		//this.materias_insctritas = materias_insctritas;
 	//}
-	public Estudiante(String nombre, int ID_estudiante, String Email){
+	public Estudiante(String nombre, int ID, String Email){
 		this.nombre = nombre;
-		this.ID_estudiante = ID_estudiante;
+		this.ID_estudiante = ID;
 		this.Email = Email;
 		
 	}
@@ -34,11 +34,11 @@ public class Estudiante extends Persona{
 	}
 	
 	
-	public int getID_Estudiante() {
-		return ID_estudiante;
+	public int getID() {
+		return ID;
 	}
-	public void setID_Estudiante(int ID_estudiante) {
-		this.ID_estudiante = ID_estudiante;
+	public void setID(int ID) {
+		this.ID = ID;
 	}
 	
 	
@@ -57,18 +57,18 @@ public class Estudiante extends Persona{
 		//this.materias_insctritas = materias_inscritas;
 	//}
 	
-	public ArrayList<Materia> getMaterias_Asignadas(){
-		return materias_Asignadas;
+	public ArrayList<Materia> getMaterias_Inscritas(){
+		return materias_insctritas;
 	}
-	public void setMaterias_Asignadas(ArrayList<Materia> materiasAsignadas) {
-		this.materias_Asignadas = materiasAsignadas;
+	public void setMaterias_Inscritas(ArrayList<Materia> materiasInsctritas) {
+		this.materias_insctritas = materiasInsctritas;
 	}
 	
 	
 	public void asignarMateria  (Materia nuevaMateria) {
-		materias_Asignadas.add(nuevaMateria);
+		materias_insctritas.add(nuevaMateria);
 	}
 	public void retirarMateria(Materia Materia) {
-		materias_Asignadas.remove(Materia);
+		materias_insctritas.remove(Materia);
 	}
 }
