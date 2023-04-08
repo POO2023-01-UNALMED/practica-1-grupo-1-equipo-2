@@ -1,7 +1,7 @@
 package personas;
 import Calendario.*;
 
-public class Profesor extends personas {
+public class Profesor extends Persona{
 	
 	//atributos de instancia
 	public String nombre;
