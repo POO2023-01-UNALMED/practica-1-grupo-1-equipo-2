@@ -42,12 +42,27 @@ public class Estudiante extends Persona{
 	}
 	
 	
+	public String getEmail() {
+		return Email;
+	}
+	public void setEmail(String Email) {
+		this.Email = Email;
+	}
+	
+	
 	//public Materia getMaterias_inscritas() {
 		//return materias_insctritas;
 	//}
 	//public void setMaterias_Insctritas(Materia materias_inscritas) {
 		//this.materias_insctritas = materias_inscritas;
 	//}
+	
+	public ArrayList<Materia> getMaterias_Asignadas(){
+		return materias_Asignadas;
+	}
+	public void setMaterias_Asignadas(ArrayList<Materia> materiasAsignadas) {
+		this.materias_Asignadas = materiasAsignadas;
+	}
 	
 	
 	public void asignarMateria  (Materia nuevaMateria) {

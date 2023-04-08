@@ -8,11 +8,11 @@ public class Materia {
 	//atributos de instancia
 	private int codigo;
 	private String nombre;
-	private profesor profesor;
-	private horario horario;
+	private Profesor profesor;
+	private Horario horario;
 	private int creditos;
 	protected ArrayList<Estudiante> estudiantes_inscritos;
-	protected ArrayList<tarea> tareas_de_materia;
+	protected ArrayList<Tarea> tareas_de_materia;
 	
 	
 	//atributos de clase
