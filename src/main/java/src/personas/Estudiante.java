@@ -2,7 +2,7 @@ package personas;
 
 import Calendario.*;
 
-public class Estudiante extends personas{
+public class Estudiante extends Persona{
 	public String nombre;
 	public int ID_estudiante;
 	public Materia materias_insctritas;
