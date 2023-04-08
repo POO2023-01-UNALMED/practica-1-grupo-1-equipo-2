@@ -1,48 +1,37 @@
 package personas;
 import Calendario.*;
+import java.util.ArrayList;
 
-public class Profesor extends personas {
+
+public class Profesor extends Persona {
 	
 	//atributos de instancia
-	public String nombre;
-	public int ID_profesor;
-	public Materia materias_asignadas;
-	public String Email;
+	protected ArrayList<Materia> materias_Asignadas;
 	
 	//constructor
-	public void profesor (String nombre, int ID_profesor, Materia materias_asignadas, String Email) {
+	public void profesor (String nombre, int ID, String Email) {
 		this.nombre=nombre;
-		this.ID_profesor = ID_profesor;
-		this.materias_asignadas= materias_asignadas;
+		this.ID = ID;
 		this.Email=Email;
 	}
 	//metodos set y get
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-	public int getID_profesor() {
-		return ID_profesor;
-	}
-	public void setID_profesor(int ID_profesor) {
-		this.ID_profesor = ID_profesor;
+	
+	
+	public ArrayList<Materia> getMaterias_Asignadas(){
+		return materias_Asignadas;
 	}
 	
-	public String getEmail() {
-		return Email;
-	}
-	public void setEmail(String Email) {
-		this.Email=Email;
+	public void setMaterias_Asignadas(ArrayList<Materia> materiasAsignadas) {
+		this.materias_Asignadas= materiasAsignadas;
 	}
 	
-	public Materia getMaterias_asignadas() {
-		return materias_asignadas;
-	}
-	public void setMaterias_asignadas(Materia materias_asignadas) {
-		this.materias_asignadas = materias_asignadas;
-	}
+	//metodos de clase
 	
+	public void asignarMateria(Materia nuevaMateria) {
+		materias_Asignadas.add(nuevaMateria);
+	}
+	public void retirarMateria(Materia Materia) {
+		materias_Asignadas.remove(Materia);
+	}
 
 }
