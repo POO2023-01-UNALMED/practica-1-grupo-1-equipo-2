@@ -6,6 +6,11 @@ public abstract class Persona {
 	public int ID;
 	public String Email;
 	
+	public Persona (String nombre, int ID, String Email) {
+		this.nombre=nombre;
+		this.ID = ID;
+		this.Email=Email;
+	}
 	
 	//metodos get y set 
 	public String getNombre() {

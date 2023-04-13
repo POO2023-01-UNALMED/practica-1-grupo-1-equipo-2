@@ -9,10 +9,8 @@ public class Profesor extends Persona {
 	protected ArrayList<Materia> materias_Asignadas;
 	
 	//constructor
-	public void profesor (String nombre, int ID, String Email) {
-		this.nombre=nombre;
-		this.ID = ID;
-		this.Email=Email;
+	public Profesor (String nombre, int ID, String Email) {
+		super(nombre, ID, Email);
 	}
 	//metodos set y get
 	

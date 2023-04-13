@@ -12,18 +12,20 @@ public class Materia {
 	private Horario horario;
 	private int creditos;
 	protected ArrayList<Estudiante> estudiantes_inscritos;
-	protected ArrayList<Tarea> tareas_de_materia;
+	protected static ArrayList<Tarea> tareas_de_materia;
 	
 	
 	//atributos de clase
 	private static int porcentajeDeAvance = 0;
 	
 	//constructor
-	public Materia(int codigo, String nombre, Profesor profesor, Horario horario) {
+	public Materia(int codigo, String nombre, Profesor profesor, Horario horario, int creditos) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.profesor = profesor;
         this.horario = horario;
+        this.creditos = creditos;
+        tareas_de_materia = new ArrayList<Tarea>();
 	}
 	
 	
@@ -76,7 +78,7 @@ public class Materia {
 	    }
 
 	 
-	 public ArrayList<Tarea> getTareasDeMateria() {
+	 public static ArrayList<Tarea> getTareasDeMateria() {
 	        return tareas_de_materia;
 	    }
 	 public void setTareasDeMateria(ArrayList<Tarea> nuevasTareas) {
@@ -99,5 +101,17 @@ public class Materia {
 	 public void retirarEstudiante(Estudiante Estudiante) {
 		 estudiantes_inscritos.remove(Estudiante);
 	 }	 
-
+	 
+	 
+	 public static double calcularPromedio() {
+		 
+		 double finalProm = 0.0;
+		 //int i=0;i<tareas.size();i++
+		 
+		 for (Tarea tarea : tareas_de_materia) {
+			 finalProm+=tarea.getCalificacion();
+		 }
+		 
+		 return finalProm/tareas_de_materia.size();
+	 }
 }
