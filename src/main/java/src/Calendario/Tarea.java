@@ -30,25 +30,49 @@ public class Tarea {
 	public void setDescripcion(String descripcion) {
 		this.descipcion=descripcion;
 	}
-
-	public double getCalificacion() {
-		return calificacion;
+	
+	public String getDescripcion() {
+		return descipcion;
 	}
 	
-	//métodos
-	public void agregarTarea() {
-		
-		
+	public void setMateria(Materia materia) {
+		this.materia=materia;
+	}
+	
+	public Materia getMateria() {
+		return materia;
+	}
+	
+	public void setFecha_Entrega(String fecha_Entrega) {
+		this.fecha_Entrega=fecha_Entrega;
+	}
+	
+	public String getFecha_Entrega() {
+		return fecha_Entrega;
+	}
+	
+	public void setFecha_Intrega(String fecha_Inicio) {
+		this.fecha_Inicio=fecha_Inicio;
+	}
+
+	public String getFecha_Inicio() {
+		return fecha_Inicio;
+	}
+	
+	public void setCalificacion(double calificacion) {
+		this.calificacion=calificacion;
+	}
+	
+	public double getCalificacion() {
+		return calificacion;
 	}
 	
 	public static void ingresarTarea(Tarea tarea) {
 		Materia.tareas_de_materia.add(tarea);
 	}
 	
-	public void eliminarTarea() {
-		
+	public static void eliminarTarea(Tarea tarea) {
+		Materia.tareas_de_materia.remove(tarea);
 	}
-	public void agregarCalificacion() {
-		
-	}
+
 }
