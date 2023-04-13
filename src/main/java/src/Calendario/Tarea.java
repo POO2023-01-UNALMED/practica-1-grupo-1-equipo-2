@@ -26,6 +26,10 @@ public class Tarea {
 		this.calificacion = calificacion;
 		ingresarTarea(this);
 	}
+	
+	public void setDescripcion(String descripcion) {
+		this.descipcion=descripcion;
+	}
 
 	public double getCalificacion() {
 		return calificacion;
