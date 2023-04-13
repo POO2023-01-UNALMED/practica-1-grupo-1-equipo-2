@@ -32,4 +32,8 @@ public class Estudiante extends Persona{
 	public void retirarMateria(Materia Materia) {
 		materias_inscritas.remove(Materia);
 	}
+	
+	//funcionalidades 
+	
+	
 }

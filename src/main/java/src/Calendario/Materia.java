@@ -26,6 +26,7 @@ public class Materia {
         this.horario = horario;
         this.creditos = creditos;
         tareas_de_materia = new ArrayList<Tarea>();
+        estudiantes_inscritos = new ArrayList<Estudiante>();
 	}
 	
 	
