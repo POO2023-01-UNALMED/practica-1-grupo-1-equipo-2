@@ -8,12 +8,14 @@ public class Estudiante extends Persona{
 	
 	
 	//atributos
-	protected static ArrayList<Materia> materias_inscritas;
+	public static ArrayList<Materia> materias_inscritas;
 	
 	
 	//constructor
 	public Estudiante(String nombre, int ID, String Email){
 		super (nombre, ID, Email);
+		materias_inscritas = new ArrayList<Materia>();
+
 	}
 	
 	
@@ -44,9 +46,9 @@ public class Estudiante extends Persona{
 			
 			for (int j = i + 1; j < materias_inscritas.size(); j ++) {
 				Horario horario2 = materias_inscritas.get(j).getHorario();
-				String hora3 = horario.getHora_inicio();
-				String hora4 = horario.getHora_Fin();
-				Horario.dias dia2 = horario.getDia();
+				String hora3 = horario2.getHora_inicio();
+				String hora4 = horario2.getHora_Fin();
+				Horario.dias dia2 = horario2.getDia();
 				
 				if (dia1 == dia2) {
 					if (hora1 == hora3 || hora2 == hora4) {

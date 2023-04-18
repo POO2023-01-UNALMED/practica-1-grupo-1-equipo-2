@@ -11,6 +11,7 @@ public class Materia {
 	private Profesor profesor;
 	private Horario horario;
 	private int creditos;
+	private Estudiante estudiante;
 	protected ArrayList<Estudiante> estudiantes_inscritos;
 	protected static ArrayList<Tarea> tareas_de_materia;
 	
@@ -19,14 +20,17 @@ public class Materia {
 	private static int porcentajeDeAvance = 0;
 	
 	//constructor
-	public Materia(int codigo, String nombre, Profesor profesor, Horario horario, int creditos) {
+	public Materia(int codigo, String nombre, Profesor profesor, Horario horario, int creditos,Estudiante estudiante) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.profesor = profesor;
         this.horario = horario;
         this.creditos = creditos;
+        this.estudiante=estudiante;
         tareas_de_materia = new ArrayList<Tarea>();
         estudiantes_inscritos = new ArrayList<Estudiante>();
+        inscribirMateria(this);
+        
 	}
 	
 	
@@ -103,6 +107,9 @@ public class Materia {
 		 estudiantes_inscritos.remove(Estudiante);
 	 }	 
 	 
+	 public void inscribirMateria(Materia materia) {
+		 Estudiante.materias_inscritas.add(materia);
+	 }
 	 
 	 
 	 public static double calcularPromedio() {
