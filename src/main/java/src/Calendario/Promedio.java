@@ -2,12 +2,12 @@ package Calendario;
 
 import personas.*;
 
-public class Calificacion{
+public class Promedio{
 	private Materia materia;
 	private Estudiante estudiante;
 	public int NOTA;
 	
-	public Calificacion(Materia materia, Estudiante estudiante, int nota) {
+	public Promedio(Materia materia, Estudiante estudiante, int nota) {
 		this.materia = materia;
 		this.estudiante = estudiante;
 		this.NOTA= nota;

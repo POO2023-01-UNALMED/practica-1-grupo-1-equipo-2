@@ -1,5 +1,7 @@
 package Calendario;
 
+import personas.*;
+
 public class Tarea {
 	
 	//atributos
@@ -8,14 +10,16 @@ public class Tarea {
 	protected String fecha_Entrega;
 	protected String fecha_Inicio;
 	protected double calificacion;
+	private Estudiante estudiante;
 	
 	//constructor
-	public Tarea(String descripcion, Materia materia, String fecha_Entrega, String fecha_Inicio, double calificacion) {
+	public Tarea(String descripcion, Materia materia, String fecha_Entrega, String fecha_Inicio, double calificacion,Estudiante estudiante) {
 		this.descipcion =descripcion;
 		this.materia = materia;
 		this.fecha_Entrega = fecha_Entrega;
 		this.fecha_Inicio = fecha_Inicio;
 		this.calificacion = calificacion;
+		this.estudiante = estudiante;
 	}
 	//constructor 2
 	public Tarea(Materia materia, String fecha_Entrega, double calificacion) {

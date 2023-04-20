@@ -11,26 +11,25 @@ public class Materia {
 	private Profesor profesor;
 	private Horario horario;
 	private int creditos;
-	private Estudiante estudiante;
+	//private Estudiante estudiante;
+	private ArrayList<Promedio> promedios;
+	private boolean aprobado;
 	protected ArrayList<Estudiante> estudiantes_inscritos;
-	protected static ArrayList<Tarea> tareas_de_materia;
-	
-	
-	//atributos de clase
-	private static int porcentajeDeAvance = 0;
+	protected ArrayList<Tarea> tareas_de_materia;
+
 	
 	//constructor
-	public Materia(int codigo, String nombre, Profesor profesor, Horario horario, int creditos,Estudiante estudiante) {
+	public Materia(int codigo, String nombre, Profesor profesor, Horario horario, int creditos, Estudiante estudiante) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.profesor = profesor;
         this.horario = horario;
         this.creditos = creditos;
-        this.estudiante=estudiante;
+        //this.estudiante = estudiante;
+        this.aprobado = false;
         tareas_de_materia = new ArrayList<Tarea>();
         estudiantes_inscritos = new ArrayList<Estudiante>();
         inscribirMateria(this);
-        
 	}
 	
 	
@@ -58,7 +57,7 @@ public class Materia {
 	        this.profesor = profesor;
 	    }
 
-	 
+
 	 public Horario getHorario() {
 	        return horario;
 	    }
@@ -74,6 +73,12 @@ public class Materia {
 	        this.creditos = creditos;
 	    }
 	 
+	 public ArrayList<Promedio> getPromedio() {
+	        return promedios;
+	    }
+	 public void setPromedio(ArrayList<Promedio> promedios) {
+	        this.promedios = promedios;
+	    }
 	 
 	 public ArrayList<Estudiante> getEstudiantesInscritos() {
 	        return estudiantes_inscritos;
@@ -83,20 +88,12 @@ public class Materia {
 	    }
 
 	 
-	 public static ArrayList<Tarea> getTareasDeMateria() {
+	 public ArrayList<Tarea> getTareasDeMateria() {
 	        return tareas_de_materia;
 	    }
 	 public void setTareasDeMateria(ArrayList<Tarea> nuevasTareas) {
 	        this.tareas_de_materia = nuevasTareas;
 	    }
-	
-	 
-	 public static int getPorcentajeDeAvance() {
-		 	return porcentajeDeAvance;
-	 	}
-	 public static void setPorcentajeDeAvance(int PorcentajeDeAvance) {
-		 	porcentajeDeAvance = PorcentajeDeAvance;
-	 	}	 
 	 
 	 
 	 //metodos de la clase
@@ -112,15 +109,14 @@ public class Materia {
 	 }
 	 
 	 
-	 public static double calcularPromedio() {
+	 public void calcularPromedio() {
 		 
 		 double finalProm = 0.0;
-		 //int i=0;i<tareas.size();i++
-		 
+
 		 for (Tarea tarea : tareas_de_materia) {
 			 finalProm+=tarea.getCalificacion();
 		 }
 		 
-		 return finalProm/tareas_de_materia.size();
+		 //this.promedios = finalProm/tareas_de_materia.size();
 	 }
 }
