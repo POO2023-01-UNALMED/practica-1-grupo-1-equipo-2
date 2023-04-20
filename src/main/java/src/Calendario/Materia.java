@@ -12,14 +12,14 @@ public class Materia {
 	private Horario horario;
 	private int creditos;
 	//private Estudiante estudiante;
-	private ArrayList<Promedio> promedios;
+	private ArrayList<TareaEstudiante> promedios;
 	private boolean aprobado;
 	protected ArrayList<Estudiante> estudiantes_inscritos;
 	protected ArrayList<Tarea> tareas_de_materia;
 
 	
 	//constructor
-	public Materia(int codigo, String nombre, Profesor profesor, Horario horario, int creditos, Estudiante estudiante) {
+	public Materia(int codigo, String nombre, Profesor profesor, Horario horario, int creditos) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.profesor = profesor;
@@ -29,7 +29,6 @@ public class Materia {
         this.aprobado = false;
         tareas_de_materia = new ArrayList<Tarea>();
         estudiantes_inscritos = new ArrayList<Estudiante>();
-        inscribirMateria(this);
 	}
 	
 	
@@ -73,10 +72,10 @@ public class Materia {
 	        this.creditos = creditos;
 	    }
 	 
-	 public ArrayList<Promedio> getPromedio() {
+	 public ArrayList<TareaEstudiante> getPromedio() {
 	        return promedios;
 	    }
-	 public void setPromedio(ArrayList<Promedio> promedios) {
+	 public void setPromedio(ArrayList<TareaEstudiante> promedios) {
 	        this.promedios = promedios;
 	    }
 	 
@@ -104,19 +103,18 @@ public class Materia {
 		 estudiantes_inscritos.remove(Estudiante);
 	 }	 
 	 
-	 public void inscribirMateria(Materia materia) {
-		 Estudiante.materias_inscritas.add(materia);
+	 public void inscribirTarea(Tarea tarea) {
+		 tareas_de_materia.add(tarea);
 	 }
+	 public void retirarTarea(Tarea tarea) {
+		 tareas_de_materia.remove(tarea);
+	 }	 
 	 
-	 
-	 public void calcularPromedio() {
-		 
-		 double finalProm = 0.0;
-
-		 for (Tarea tarea : tareas_de_materia) {
-			 finalProm+=tarea.getCalificacion();
-		 }
-		 
-		 //this.promedios = finalProm/tareas_de_materia.size();
-	 }
+	 public double calcularPromedio(Estudiante estudiante) {
+	        double totalScore = 0;
+	        for (Tarea tarea : tareas_de_materia) {
+	            totalScore += tarea.getGrade(estudiante);
+	        }
+	        return totalScore;
+	    }
 }

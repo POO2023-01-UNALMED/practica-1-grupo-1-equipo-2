@@ -24,7 +24,7 @@ public class Estudiante extends Persona{
 		this.promedio =  0.0;
 		this.porcentajeDeAvance = porcentajeDeAvance;
 		materias_inscritas = new ArrayList<Materia>();
-		aplicarBeca(this);
+		//aplicarBeca(this);
 	}
 	
 	
@@ -33,7 +33,7 @@ public class Estudiante extends Persona{
 		return materias_inscritas;
 	}
 	public void setMaterias_Inscritas(ArrayList<Materia> materiasInscritas) {
-		this.materias_inscritas = materiasInscritas;
+		materias_inscritas = materiasInscritas;
 	}
 	
 	public boolean getFueBecado() {
@@ -42,14 +42,6 @@ public class Estudiante extends Persona{
 	public void setFueBecado(boolean fueBecado) {
         this.fueBecado = fueBecado;
     }
-	
-	public double getPromedio() {
-        return promedio;
-    }
-	public void setPromedio(double finalProm) {
-        this.promedio = finalProm;
-    }
-	
 	
 	public int getPorcentajeDeAvance() {
 	 	return porcentajeDeAvance;
@@ -67,19 +59,19 @@ public class Estudiante extends Persona{
 		materias_inscritas.remove(Materia);
 	}
 	
-	public void aplicarBeca  (Estudiante estudiante) {
-		Beca.estudiantes.add(estudiante);
-	}
+	//public void aplicarBeca  (Estudiante estudiante) {
+	//	Beca.estudiantes.add(estudiante);
+	//}
 	
 	
-	public void calcularPromedio(){
+	public double calcularPromedio(){
 		double finalprom = 0.0;
 		int contador = 0;
 		for (Materia materia: materias_inscritas) {
-			finalprom+=materia.getPromedio();
+			finalprom += materia.calcularPromedio(this);
 			contador+=1;
-		this.promedio = finalprom/contador;
 		}
+		return finalprom/contador;	
 	}
 	
 	

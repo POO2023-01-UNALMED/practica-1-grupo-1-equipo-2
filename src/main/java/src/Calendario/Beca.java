@@ -34,13 +34,13 @@ public class Beca {
 	        
 		for (Estudiante estudiante : estudiantes) {
 	            if (estudiante.getPorcentajeDeAvance() >= 20 && estudiante.getPorcentajeDeAvance() < 40 &&
-	            		estudiante.getPromedio() >= 4.5 &&
+	            		estudiante.calcularPromedio() >= 4.5 &&
 	            		estudiante.getFueBecado() == false) {
 	            	estudiantesAptosInicial.add(estudiante);
 	            	}
 	            
 	            else if (estudiante.getPorcentajeDeAvance() >= 40 && estudiante.getPorcentajeDeAvance() < 60 &&
-	            		estudiante.getPromedio() >= 4.0 &&
+	            		estudiante.calcularPromedio() >= 4.0 &&
 	            		estudiante.getFueBecado() == false) {
 	            	estudiantesAptosNormal.add(estudiante);
 			    	
@@ -49,9 +49,9 @@ public class Beca {
 			    	estudiantesAptosAvanzada.add(estudiante);
 			    }
 	        }
-	        Collections.sort(estudiantesAptosInicial, Comparator.comparingDouble(Estudiante::getPromedio).reversed());
-	        Collections.sort(estudiantesAptosNormal, Comparator.comparingDouble(Estudiante::getPromedio).reversed());
-	        Collections.sort(estudiantesAptosAvanzada, Comparator.comparingDouble(Estudiante::getPromedio).reversed());
+	        Collections.sort(estudiantesAptosInicial, Comparator.comparingDouble(Estudiante::calcularPromedio).reversed());
+	        Collections.sort(estudiantesAptosNormal, Comparator.comparingDouble(Estudiante::calcularPromedio).reversed());
+	        Collections.sort(estudiantesAptosAvanzada, Comparator.comparingDouble(Estudiante::calcularPromedio).reversed());
 	        
 	        for (int i = 0; i<2;i++) {
 	        	this.estudiantesAptosInicial.add(estudiantesAptosInicial.get(i));
