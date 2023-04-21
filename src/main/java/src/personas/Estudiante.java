@@ -1,6 +1,8 @@
 package personas;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import Calendario.*;
 
@@ -9,7 +11,7 @@ public class Estudiante extends Persona{
 	//atributos
 	private double promedio;
 	private boolean fueBecado;
-	public static ArrayList<Materia> materias_inscritas;
+	public ArrayList<Materia> materias_inscritas;
 	private int porcentajeDeAvance;
 	private boolean fallaHorario;
 		
@@ -103,7 +105,7 @@ public class Estudiante extends Persona{
 				String hora4 = horario2.getHora_Fin();
 				Horario.dias dia2 = horario2.getDia();
 			
-				if (dia1 == dia2) {
+				if (dia1 == dia2 && !MateriasError.contains(materias_inscritas.get(i)))  {
 					if (hora1 == hora3 || hora2 == hora4) {
 						 this.fallaHorario=true; 
 						 MateriasError.add(materias_inscritas.get(i));
@@ -114,10 +116,31 @@ public class Estudiante extends Persona{
 		}
 		return MateriasError;
 		}
+	public String sugerirHorario(ArrayList<Materia> materiaR) {
+	    ArrayList<Materia> materiasSugeridas = new ArrayList<Materia>();
+	    Set<Horario> uniqueHorario = new HashSet<Horario>();
+		String p = "";
+	    if (fallaHorario) {
+			for (Materia materia : materias_inscritas) {
+				if (!uniqueHorario.contains(materia.getHorario())) {
+	                uniqueHorario.add(materia.getHorario());
+	                materiasSugeridas.add(materia);
+	            }
+	        }
+			for(Materia materia: materiasSugeridas) {
+				p+= materia;
+			}
+	    	return p;	
+	    	}
+		return "No hay sugerencias";
+	    }
+	
 	public String toString () {
 		return "Estudiante: " + getNombre();
 	}
+	
 	}
+
 		
 	
 	

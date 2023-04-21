@@ -1,6 +1,8 @@
 
 package Calendario;
 
+import java.util.ArrayList;
+
 import personas.*;
 
 public class TEST {
@@ -14,7 +16,7 @@ public class TEST {
 		
 		
 		Profesor pro = new Profesor("PABLO",12345,"jjk@a.com");
-		Horario ho = new Horario(Horario.dias.martes ,"2","3");
+		Horario ho = new Horario(Horario.dias.miercoles ,"2","3");
 		Horario ho1 = new Horario(Horario.dias.miercoles, "2", "3" );
 		
 		Materia MD = new Materia (456, "MD", pro, ho1, 4);
@@ -95,10 +97,10 @@ public class TEST {
 		Estudiante.aplicarBeca(est4);
 		beca.asignarEstudiantesBeca();
 		
-		System.out.println(beca.getEstudiantes());
-		System.out.println(beca.estudiantesAptosInicial);
-		System.out.println(beca.estudiantesAptosNormal);
-		System.out.println(beca.estudiantesAptosAvanzada);
+		//System.out.println(beca.getEstudiantes());
+		//System.out.println(beca.estudiantesAptosInicial);
+		//System.out.println(beca.estudiantesAptosNormal);
+		//System.out.println(beca.estudiantesAptosAvanzada);
 		
 		
 		double promedioEst = est.calcularPromedio();
@@ -116,6 +118,9 @@ public class TEST {
 		//Estudiante est = new Estudiante("PEPE", 67890, "pp@a.com");
 		//System.out.println(Materia.calcularPromedio());
 		//System.out.println(Estudiante.compararHorario());
+		ArrayList<Materia> nose = est.compararHorario();
+		System.out.println(est.sugerirHorario(nose));
+		System.out.println(est.getMaterias_Inscritas());
 	}
 
 }

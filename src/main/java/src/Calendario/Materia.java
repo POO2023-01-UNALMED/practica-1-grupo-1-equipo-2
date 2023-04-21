@@ -117,4 +117,7 @@ public class Materia {
 	        }
 	        return totalScore;
 	    }
+	 public String toString() {
+		 return nombre + " " + horario;
+	 }
 }

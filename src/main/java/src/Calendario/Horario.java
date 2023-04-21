@@ -1,5 +1,7 @@
 package Calendario;
 
+import java.util.ArrayList;
+
 public class Horario {
 	
 	private dias dia;
@@ -38,6 +40,10 @@ public class Horario {
 
     public void setHoraFinal(String hora_Fin) {
         this.hora_Fin = hora_Fin;
+    }
+    
+    public String toString() {
+    	return dia + ": de " + hora_inicio + " a " + hora_Fin;
     }
 }
 
