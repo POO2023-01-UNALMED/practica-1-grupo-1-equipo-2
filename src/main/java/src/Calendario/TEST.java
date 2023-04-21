@@ -9,7 +9,7 @@ public class TEST {
 		
 		Estudiante est = new Estudiante("PEPE", 67890, "pp@a.com",false,20);
 		Estudiante est2 = new Estudiante("JHON", 67890, "pp@a.com",false,20);
-		Estudiante est3 = new Estudiante("BRADLEY", 67890, "pp@a.com",false,45);
+		Estudiante est3 = new Estudiante("BREADLEY", 67890, "pp@a.com",false,45);
 		Estudiante est4 = new Estudiante("BAENA", 67890, "pp@a.com",false,65);
 		
 		
@@ -56,7 +56,7 @@ public class TEST {
 		Tarea tallerP = new Tarea(GVA,"NOSE");
 		tallerP.setGrade(est,5.0);
 		tallerP.setGrade(est2,2.0);
-		tallerP.setGrade(est3,4.0);
+		tallerP.setGrade(est3,1.0);
 		tallerP.setGrade(est4,3.5);
 		GVA.inscribirTarea(tallerP);
 
@@ -64,14 +64,14 @@ public class TEST {
 		Tarea tallerP2 = new Tarea(GVA,"NOSE2");
 		tallerP2.setGrade(est,5.0);
 		tallerP2.setGrade(est2,1.0);
-		tallerP2.setGrade(est3,4.0);
+		tallerP2.setGrade(est3,1.0);
 		tallerP2.setGrade(est4,3.5);
 		MD.inscribirTarea(tallerP2);
 		
 		Tarea tallerP3 = new Tarea(GVA,"NOSE3");
 		tallerP3.setGrade(est,5.0);
 		tallerP3.setGrade(est2,1.1);
-		tallerP3.setGrade(est3,4.0);
+		tallerP3.setGrade(est3,1.0);
 		tallerP3.setGrade(est4,3.5);
 		MD.inscribirTarea(tallerP3); 
 

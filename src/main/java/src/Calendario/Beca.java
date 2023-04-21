@@ -64,16 +64,33 @@ public class Beca {
 	        Collections.sort(estudiantesAptosNormal2, Comparator.comparingDouble(Estudiante::calcularPromedio).reversed());
 	        Collections.sort(estudiantesAptosAvanzada2, Comparator.comparingDouble(Estudiante::calcularPromedio).reversed());
 	        
-	        if (estudiantesAptosInicial2.size()>=2 && estudiantesAptosNormal2.size()>=2 && estudiantesAptosAvanzada2.size()>=2) {
-	        for (int i = 0; i<2;i++) {
-	        	this.estudiantesAptosInicial.add(estudiantesAptosInicial2.get(i));
-	        	this.estudiantesAptosNormal.add(estudiantesAptosNormal2.get(i));
-	        	this.estudiantesAptosAvanzada.add(estudiantesAptosAvanzada2.get(i));
-	         }
+	        if (estudiantesAptosInicial2.size()>=2) {
+	        	for (int i = 0; i<2;i++) {
+		        	this.estudiantesAptosInicial.add(estudiantesAptosInicial2.get(i));
+	        	}     
+	       }
+	        else if (estudiantesAptosInicial2.size()==1) {
+        		this.estudiantesAptosInicial.add(estudiantesAptosInicial2.get(0));
 	        }
-	        else if (estudiantesAptosInicial2.size()==1 && estudiantesAptosNormal2.size()==1 && estudiantesAptosAvanzada2.size()==1) {
-	        	this.estudiantesAptosInicial.add(estudiantesAptosInicial2.get(0));
+	        
+	        if (estudiantesAptosNormal2.size()>=2) {
+	        	for (int i =0; i<2; i++) {
+		        	this.estudiantesAptosNormal.add(estudiantesAptosNormal2.get(i));
+
+	        	}
+	        }
+	     
+	        else if (estudiantesAptosNormal2.size()==1) {
 	        	this.estudiantesAptosNormal.add(estudiantesAptosNormal2.get(0));
+	        }
+	        
+	        if (estudiantesAptosAvanzada2.size()>=2) {
+	        	for (int i =0; i<2; i++) {
+	        		this.estudiantesAptosAvanzada.add(estudiantesAptosAvanzada2.get(i));
+	        	}
+	        }
+	        
+	        else if (estudiantesAptosAvanzada2.size()==1) {
 	        	this.estudiantesAptosAvanzada.add(estudiantesAptosAvanzada2.get(0));
 	        }
 		}

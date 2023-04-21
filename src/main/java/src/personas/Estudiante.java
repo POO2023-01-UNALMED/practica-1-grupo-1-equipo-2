@@ -11,10 +11,12 @@ public class Estudiante extends Persona{
 	private boolean fueBecado;
 	public static ArrayList<Materia> materias_inscritas;
 	private int porcentajeDeAvance;
+	private boolean fallaHorario;
 		
 	//constructor
 	public Estudiante(String nombre, int ID, String Email, boolean fueBecado, int porcentajeDeAvance){
 		super (nombre, ID, Email);
+		this.fallaHorario = false;
 		this.fueBecado = fueBecado;
 		this.promedio =  0.0;
 		this.porcentajeDeAvance = porcentajeDeAvance;
@@ -29,9 +31,18 @@ public class Estudiante extends Persona{
 		materias_inscritas = materiasInscritas;
 	}
 	
+	public void setfallaHorario(boolean fallaHorario) {
+		this.fallaHorario= fallaHorario;
+	}
+	
+	public boolean getfallaHorario() {
+		return fallaHorario;
+	}
+	
 	public boolean getFueBecado() {
         return fueBecado;
     }
+	
 	public void setFueBecado(boolean fueBecado) {
         this.fueBecado = fueBecado;
     }
@@ -39,10 +50,10 @@ public class Estudiante extends Persona{
 	public int getPorcentajeDeAvance() {
 	 	return porcentajeDeAvance;
  	}
+	
 	public void setPorcentajeDeAvance(int PorcentajeDeAvance) {
 	 	porcentajeDeAvance = PorcentajeDeAvance;
  	}	 
-	
 	
 	//metodos de la clase
 	public void asignarMateria  (Materia nuevaMateria) {
@@ -78,34 +89,35 @@ public class Estudiante extends Persona{
 	}
 	
 	//funcionalidades 1. Detectar problemas con franja horaria
-	public boolean compararHorario(){
-		boolean f = false;
+	public ArrayList<Materia> compararHorario(){
+		ArrayList<Materia>MateriasError = new ArrayList<Materia>();
 		for(int i = 0; i < materias_inscritas.size(); i++ ) {
 			Horario horario = materias_inscritas.get(i).getHorario();
 			String hora1 = horario.getHora_inicio();
 			String hora2 = horario.getHora_Fin();
 			Horario.dias dia1 = horario.getDia();
 			
-			for (int j = i + 1; j < materias_inscritas.size(); j ++) {
+			for (int j = i + 1; j < materias_inscritas.size();) {
 				Horario horario2 = materias_inscritas.get(j).getHorario();
 				String hora3 = horario2.getHora_inicio();
 				String hora4 = horario2.getHora_Fin();
 				Horario.dias dia2 = horario2.getDia();
-				
+			
 				if (dia1 == dia2) {
 					if (hora1 == hora3 || hora2 == hora4) {
-						return true; 
+						 this.fallaHorario=true; 
+						 MateriasError.add(materias_inscritas.get(i));
+						 MateriasError.add(materias_inscritas.get(j));
 						}
-					else {return false;}
-					}
-				else {return false;}
-				}
 			}
-		return f;
+			}
+		}
+		return MateriasError;
 		}
 	public String toString () {
 		return "Estudiante: " + getNombre();
 	}
 	}
+		
 	
 	
