@@ -52,7 +52,7 @@ public class Estudiante extends Persona{
 		materias_inscritas.remove(Materia);
 	}
 	
-	public void aplicarBeca  (Estudiante estudiante) {
+	public static void aplicarBeca (Estudiante estudiante) {
 		Beca.estudiantes.add(estudiante);
 	}
 	
@@ -102,7 +102,10 @@ public class Estudiante extends Persona{
 				}
 			}
 		return f;
-		}		
+		}
+	public String toString () {
+		return "Estudiante: " + getNombre();
+	}
 	}
 	
 	

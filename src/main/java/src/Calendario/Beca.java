@@ -27,36 +27,54 @@ public class Beca {
 	}
 	
 	
+	public ArrayList<Estudiante> getEstudiantes() {
+	    return estudiantes;
+	}
+
+	public void setEstudiantes(ArrayList<Estudiante> estudiantes) {
+	    Beca.estudiantes = estudiantes;
+	}
+	
+	
 	public void asignarEstudiantesBeca() {
-		estudiantesAptosInicial = new ArrayList<Estudiante>();
-		estudiantesAptosNormal = new ArrayList<Estudiante>();
-		estudiantesAptosAvanzada = new ArrayList<Estudiante>();
+		ArrayList<Estudiante>estudiantesAptosInicial2 = new ArrayList<Estudiante>();
+		ArrayList<Estudiante>estudiantesAptosNormal2 = new ArrayList<Estudiante>();
+		ArrayList<Estudiante>estudiantesAptosAvanzada2 = new ArrayList<Estudiante>();
 	        
 		for (Estudiante estudiante : estudiantes) {
 	            if (estudiante.getPorcentajeDeAvance() >= 20 && estudiante.getPorcentajeDeAvance() < 40 &&
 	            		estudiante.calcularPromedio() >= 4.5 &&
 	            		estudiante.getFueBecado() == false) {
-	            	estudiantesAptosInicial.add(estudiante);
+	            	estudiantesAptosInicial2.add(estudiante);
 	            	}
 	            
 	            else if (estudiante.getPorcentajeDeAvance() >= 40 && estudiante.getPorcentajeDeAvance() < 60 &&
 	            		estudiante.calcularPromedio() >= 4.0 &&
 	            		estudiante.getFueBecado() == false) {
-	            	estudiantesAptosNormal.add(estudiante);
+	            	estudiantesAptosNormal2.add(estudiante);
 			    	
 				}
-			    else {
-			    	estudiantesAptosAvanzada.add(estudiante);
+			    else if(estudiante.getPorcentajeDeAvance() >= 60 && estudiante.getPorcentajeDeAvance() < 100 &&
+	            		estudiante.calcularPromedio() >= 3.5 &&
+	            		estudiante.getFueBecado() == false){
+			    	estudiantesAptosAvanzada2.add(estudiante);
 			    }
 	        }
-	        Collections.sort(estudiantesAptosInicial, Comparator.comparingDouble(Estudiante::calcularPromedio).reversed());
-	        Collections.sort(estudiantesAptosNormal, Comparator.comparingDouble(Estudiante::calcularPromedio).reversed());
-	        Collections.sort(estudiantesAptosAvanzada, Comparator.comparingDouble(Estudiante::calcularPromedio).reversed());
+	        Collections.sort(estudiantesAptosInicial2, Comparator.comparingDouble(Estudiante::calcularPromedio).reversed());
+	        Collections.sort(estudiantesAptosNormal2, Comparator.comparingDouble(Estudiante::calcularPromedio).reversed());
+	        Collections.sort(estudiantesAptosAvanzada2, Comparator.comparingDouble(Estudiante::calcularPromedio).reversed());
 	        
+	        if (estudiantesAptosInicial2.size()>=2 && estudiantesAptosNormal2.size()>=2 && estudiantesAptosAvanzada2.size()>=2) {
 	        for (int i = 0; i<2;i++) {
-	        	this.estudiantesAptosInicial.add(estudiantesAptosInicial.get(i));
-	        	this.estudiantesAptosNormal.add(estudiantesAptosNormal.get(i));
-	        	this.estudiantesAptosAvanzada.add(estudiantesAptosAvanzada.get(i));
+	        	this.estudiantesAptosInicial.add(estudiantesAptosInicial2.get(i));
+	        	this.estudiantesAptosNormal.add(estudiantesAptosNormal2.get(i));
+	        	this.estudiantesAptosAvanzada.add(estudiantesAptosAvanzada2.get(i));
+	         }
+	        }
+	        else if (estudiantesAptosInicial2.size()==1 && estudiantesAptosNormal2.size()==1 && estudiantesAptosAvanzada2.size()==1) {
+	        	this.estudiantesAptosInicial.add(estudiantesAptosInicial2.get(0));
+	        	this.estudiantesAptosNormal.add(estudiantesAptosNormal2.get(0));
+	        	this.estudiantesAptosAvanzada.add(estudiantesAptosAvanzada2.get(0));
 	        }
 		}
 }

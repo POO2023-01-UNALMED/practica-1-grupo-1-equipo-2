@@ -9,7 +9,7 @@ public class TEST {
 		
 		Estudiante est = new Estudiante("PEPE", 67890, "pp@a.com",false,20);
 		Estudiante est2 = new Estudiante("JHON", 67890, "pp@a.com",false,20);
-		Estudiante est3 = new Estudiante("BRADLEY", 67890, "pp@a.com",false,20);
+		Estudiante est3 = new Estudiante("BRADLEY", 67890, "pp@a.com",false,45);
 		Estudiante est4 = new Estudiante("BAENA", 67890, "pp@a.com",false,65);
 		
 		
@@ -56,23 +56,23 @@ public class TEST {
 		Tarea tallerP = new Tarea(GVA,"NOSE");
 		tallerP.setGrade(est,5.0);
 		tallerP.setGrade(est2,2.0);
-		tallerP.setGrade(est3,3.5);
-		tallerP.setGrade(est4,2.8);
+		tallerP.setGrade(est3,4.0);
+		tallerP.setGrade(est4,3.5);
 		GVA.inscribirTarea(tallerP);
 
 		
 		Tarea tallerP2 = new Tarea(GVA,"NOSE2");
-		tallerP2.setGrade(est,3.0);
+		tallerP2.setGrade(est,5.0);
 		tallerP2.setGrade(est2,1.0);
-		tallerP2.setGrade(est3,2.8);
-		tallerP2.setGrade(est4,1.5);
+		tallerP2.setGrade(est3,4.0);
+		tallerP2.setGrade(est4,3.5);
 		MD.inscribirTarea(tallerP2);
 		
 		Tarea tallerP3 = new Tarea(GVA,"NOSE3");
-		tallerP3.setGrade(est,4.0);
+		tallerP3.setGrade(est,5.0);
 		tallerP3.setGrade(est2,1.1);
-		tallerP3.setGrade(est3,0.4);
-		tallerP3.setGrade(est4,4.5);
+		tallerP3.setGrade(est3,4.0);
+		tallerP3.setGrade(est4,3.5);
 		MD.inscribirTarea(tallerP3); 
 
 		
@@ -87,22 +87,29 @@ public class TEST {
 		//Tarea tallerBA = new Tarea(GVA,"NOSE",4);
 		//Tarea tallerBA2 = new Tarea(GVA,"NOSE2",4);
 		
-		//Beca beca = new Beca("SISAS");
-		//beca.asignarEstudiantesBeca();
+		Beca beca = new Beca("SISAS");
 		
-		//System.out.println(beca.estudiantes);
-		//System.out.println(beca.estudiantesAptosInicial);
-		//System.out.println(beca.estudiantesAptosNormal);
-		//System.out.println(beca.estudiantesAptosAvanzada);
+		Estudiante.aplicarBeca(est);
+		Estudiante.aplicarBeca(est2);
+		Estudiante.aplicarBeca(est3);
+		Estudiante.aplicarBeca(est4);
+		beca.asignarEstudiantesBeca();
+		
+		System.out.println(beca.getEstudiantes());
+		System.out.println(beca.estudiantesAptosInicial);
+		System.out.println(beca.estudiantesAptosNormal);
+		System.out.println(beca.estudiantesAptosAvanzada);
+		
+		
 		double promedioEst = est.calcularPromedio();
 		double promedioEst2 = est2.calcularPromedio();
 		double promedioEst3 = est3.calcularPromedio();
 		double promedioEst4= est4.calcularPromedio();
 		
-		System.out.println(promedioEst);
-		System.out.println(promedioEst2);
-		System.out.println(promedioEst3);
-		System.out.println(promedioEst4);
+		//System.out.println(promedioEst);
+		//System.out.println(promedioEst2);
+		//System.out.println(promedioEst3);
+		//System.out.println(promedioEst4);
 		
 		
 		
