@@ -25,6 +25,7 @@ public class Tarea {
 	public Tarea(Materia materia, String fecha_Entrega) {
 		fecha_Inicio = "fecha";
 		this.fecha_Entrega = fecha_Entrega;
+		tareaEstudiantes = new ArrayList<>();
 	}
 	
 	public void setDescripcion(String descripcion) {

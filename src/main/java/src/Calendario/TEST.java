@@ -20,10 +20,26 @@ public class TEST {
 		Materia MD = new Materia (456, "MD", pro, ho1, 4);
 		Materia GVA = new Materia(123,"GVA",pro,ho,4);
 		
+		est.asignarMateria(MD);
+		est2.asignarMateria(MD);
+		est3.asignarMateria(MD);
+		est4.asignarMateria(MD);
+		
+		est.asignarMateria(GVA);
+		est2.asignarMateria(GVA);
+		est3.asignarMateria(GVA);
+		est4.asignarMateria(GVA);
+		
+		
 		MD.inscribirEstudiante(est);
 		MD.inscribirEstudiante(est2);
 		MD.inscribirEstudiante(est3);
 		MD.inscribirEstudiante(est4);
+		
+		GVA.inscribirEstudiante(est);
+		GVA.inscribirEstudiante(est2);
+		GVA.inscribirEstudiante(est3);
+		GVA.inscribirEstudiante(est4);
 
 
 		
@@ -83,9 +99,10 @@ public class TEST {
 		double promedioEst3 = est3.calcularPromedio();
 		double promedioEst4= est4.calcularPromedio();
 		
-		System.out.println(promedioEst+ promedioEst2 + promedioEst3 + promedioEst4);
-
-		
+		System.out.println(promedioEst);
+		System.out.println(promedioEst2);
+		System.out.println(promedioEst3);
+		System.out.println(promedioEst4);
 		
 		
 		

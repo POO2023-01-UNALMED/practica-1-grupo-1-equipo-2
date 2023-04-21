@@ -6,16 +6,11 @@ import Calendario.*;
 
 public class Estudiante extends Persona{
 	
-	
 	//atributos
 	private double promedio;
 	private boolean fueBecado;
 	public static ArrayList<Materia> materias_inscritas;
 	private int porcentajeDeAvance;
-	
-	//atributos de clase
-	//private static int porcentajeDeAvance = 0;
-	
 		
 	//constructor
 	public Estudiante(String nombre, int ID, String Email, boolean fueBecado, int porcentajeDeAvance){
@@ -24,9 +19,7 @@ public class Estudiante extends Persona{
 		this.promedio =  0.0;
 		this.porcentajeDeAvance = porcentajeDeAvance;
 		materias_inscritas = new ArrayList<Materia>();
-		//aplicarBeca(this);
 	}
-	
 	
 	//Metodos get y set
 	public ArrayList<Materia> getMaterias_Inscritas(){
@@ -59,22 +52,30 @@ public class Estudiante extends Persona{
 		materias_inscritas.remove(Materia);
 	}
 	
-	//public void aplicarBeca  (Estudiante estudiante) {
-	//	Beca.estudiantes.add(estudiante);
-	//}
-	
-	
-	public double calcularPromedio(){
-		double finalprom = 0.0;
-		int contador = 0;
-		for (Materia materia: materias_inscritas) {
-			finalprom += materia.calcularPromedio(this);
-			contador+=1;
-		}
-		return finalprom/contador;	
+	public void aplicarBeca  (Estudiante estudiante) {
+		Beca.estudiantes.add(estudiante);
 	}
 	
 	
+	public double calcularPromedio() {
+	    double finalScore = 0.0;
+	    int numMaterias = materias_inscritas.size();
+	    for (Materia materia : materias_inscritas) {
+	        double materiaScore = 0.0;
+	        int numTareas = materia.getTareasDeMateria().size();
+	        for (Tarea tarea : materia.getTareasDeMateria()) {
+	            materiaScore += tarea.getGrade(this);
+	        }
+	        if (numTareas > 0) {
+	            materiaScore /= numTareas;
+	        }
+	        finalScore += materiaScore;
+	    }
+	    if (numMaterias > 0) {
+	        finalScore /= numMaterias;
+	    }
+	    return Math.round(finalScore * 100.0) / 100.0;
+	}
 	
 	//funcionalidades 1. Detectar problemas con franja horaria
 	public boolean compararHorario(){

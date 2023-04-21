@@ -59,8 +59,6 @@ public class Beca {
 	        	this.estudiantesAptosAvanzada.add(estudiantesAptosAvanzada.get(i));
 	        }
 		}
-	
-	
 }
 	
 
