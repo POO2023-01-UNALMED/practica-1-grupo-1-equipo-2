@@ -99,7 +99,7 @@ public class Estudiante extends Persona{
 			String hora2 = horario.getHora_Fin();
 			Horario.dias dia1 = horario.getDia();
 			
-			for (int j = i + 1; j < materias_inscritas.size();) {
+			for (int j = i + 1; j < materias_inscritas.size(); j++) {
 				Horario horario2 = materias_inscritas.get(j).getHorario();
 				String hora3 = horario2.getHora_inicio();
 				String hora4 = horario2.getHora_Fin();
@@ -116,24 +116,39 @@ public class Estudiante extends Persona{
 		}
 		return MateriasError;
 		}
+	
 	public String sugerirHorario(ArrayList<Materia> materiaR) {
 	    ArrayList<Materia> materiasSugeridas = new ArrayList<Materia>();
-	    Set<Horario> uniqueHorario = new HashSet<Horario>();
-		String p = "";
-	    if (fallaHorario) {
-			for (Materia materia : materias_inscritas) {
-				if (!uniqueHorario.contains(materia.getHorario())) {
-	                uniqueHorario.add(materia.getHorario());
+		String p = "Horario sugerido: ";
+		if (fallaHorario) {
+	        for (Materia materia : materiaR) {
+	            boolean conflicto = false;
+	            for (Materia materiaSugerida : materiasSugeridas) {
+	                if (materia.getHorario().getDia() == materiaSugerida.getHorario().getDia() &&
+	                    (materia.getHorario().getHora_inicio().equals(materiaSugerida.getHorario().getHora_inicio()) ||
+	                     materia.getHorario().getHora_Fin().equals(materiaSugerida.getHorario().getHora_Fin()))) {
+	                    conflicto = true;
+	                    break;
+	                }
+	            }
+	            if (!conflicto) {
 	                materiasSugeridas.add(materia);
 	            }
 	        }
-			for(Materia materia: materiasSugeridas) {
-				p+= materia;
-			}
-	    	return p;	
-	    	}
-		return "No hay sugerencias";
+	        if (materiasSugeridas.size()>1)	{
+	        	for(Materia materia: materiasSugeridas) {
+	            p+= materia+", ";
+	        	}
+	        }
+	            else {
+	            	for(Materia materia: materiasSugeridas) {
+	    	            p+= materia;
+	            }
+	        }
+	        return p;    
 	    }
+		return "No hay sugerencias";
+	  }
 	
 	public String toString () {
 		return "Estudiante: " + getNombre();
