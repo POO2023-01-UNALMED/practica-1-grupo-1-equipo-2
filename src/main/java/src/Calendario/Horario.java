@@ -4,25 +4,26 @@ import java.util.ArrayList;
 
 public class Horario {
 	
-	private dias dia;
+	protected ArrayList<dias> dia;
 	private String hora_inicio;
 	private String hora_Fin;
 	public enum dias {lunes, martes, miercoles, jueves, viernes, sabado, domingo};
 	
 	
-	public Horario(dias dia,String hora_inicio,String hora_Fin) {
+	public Horario(ArrayList<dias> dia,String hora_inicio,String hora_Fin) {
 		
 		this.dia = dia;
 		this.hora_inicio = hora_inicio;
-		this.hora_Fin = hora_Fin;	 	
+		this.hora_Fin = hora_Fin;
+		
 	}
 	
 	
-	public dias getDia() {
+	public ArrayList<dias> getDia() {
         return dia;
     }
 
-    public void setDia(dias dia) {
+    public void setDia(ArrayList<dias> dia) {
         this.dia = dia;
     }
 

@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import Calendario.*;
+import Calendario.Horario.dias;
 
 public class Estudiante extends Persona{
 	
@@ -97,21 +98,27 @@ public class Estudiante extends Persona{
 			Horario horario = materias_inscritas.get(i).getHorario();
 			String hora1 = horario.getHora_inicio();
 			String hora2 = horario.getHora_Fin();
-			Horario.dias dia1 = horario.getDia();
+			ArrayList<dias> dia1 = horario.getDia();
 			
 			for (int j = i + 1; j < materias_inscritas.size(); j++) {
 				Horario horario2 = materias_inscritas.get(j).getHorario();
 				String hora3 = horario2.getHora_inicio();
 				String hora4 = horario2.getHora_Fin();
-				Horario.dias dia2 = horario2.getDia();
+				ArrayList<dias> dia2 = horario2.getDia();
 			
-				if (dia1 == dia2 && !MateriasError.contains(materias_inscritas.get(i)))  {
-					if (hora1 == hora3 || hora2 == hora4) {
-						 this.fallaHorario=true; 
-						 MateriasError.add(materias_inscritas.get(i));
-						 MateriasError.add(materias_inscritas.get(j));
+				for (int k = 0; k < dia1.size(); k++ ) {
+					dias dia11 = dia1.get(k);
+					for (int h = k+1; h < dia2.size(); h++ ) {
+						dias dia22= dia2.get(h);
+					if (dia11 == dia22 && !MateriasError.contains(materias_inscritas.get(i)))  {
+						if (hora1 == hora3 || hora2 == hora4) {
+							 this.fallaHorario=true; 
+							 MateriasError.add(materias_inscritas.get(i));
+							 MateriasError.add(materias_inscritas.get(j));
+							}
 						}
-			}
+					}
+				}
 			}
 		}
 		return MateriasError;

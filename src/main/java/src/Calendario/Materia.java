@@ -16,9 +16,26 @@ public class Materia {
 	private boolean aprobado;
 	protected ArrayList<Estudiante> estudiantes_inscritos;
 	protected ArrayList<Tarea> tareas_de_materia;
-
+	public enum tipo{ 
+		fundamentacion,
+		disciplinar,
+		libreEleccion
+	}
+	protected ArrayList<Materia> prerrequisitos;
 	
 	//constructor
+	public Materia(int codigo, String nombre, Profesor profesor, Horario horario, int creditos, ArrayList<Materia> prerrequisitos) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.profesor = profesor;
+        this.horario = horario;
+        this.creditos = creditos;
+        //this.estudiante = estudiante;
+        this.aprobado = false;
+        tareas_de_materia = new ArrayList<Tarea>();
+        estudiantes_inscritos = new ArrayList<Estudiante>();
+        this.prerrequisitos=prerrequisitos;
+	}
 	public Materia(int codigo, String nombre, Profesor profesor, Horario horario, int creditos) {
         this.codigo = codigo;
         this.nombre = nombre;
