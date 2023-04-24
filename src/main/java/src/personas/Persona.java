@@ -3,10 +3,10 @@ package personas;
 public abstract class Persona {
 	//Atributos clase abstracta
 	public String nombre;
-	public int ID;
+	public long ID;
 	public String Email;
 	
-	public Persona (String nombre, int ID, String Email) {
+	public Persona (String nombre, long ID, String Email) {
 		this.nombre=nombre;
 		this.ID = ID;
 		this.Email=Email;
@@ -19,10 +19,10 @@ public abstract class Persona {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public int getID() {
+	public long getID() {
 		return ID;
 	}
-	public void setID(int ID) {
+	public void setID(long ID) {
 		this.ID=ID;
 	}
 	

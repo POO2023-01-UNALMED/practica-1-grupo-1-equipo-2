@@ -21,10 +21,11 @@ public class Materia {
 		disciplinar,
 		libreEleccion
 	}
-	protected ArrayList<Materia> prerrequisitos;
+	protected Materia prerrequisitos;
+	
 	
 	//constructor
-	public Materia(int codigo, String nombre, Profesor profesor, Horario horario, int creditos, ArrayList<Materia> prerrequisitos) {
+	public Materia(int codigo, String nombre, Profesor profesor, Horario horario, int creditos,Materia prerrequisitos) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.profesor = profesor;
