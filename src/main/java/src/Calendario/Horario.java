@@ -44,7 +44,7 @@ public class Horario {
     }
     
     public String toString() {
-    	return dia + " de " + hora_inicio + " a " + hora_Fin;
+    	return "Los dias "+ dia + " de " + hora_inicio + " a " + hora_Fin;
     }
 }
 

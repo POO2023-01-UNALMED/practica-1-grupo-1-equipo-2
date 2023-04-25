@@ -3,7 +3,6 @@ package personas;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
-
 import Calendario.*;
 import Calendario.Horario.dias;
 
@@ -106,9 +105,9 @@ public class Estudiante extends Persona{
 				String hora4 = horario2.getHora_Fin();
 				ArrayList<dias> dia2 = horario2.getDia();
 			
-				for (int k = 0; k < dia1.size(); k++ ) {
+				for (int k = 0; k < dia1.size(); k++) {
 					dias dia11 = dia1.get(k);
-					for (int h = k+1; h < dia2.size(); h++ ) {
+					for (int h = 0; h < dia2.size(); h++) {
 						dias dia22= dia2.get(h);
 					if (dia11 == dia22 && !MateriasError.contains(materias_inscritas.get(i)))  {
 						if (hora1 == hora3 || hora2 == hora4) {
@@ -122,16 +121,27 @@ public class Estudiante extends Persona{
 			}
 		}
 		return MateriasError;
-		}
+	}
 	
-	public String sugerirHorario(ArrayList<Materia> materiaR) {
+	public String sugerirHorario() {
 	    ArrayList<Materia> materiasSugeridas = new ArrayList<Materia>();
-		String p = "Horario sugerido: ";
-		if (fallaHorario) {
-	        for (Materia materia : materiaR) {
+	    String p = "";
+	    if (fallaHorario) {
+	        for (Materia materia : materias_inscritas) {
 	            boolean conflicto = false;
 	            for (Materia materiaSugerida : materiasSugeridas) {
-	                if (materia.getHorario().getDia() == materiaSugerida.getHorario().getDia() &&
+	                
+	                ArrayList<dias> diasMateria = materia.getHorario().getDia();
+	                ArrayList<dias> diasMateriaSugerida = materiaSugerida.getHorario().getDia();
+	                boolean falloDias = false;
+	                for (dias diaMateria : diasMateria) {
+	                    if (diasMateriaSugerida.contains(diaMateria)) {
+	                    	falloDias = true;
+	                        break;
+	                    }
+	                }
+	                
+	                if (falloDias &&
 	                    (materia.getHorario().getHora_inicio().equals(materiaSugerida.getHorario().getHora_inicio()) ||
 	                     materia.getHorario().getHora_Fin().equals(materiaSugerida.getHorario().getHora_Fin()))) {
 	                    conflicto = true;
@@ -142,26 +152,25 @@ public class Estudiante extends Persona{
 	                materiasSugeridas.add(materia);
 	            }
 	        }
-	        if (materiasSugeridas.size()>1)	{
-	        	for(Materia materia: materiasSugeridas) {
-	            p+= materia+", ";
-	        	}
-	        }
-	            else {
-	            	for(Materia materia: materiasSugeridas) {
-	    	            p+= materia;
+	        if (materiasSugeridas.size()>1) {
+	            for(Materia materia: materiasSugeridas) {
+	                p+= materia+", ";
+	            }
+	        } else {
+	            for(Materia materia: materiasSugeridas) {
+	                p+= materia;
 	            }
 	        }
+	        
 	        return p;    
 	    }
-		return "No hay sugerencias";
-	  }
-	
+	    return "No hay sugerencias";
+	}
 	public String toString () {
 		return "Estudiante: " + getNombre();
 	}
 	
-	}
+}
 
 		
 	

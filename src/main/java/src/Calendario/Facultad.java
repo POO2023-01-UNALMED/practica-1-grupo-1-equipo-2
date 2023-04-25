@@ -39,7 +39,7 @@ public class Facultad {
 		Profesor Jaime = new Profesor("Jaime", 0005, "jaime@unal.edu.co");
 		Materia Programacion_Orientada_Objetos = new Materia(10016, "Programacion_Orientada_Objetos", Jaime, horario5, 3, Fundamentos_Programacion);
 		
-		Horario horario6 = new Horario(new ArrayList<dias>(Arrays.asList(dias.martes, dias.jueves)),"16","18");
+		Horario horario6 = new Horario(new ArrayList<dias>(Arrays.asList(dias.miercoles, dias.viernes)),"8","10");
 		Profesor Julian = new Profesor("Julian", 0006, "julian@unal.edu.co");
 		Materia Estructura_Datos = new Materia(10017, "Estructura_Datos", Julian, horario6, 3, Programacion_Orientada_Objetos);
 		
@@ -55,6 +55,16 @@ public class Facultad {
 		Profesor Marisol = new Profesor("Marisol", 0011, "marisol@unal.edu.co");
 		Materia Catedra_Felicidad = new Materia(10019, "Catedra_Felicidad", Marisol, horario9, 2);
 		
+		
+		materias.add(Calculo_Diferencial);
+		materias.add(Calculo_Integral);
+		materias.add(Calculo_VariasVariables);
+		materias.add(Fundamentos_Programacion);
+		materias.add(Programacion_Orientada_Objetos);
+		materias.add(Estructura_Datos);
+		materias.add(Catedra_Antioquia);
+		materias.add(Catedra_Apun);
+		materias.add(Catedra_Felicidad);
 		
 		
 	}
@@ -73,6 +83,13 @@ public class Facultad {
 	
 	public void setCarrera(String carrera) {
 		this.carrera=carrera;
+	}
+	public ArrayList<Materia> getMaterias() {
+		return materias;
+	}
+	
+	public void setMaterias (ArrayList<Materia> materias) {
+		this.materias=materias;
 	}
 
 	

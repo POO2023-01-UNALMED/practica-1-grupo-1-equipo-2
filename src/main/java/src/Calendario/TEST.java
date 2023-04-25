@@ -13,81 +13,48 @@ public class TEST {
 		Estudiante est2 = new Estudiante("JHON", 67890, "pp@a.com",false,20);
 		Estudiante est3 = new Estudiante("BREADLEY", 67890, "pp@a.com",false,45);
 		Estudiante est4 = new Estudiante("BAENA", 67890, "pp@a.com",false,65);
-		
-		
-		Profesor pro = new Profesor("PABLO",12345,"jjk@a.com");
-		Horario ho = new Horario(Horario.dias.miercoles ,"2","3");
-		Horario ho1 = new Horario(Horario.dias.miercoles, "2", "3" );
-		
-		Materia MD = new Materia (456, "MD", pro, ho1, 4);
-		Materia GVA = new Materia(123,"GVA",pro,ho,4);
-		
-		est.asignarMateria(MD);
-		est2.asignarMateria(MD);
-		est3.asignarMateria(MD);
-		est4.asignarMateria(MD);
-		
-		est.asignarMateria(GVA);
-		est2.asignarMateria(GVA);
-		est3.asignarMateria(GVA);
-		est4.asignarMateria(GVA);
-		
-		
-		MD.inscribirEstudiante(est);
-		MD.inscribirEstudiante(est2);
-		MD.inscribirEstudiante(est3);
-		MD.inscribirEstudiante(est4);
-		
-		GVA.inscribirEstudiante(est);
-		GVA.inscribirEstudiante(est2);
-		GVA.inscribirEstudiante(est3);
-		GVA.inscribirEstudiante(est4);
 
-
+		Facultad Minas = new Facultad();
 		
-		//Materia MDP = new Materia (456, "MD", pro, ho1, 4,est2);
-		//Materia GVAP = new Materia(123,"GVA",pro,ho,4,est2);
+		ArrayList<Materia> materiasDisponibles = Minas.getMaterias();
 		
-		//Materia MDB = new Materia (456, "MD", pro, ho1, 4,est3);
-		//Materia GVAB = new Materia(123,"GVA",pro,ho,4,est3);
-		
-		//Materia MDBBA = new Materia (456, "MD", pro, ho1, 4,est4);
-		//Materia GVABA = new Materia(123,"GVA",pro,ho,4,est4);
+		//System.out.println(materiasDisponibles);
 		
 		
-		Tarea tallerP = new Tarea(GVA,"NOSE");
+		est.asignarMateria(materiasDisponibles.get(0));
+		est2.asignarMateria(materiasDisponibles.get(0));
+		est3.asignarMateria(materiasDisponibles.get(0));
+		est4.asignarMateria(materiasDisponibles.get(0));
+		
+		est.asignarMateria(materiasDisponibles.get(5));
+		est2.asignarMateria(materiasDisponibles.get(5));
+		est3.asignarMateria(materiasDisponibles.get(5));
+		est4.asignarMateria(materiasDisponibles.get(5));
+		
+		
+		Tarea tallerP = new Tarea(materiasDisponibles.get(0),"NOSE");
 		tallerP.setGrade(est,5.0);
 		tallerP.setGrade(est2,2.0);
 		tallerP.setGrade(est3,1.0);
 		tallerP.setGrade(est4,3.5);
-		GVA.inscribirTarea(tallerP);
+		materiasDisponibles.get(0).inscribirTarea(tallerP);
 
 		
-		Tarea tallerP2 = new Tarea(GVA,"NOSE2");
+		Tarea tallerP2 = new Tarea(materiasDisponibles.get(5),"NOSE2");
 		tallerP2.setGrade(est,5.0);
 		tallerP2.setGrade(est2,1.0);
 		tallerP2.setGrade(est3,1.0);
 		tallerP2.setGrade(est4,3.5);
-		MD.inscribirTarea(tallerP2);
+		materiasDisponibles.get(5).inscribirTarea(tallerP2);
 		
-		Tarea tallerP3 = new Tarea(GVA,"NOSE3");
+		Tarea tallerP3 = new Tarea(materiasDisponibles.get(5),"NOSE3");
 		tallerP3.setGrade(est,5.0);
 		tallerP3.setGrade(est2,1.1);
 		tallerP3.setGrade(est3,1.0);
 		tallerP3.setGrade(est4,3.5);
-		MD.inscribirTarea(tallerP3); 
+		materiasDisponibles.get(5).inscribirTarea(tallerP3); 
 
-		
-		//Tarea tallerJ = new Tarea(GVA,"NOSE",4.5);
-		//Tarea tallerJ2 = new Tarea(GVA,"NOSE2",4.5);
-		
-		
-		//Tarea tallerB = new Tarea(GVA,"NOSE",4.8);
-		//Tarea tallerB2 = new Tarea(GVA,"NOSE2",4.8);
-		
-	
-		//Tarea tallerBA = new Tarea(GVA,"NOSE",4);
-		//Tarea tallerBA2 = new Tarea(GVA,"NOSE2",4);
+
 		
 		Beca beca = new Beca("SISAS");
 		
@@ -97,30 +64,34 @@ public class TEST {
 		Estudiante.aplicarBeca(est4);
 		beca.asignarEstudiantesBeca();
 		
-		//System.out.println(beca.getEstudiantes());
-		//System.out.println(beca.estudiantesAptosInicial);
-		//System.out.println(beca.estudiantesAptosNormal);
-		//System.out.println(beca.estudiantesAptosAvanzada);
-		
+		System.out.println("Admitidos a becas: ");
+		System.out.println("Beca Inicial: "+beca.estudiantesAptosInicial);
+		System.out.println("Beca Normal: "+beca.estudiantesAptosNormal);
+		System.out.println("Beca Avanzada: "+beca.estudiantesAptosAvanzada+"\n");
 		
 		double promedioEst = est.calcularPromedio();
 		double promedioEst2 = est2.calcularPromedio();
 		double promedioEst3 = est3.calcularPromedio();
 		double promedioEst4= est4.calcularPromedio();
 		
-		//System.out.println(promedioEst);
-		//System.out.println(promedioEst2);
-		//System.out.println(promedioEst3);
-		//System.out.println(promedioEst4);
+		System.out.println("Promedios: ");
+		System.out.println(est+" promedio: "+promedioEst);
+		System.out.println(est2+" promedio: "+promedioEst2);
+		System.out.println(est3+" promedio: "+promedioEst3);
+		System.out.println(est4+" promedio: "+promedioEst4+"\n");
 		
+		System.out.println("Horarios: ");
 		
-		
-		//Estudiante est = new Estudiante("PEPE", 67890, "pp@a.com");
-		//System.out.println(Materia.calcularPromedio());
-		//System.out.println(Estudiante.compararHorario());
 		ArrayList<Materia> nose = est.compararHorario();
-		System.out.println(est.sugerirHorario(nose));
-		System.out.println(est.getMaterias_Inscritas());
+		
+		System.out.println(est.getfallaHorario());
+		System.out.println(nose+"\n");
+		
+		System.out.println("Horario estudiante "+est.getNombre()+": ");
+		System.out.println(est.getMaterias_Inscritas()+"\n");
+		System.out.println("Nuevo horario sugerido "+est.getNombre()+": ");
+		System.out.println(est.sugerirHorario());
+		
 	}
 
 }
