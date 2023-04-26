@@ -15,11 +15,9 @@ public class TEST {
 		ArrayList<Materia> materiasDisponibles = Minas.getMaterias();
 		
 		Estudiante est = new Estudiante("PEPE", 67890, "pp@a.com",false,20,new ArrayList<Materia>(Arrays.asList(materiasDisponibles.get(0),materiasDisponibles.get(1),materiasDisponibles.get(3))));
-		
 		Estudiante est2 = new Estudiante("JHON", 67890, "pp@a.com",false,20,new ArrayList<Materia>(Arrays.asList(materiasDisponibles.get(0),materiasDisponibles.get(3))));
 		Estudiante est3 = new Estudiante("BREADLEY", 67890, "pp@a.com",false,45,new ArrayList<Materia>(Arrays.asList(materiasDisponibles.get(0),materiasDisponibles.get(3))));
 		Estudiante est4 = new Estudiante("BAENA", 67890, "pp@a.com",false,65,new ArrayList<Materia>(Arrays.asList(materiasDisponibles.get(0),materiasDisponibles.get(3))));
-
 		
 		
 		//System.out.println(materiasDisponibles);
@@ -57,7 +55,6 @@ public class TEST {
 		tallerP3.setGrade(est3,1.0);
 		tallerP3.setGrade(est4,3.5);
 		materiasDisponibles.get(4).inscribirTarea(tallerP3); 
-
 
 		
 		Beca beca = new Beca("SISAS");
