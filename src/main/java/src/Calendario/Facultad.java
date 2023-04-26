@@ -47,7 +47,6 @@ public class Facultad {
 		Profesor Sierra = new Profesor("Sierra", 0007, "sierra@unal.edu.co");
 		Materia Catedra_Antioquia = new Materia(10018, "Catedra Antioquia", Sierra, horario7, 3);
 		
-		
 		Horario horario8 = new Horario(new ArrayList<dias>(Arrays.asList(dias.sabado)),"8","10");
 		Materia Catedra_Apun = new Materia(10019, "Catedra Apun", Sierra, horario8, 3);
 		

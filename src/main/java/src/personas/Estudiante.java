@@ -107,8 +107,9 @@ public class Estudiante extends Persona{
 	}
 	
 	//funcionalidades 1. Detectar problemas con franja horaria
-	public ArrayList<Materia> compararHorario(){
+	public boolean compararHorario(ArrayList<Materia> materias_inscritas){
 		ArrayList<Materia>MateriasError = new ArrayList<Materia>();
+		fallaHorario = false;
 		for(int i = 0; i < materias_inscritas.size(); i++ ) {
 			Horario horario = materias_inscritas.get(i).getHorario();
 			String hora1 = horario.getHora_inicio();
@@ -127,7 +128,7 @@ public class Estudiante extends Persona{
 						dias dia22= dia2.get(h);
 					if (dia11 == dia22 && !MateriasError.contains(materias_inscritas.get(i)))  {
 						if (hora1 == hora3 || hora2 == hora4) {
-							 this.fallaHorario=true; 
+							 fallaHorario=true; 
 							 MateriasError.add(materias_inscritas.get(i));
 							 MateriasError.add(materias_inscritas.get(j));
 							}
@@ -136,12 +137,11 @@ public class Estudiante extends Persona{
 				}
 			}
 		}
-		return MateriasError;
+		return fallaHorario;
 	}
 	
-	public String sugerirHorario() {
+	public void sugerirHorario(boolean fallaHorario) {
 	    ArrayList<Materia> materiasSugeridas = new ArrayList<Materia>();
-	    String p = "";
 	    if (fallaHorario) {
 	        for (Materia materia : materias_inscritas) {
 	            boolean conflicto = false;
@@ -168,23 +168,41 @@ public class Estudiante extends Persona{
 	                materiasSugeridas.add(materia);
 	            }
 	        }
-	        if (materiasSugeridas.size()>1) {
-	            for(Materia materia: materiasSugeridas) {
-	                p+= materia+", ";
-	            }
-	        } else {
-	            for(Materia materia: materiasSugeridas) {
-	                p+= materia;
-	            }
-	        }
-	        
-	        return p;    
+	      this.materias_inscritas = materiasSugeridas;
 	    }
-	    return "No hay sugerencias";
 	}
+	public void sugerirMaterias(ArrayList<Materia> materiasDisponibles) {  
+		ArrayList<Materia> materiasRecomendadas = new ArrayList<Materia>();
+		for (Materia materia : materias_cursadas) {
+			if(materia == materiasDisponibles.get(0)) {
+				materiasRecomendadas.add(materiasDisponibles.get(1));
+			}
+			else if(materia == materiasDisponibles.get(0)) {
+				materiasRecomendadas.add(materiasDisponibles.get(2));
+			}
+		
+			if (materia == materiasDisponibles.get(3)) {
+				materiasRecomendadas.add(materiasDisponibles.get(4));
+			}
+			else if(materia == materiasDisponibles.get(4)) {
+				materiasRecomendadas.add(materiasDisponibles.get(5));
+			}
+		}
+		
+		for(int i = 6; i<9;i++) {
+			materiasRecomendadas.add(materiasDisponibles.get(i));
+			if(compararHorario(materiasRecomendadas)) {
+				materiasRecomendadas.remove(materiasDisponibles.get(i));
+				break;
+			}
+		}
+		 this.materias_inscritas = materiasRecomendadas;
+	}
+	
+	
 	public String toString () {
 		return "Estudiante: " + getNombre();
-	}
+		}
 	
 	
 	
