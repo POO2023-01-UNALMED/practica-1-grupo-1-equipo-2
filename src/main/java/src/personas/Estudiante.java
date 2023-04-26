@@ -12,17 +12,16 @@ public class Estudiante extends Persona{
 	private double promedio;
 	private boolean fueBecado;
 	public ArrayList<Materia> materias_inscritas;
-	private int porcentajeDeAvance;
+	private double porcentajeDeAvance;
 	private boolean fallaHorario;
 	protected ArrayList<Materia> materias_cursadas;
 		
 	//constructor
-	public Estudiante(String nombre, int ID, String Email, boolean fueBecado, int porcentajeDeAvance, ArrayList<Materia> materias_cursadas){
+	public Estudiante(String nombre, int ID, String Email, boolean fueBecado, ArrayList<Materia> materias_cursadas){
 		super (nombre, ID, Email);
 		this.fallaHorario = false;
 		this.fueBecado = fueBecado;
 		this.promedio =  0.0;
-		this.porcentajeDeAvance = porcentajeDeAvance;
 		materias_inscritas = new ArrayList<Materia>();
 		this.materias_cursadas=materias_cursadas;
 	}
@@ -51,11 +50,11 @@ public class Estudiante extends Persona{
         this.fueBecado = fueBecado;
     }
 	
-	public int getPorcentajeDeAvance() {
+	public double getPorcentajeDeAvance() {
 	 	return porcentajeDeAvance;
  	}
 	
-	public void setPorcentajeDeAvance(int PorcentajeDeAvance) {
+	public void setPorcentajeDeAvance(double PorcentajeDeAvance) {
 	 	porcentajeDeAvance = PorcentajeDeAvance;
  	}	 
 	 public ArrayList<Materia> getMateriasCursadas() {
@@ -209,7 +208,10 @@ public class Estudiante extends Persona{
 		return "Estudiante: " + getNombre();
 		}
 	
-	
+	public void calcularPorcetajeAvance() {
+		double porcentajeAvance = (1.0/9)*materias_cursadas.size();
+		setPorcentajeDeAvance(Math.round(porcentajeAvance * 100.0) );
+	}
 	
 }
 

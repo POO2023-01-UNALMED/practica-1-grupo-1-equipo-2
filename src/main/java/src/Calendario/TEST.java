@@ -14,13 +14,23 @@ public class TEST {
 		
 		ArrayList<Materia> materiasDisponibles = Minas.getMaterias();
 		
-		Estudiante est = new Estudiante("PEPE", 67890, "pp@a.com",false,20,new ArrayList<Materia>(Arrays.asList(materiasDisponibles.get(0),materiasDisponibles.get(1),materiasDisponibles.get(3))));
-		Estudiante est2 = new Estudiante("JHON", 67890, "pp@a.com",false,20,new ArrayList<Materia>(Arrays.asList(materiasDisponibles.get(0),materiasDisponibles.get(3))));
-		Estudiante est3 = new Estudiante("BREADLEY", 67890, "pp@a.com",false,45,new ArrayList<Materia>(Arrays.asList(materiasDisponibles.get(0),materiasDisponibles.get(3))));
-		Estudiante est4 = new Estudiante("BAENA", 67890, "pp@a.com",false,65,new ArrayList<Materia>(Arrays.asList(materiasDisponibles.get(0),materiasDisponibles.get(3))));
+		Estudiante est = new Estudiante("PEPE", 67890, "pp@a.com",false,new ArrayList<Materia>(Arrays.asList(materiasDisponibles.get(0),materiasDisponibles.get(1),materiasDisponibles.get(3))));
+		Estudiante est2 = new Estudiante("JHON", 67890, "pp@a.com",false,new ArrayList<Materia>(Arrays.asList(materiasDisponibles.get(0),materiasDisponibles.get(3))));
+		Estudiante est3 = new Estudiante("BREADLEY", 67890, "pp@a.com",false,new ArrayList<Materia>(Arrays.asList(materiasDisponibles.get(0),materiasDisponibles.get(3))));
+		Estudiante est4 = new Estudiante("BAENA", 67890, "pp@a.com",false,new ArrayList<Materia>(Arrays.asList(materiasDisponibles.get(0),materiasDisponibles.get(3))));
 		
-		
+		est.calcularPorcetajeAvance();
+		est2.calcularPorcetajeAvance();
+		est3.calcularPorcetajeAvance();
+		est4.calcularPorcetajeAvance();
 		//System.out.println(materiasDisponibles);
+		
+		
+		
+		System.out.println(est.getPorcentajeDeAvance());
+		System.out.println(est2.getPorcentajeDeAvance());
+		System.out.println(est3.getPorcentajeDeAvance());
+		System.out.println(est4.getPorcentajeDeAvance());
 		
 		
 		est.inscribirMateria("Calculo VariasVariables",materiasDisponibles);
@@ -33,27 +43,26 @@ public class TEST {
 		est3.inscribirMateria("Programacion Orientada Objetos",materiasDisponibles);
 		est4.inscribirMateria("Programacion Orientada Objetos",materiasDisponibles);
 		
-		
 		Tarea tallerP = new Tarea(materiasDisponibles.get(1),"NOSE");
-		tallerP.setGrade(est,5.0);
-		tallerP.setGrade(est2,2.0);
-		tallerP.setGrade(est3,1.0);
-		tallerP.setGrade(est4,3.5);
+		//tallerP.setGrade(est,5.0);
+		tallerP.setGrade(est2,4.0);
+		tallerP.setGrade(est3,5.0);
+		tallerP.setGrade(est4,5.0);
 		materiasDisponibles.get(1).inscribirTarea(tallerP);
 
 		
 		Tarea tallerP2 = new Tarea(materiasDisponibles.get(4),"NOSE2");
 		tallerP2.setGrade(est,5.0);
-		tallerP2.setGrade(est2,1.0);
-		tallerP2.setGrade(est3,1.0);
+		tallerP2.setGrade(est2,5.0);
+		tallerP2.setGrade(est3,5.0);
 		tallerP2.setGrade(est4,3.5);
 		materiasDisponibles.get(4).inscribirTarea(tallerP2);
 		
 		Tarea tallerP3 = new Tarea(materiasDisponibles.get(4),"NOSE3");
 		tallerP3.setGrade(est,5.0);
-		tallerP3.setGrade(est2,1.1);
-		tallerP3.setGrade(est3,1.0);
-		tallerP3.setGrade(est4,3.5);
+		tallerP3.setGrade(est2,5.0);
+		tallerP3.setGrade(est3,4.0);
+		tallerP3.setGrade(est4,4.5);
 		materiasDisponibles.get(4).inscribirTarea(tallerP3); 
 
 		
