@@ -21,15 +21,15 @@ public class TEST {
 		//System.out.println(materiasDisponibles);
 		
 		
-		est.asignarMateria(materiasDisponibles.get(0));
-		est2.asignarMateria(materiasDisponibles.get(0));
-		est3.asignarMateria(materiasDisponibles.get(0));
-		est4.asignarMateria(materiasDisponibles.get(0));
+		est.asignarMateria("Calculo Diferencial",materiasDisponibles);
+		est2.asignarMateria("Calculo Diferencial",materiasDisponibles);
+		est3.asignarMateria("Calculo Diferencial",materiasDisponibles);
+		est4.asignarMateria("Calculo Diferencial",materiasDisponibles);
 		
-		est.asignarMateria(materiasDisponibles.get(5));
-		est2.asignarMateria(materiasDisponibles.get(5));
-		est3.asignarMateria(materiasDisponibles.get(5));
-		est4.asignarMateria(materiasDisponibles.get(5));
+		est.asignarMateria("Estructura Datos",materiasDisponibles);
+		est2.asignarMateria("Estructura Datos",materiasDisponibles);
+		est3.asignarMateria("Estructura Datos",materiasDisponibles);
+		est4.asignarMateria("Estructura Datos",materiasDisponibles);
 		
 		
 		Tarea tallerP = new Tarea(materiasDisponibles.get(0),"NOSE");

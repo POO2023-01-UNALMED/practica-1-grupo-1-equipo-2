@@ -14,15 +14,17 @@ public class Estudiante extends Persona{
 	public ArrayList<Materia> materias_inscritas;
 	private int porcentajeDeAvance;
 	private boolean fallaHorario;
+	protected ArrayList<Materia> materias_cursadas;
 		
 	//constructor
-	public Estudiante(String nombre, int ID, String Email, boolean fueBecado, int porcentajeDeAvance){
+	public Estudiante(String nombre, int ID, String Email, boolean fueBecado, int porcentajeDeAvance, ArrayList<Materia> materias_cursadas){
 		super (nombre, ID, Email);
 		this.fallaHorario = false;
 		this.fueBecado = fueBecado;
 		this.promedio =  0.0;
 		this.porcentajeDeAvance = porcentajeDeAvance;
 		materias_inscritas = new ArrayList<Materia>();
+		this.materias_cursadas=materias_cursadas;
 	}
 	
 	//Metodos get y set
@@ -56,10 +58,24 @@ public class Estudiante extends Persona{
 	public void setPorcentajeDeAvance(int PorcentajeDeAvance) {
 	 	porcentajeDeAvance = PorcentajeDeAvance;
  	}	 
-	
+	 public ArrayList<Materia> getMateriasCursadas() {
+	        return materias_cursadas;
+	    }
+	 public void setMateriasCursadas(ArrayList<Materia> materias_cursadas) {
+			this.materias_cursadas=materias_cursadas;
+	    }
 	//metodos de la clase
-	public void asignarMateria  (Materia nuevaMateria) {
-		materias_inscritas.add(nuevaMateria);
+	public void inscribirMateria(String nombreMateria, ArrayList<Materia> materiasDisponibles) {
+	    for (Materia materia : materiasDisponibles) {
+	        if (materia .getNombre().equals(nombreMateria)) {
+	        	Materia prerrequisito = materia.getPrerrequisito();
+	        	if (prerrequisito == null || materias_cursadas.contains(prerrequisito)) {
+	           materias_inscritas.add(materia);
+	            break;
+	        	}
+	        }
+	    }
+	        
 	}
 	public void retirarMateria(Materia Materia) {
 		materias_inscritas.remove(Materia);
@@ -169,6 +185,8 @@ public class Estudiante extends Persona{
 	public String toString () {
 		return "Estudiante: " + getNombre();
 	}
+	
+	
 	
 }
 

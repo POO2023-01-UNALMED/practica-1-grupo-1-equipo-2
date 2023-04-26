@@ -21,11 +21,11 @@ public class Materia {
 		disciplinar,
 		libreEleccion
 	}
-	protected Materia prerrequisitos;
+	protected Materia prerrequisito;
 	
 	
 	//constructor
-	public Materia(int codigo, String nombre, Profesor profesor, Horario horario, int creditos,Materia prerrequisitos) {
+	public Materia(int codigo, String nombre, Profesor profesor, Horario horario, int creditos,Materia prerrequisito) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.profesor = profesor;
@@ -35,7 +35,7 @@ public class Materia {
         this.aprobado = false;
         tareas_de_materia = new ArrayList<Tarea>();
         estudiantes_inscritos = new ArrayList<Estudiante>();
-        this.prerrequisitos=prerrequisitos;
+        this.prerrequisito=prerrequisito;
 	}
 	public Materia(int codigo, String nombre, Profesor profesor, Horario horario, int creditos) {
         this.codigo = codigo;
@@ -110,6 +110,12 @@ public class Materia {
 	    }
 	 public void setTareasDeMateria(ArrayList<Tarea> nuevasTareas) {
 	        this.tareas_de_materia = nuevasTareas;
+	    }
+	 public Materia getPrerrequisito() {
+	        return prerrequisito;
+	    }
+	 public void setPrerrequisito(Materia prerrequisito) {
+	        this.prerrequisito = prerrequisito;
 	    }
 	 
 	 
