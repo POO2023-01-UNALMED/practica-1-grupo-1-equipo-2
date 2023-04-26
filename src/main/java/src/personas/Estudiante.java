@@ -174,29 +174,34 @@ public class Estudiante extends Persona{
 	public void sugerirMaterias(ArrayList<Materia> materiasDisponibles) {  
 		ArrayList<Materia> materiasRecomendadas = new ArrayList<Materia>();
 		for (Materia materia : materias_cursadas) {
-			if(materia == materiasDisponibles.get(0)) {
+			if(materia == materiasDisponibles.get(0) && !(materias_cursadas.contains(materiasDisponibles.get(1)))) {
 				materiasRecomendadas.add(materiasDisponibles.get(1));
 			}
-			else if(materia == materiasDisponibles.get(0)) {
+			else if(materia == materiasDisponibles.get(1) && !(materias_cursadas.contains(materiasDisponibles.get(2)))) {
 				materiasRecomendadas.add(materiasDisponibles.get(2));
 			}
 		
-			if (materia == materiasDisponibles.get(3)) {
+			if (materia == materiasDisponibles.get(3) && !(materias_cursadas.contains(materiasDisponibles.get(4)))) {
 				materiasRecomendadas.add(materiasDisponibles.get(4));
+				if(compararHorario(materiasRecomendadas)) {
+					materiasRecomendadas.remove(materiasDisponibles.get(4));
+				}
 			}
-			else if(materia == materiasDisponibles.get(4)) {
+			else if(materia == materiasDisponibles.get(4) && !(materias_cursadas.contains(materiasDisponibles.get(5)))) {
 				materiasRecomendadas.add(materiasDisponibles.get(5));
+				if(compararHorario(materiasRecomendadas)) {
+					materiasRecomendadas.remove(materiasDisponibles.get(5));
+				}
 			}
 		}
 		
-		for(int i = 6; i<9;i++) {
+		for (int i = 6; i<9;i++) {
 			materiasRecomendadas.add(materiasDisponibles.get(i));
 			if(compararHorario(materiasRecomendadas)) {
 				materiasRecomendadas.remove(materiasDisponibles.get(i));
-				break;
 			}
 		}
-		 this.materias_inscritas = materiasRecomendadas;
+		this.materias_inscritas = materiasRecomendadas;
 	}
 	
 	

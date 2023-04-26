@@ -2,6 +2,7 @@
 package Calendario;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import personas.*;
 
@@ -9,50 +10,53 @@ public class TEST {
 
 	public static void main(String[] args) {
 		
-		Estudiante est = new Estudiante("PEPE", 67890, "pp@a.com",false,20);
-		Estudiante est2 = new Estudiante("JHON", 67890, "pp@a.com",false,20);
-		Estudiante est3 = new Estudiante("BREADLEY", 67890, "pp@a.com",false,45);
-		Estudiante est4 = new Estudiante("BAENA", 67890, "pp@a.com",false,65);
-
 		Facultad Minas = new Facultad();
 		
 		ArrayList<Materia> materiasDisponibles = Minas.getMaterias();
 		
+		Estudiante est = new Estudiante("PEPE", 67890, "pp@a.com",false,20,new ArrayList<Materia>(Arrays.asList(materiasDisponibles.get(0),materiasDisponibles.get(1),materiasDisponibles.get(3))));
+		
+		Estudiante est2 = new Estudiante("JHON", 67890, "pp@a.com",false,20,new ArrayList<Materia>(Arrays.asList(materiasDisponibles.get(0),materiasDisponibles.get(3))));
+		Estudiante est3 = new Estudiante("BREADLEY", 67890, "pp@a.com",false,45,new ArrayList<Materia>(Arrays.asList(materiasDisponibles.get(0),materiasDisponibles.get(3))));
+		Estudiante est4 = new Estudiante("BAENA", 67890, "pp@a.com",false,65,new ArrayList<Materia>(Arrays.asList(materiasDisponibles.get(0),materiasDisponibles.get(3))));
+
+		
+		
 		//System.out.println(materiasDisponibles);
 		
 		
-		est.asignarMateria("Calculo Diferencial",materiasDisponibles);
-		est2.asignarMateria("Calculo Diferencial",materiasDisponibles);
-		est3.asignarMateria("Calculo Diferencial",materiasDisponibles);
-		est4.asignarMateria("Calculo Diferencial",materiasDisponibles);
+		est.inscribirMateria("Calculo VariasVariables",materiasDisponibles);
+		est2.inscribirMateria("Calculo Integral",materiasDisponibles);
+		est3.inscribirMateria("Calculo Integral",materiasDisponibles);
+		est4.inscribirMateria("Calculo Integral",materiasDisponibles);
 		
-		est.asignarMateria("Estructura Datos",materiasDisponibles);
-		est2.asignarMateria("Estructura Datos",materiasDisponibles);
-		est3.asignarMateria("Estructura Datos",materiasDisponibles);
-		est4.asignarMateria("Estructura Datos",materiasDisponibles);
+		est.inscribirMateria("Programacion Orientada Objetos",materiasDisponibles);
+		est2.inscribirMateria("Programacion Orientada Objetos",materiasDisponibles);
+		est3.inscribirMateria("Programacion Orientada Objetos",materiasDisponibles);
+		est4.inscribirMateria("Programacion Orientada Objetos",materiasDisponibles);
 		
 		
-		Tarea tallerP = new Tarea(materiasDisponibles.get(0),"NOSE");
+		Tarea tallerP = new Tarea(materiasDisponibles.get(1),"NOSE");
 		tallerP.setGrade(est,5.0);
 		tallerP.setGrade(est2,2.0);
 		tallerP.setGrade(est3,1.0);
 		tallerP.setGrade(est4,3.5);
-		materiasDisponibles.get(0).inscribirTarea(tallerP);
+		materiasDisponibles.get(1).inscribirTarea(tallerP);
 
 		
-		Tarea tallerP2 = new Tarea(materiasDisponibles.get(5),"NOSE2");
+		Tarea tallerP2 = new Tarea(materiasDisponibles.get(4),"NOSE2");
 		tallerP2.setGrade(est,5.0);
 		tallerP2.setGrade(est2,1.0);
 		tallerP2.setGrade(est3,1.0);
 		tallerP2.setGrade(est4,3.5);
-		materiasDisponibles.get(5).inscribirTarea(tallerP2);
+		materiasDisponibles.get(4).inscribirTarea(tallerP2);
 		
-		Tarea tallerP3 = new Tarea(materiasDisponibles.get(5),"NOSE3");
+		Tarea tallerP3 = new Tarea(materiasDisponibles.get(4),"NOSE3");
 		tallerP3.setGrade(est,5.0);
 		tallerP3.setGrade(est2,1.1);
 		tallerP3.setGrade(est3,1.0);
 		tallerP3.setGrade(est4,3.5);
-		materiasDisponibles.get(5).inscribirTarea(tallerP3); 
+		materiasDisponibles.get(4).inscribirTarea(tallerP3); 
 
 
 		
@@ -82,15 +86,19 @@ public class TEST {
 		
 		System.out.println("Horarios: ");
 		
-		ArrayList<Materia> nose = est.compararHorario();
+		boolean nose = est.compararHorario(est.getMaterias_Inscritas());
 		
-		System.out.println(est.getfallaHorario());
+		System.out.println("El horario de "+est+" es:");
+		System.out.println(est.getMaterias_Inscritas()+"\n");
+		
+		System.out.println("El horario de "+est+" presenta fallas?");
 		System.out.println(nose+"\n");
 		
-		System.out.println("Horario estudiante "+est.getNombre()+": ");
+		est.sugerirMaterias(materiasDisponibles);
+		
+		System.out.println("Nuevo horario del estudiante "+est.getNombre()+": ");
 		System.out.println(est.getMaterias_Inscritas()+"\n");
-		System.out.println("Nuevo horario sugerido "+est.getNombre()+": ");
-		System.out.println(est.sugerirHorario());
+		
 		
 	}
 
