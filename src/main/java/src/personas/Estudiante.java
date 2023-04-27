@@ -18,6 +18,7 @@ public class Estudiante extends Persona{
 	protected ArrayList<Materia> materias_cursadas;
 	private int creditosInscritos = 0;
 	private ArrayList<Materia> intentoMaterias;
+	private ArrayList<Profesor> profesoreInscritos;
 		
 	//constructor
 	public Estudiante(String nombre, int ID, String Email, boolean fueBecado, ArrayList<Materia> materias_cursadas){
@@ -28,12 +29,24 @@ public class Estudiante extends Persona{
 		materias_inscritas = new ArrayList<Materia>();
 		this.materias_cursadas=materias_cursadas;
 		intentoMaterias = new ArrayList<Materia>();
+		profesoreInscritos= new ArrayList<Profesor>();
+
 	}
 	
 	//Metodos get y set
+	
+	public void setProfesoresInscritos(ArrayList<Profesor> profesor) {
+		profesoreInscritos = profesor;
+	}
+	
+	public ArrayList<Profesor> getProfesoresInscritos(){
+		return profesoreInscritos;
+	}
+	
 	public ArrayList<Materia> getMaterias_Inscritas(){
 		return materias_inscritas;
 	}
+	
 	public void setMaterias_Inscritas(ArrayList<Materia> materiasInscritas) {
 		materias_inscritas = materiasInscritas;
 	}
@@ -98,7 +111,10 @@ public class Estudiante extends Persona{
 	            }
 	        }
 	        if (intentoCreditos >= 10 && tieneFundamentacion) {
-	            setMaterias_Inscritas(intentoMaterias);
+	            for(Materia ma: intentoMaterias) {
+	            	profesoreInscritos.add(ma.getProfesor());
+	            }
+	        	setMaterias_Inscritas(intentoMaterias);
 	            setCreditosInscritos(intentoCreditos);
 	        }
 	    }

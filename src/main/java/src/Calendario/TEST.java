@@ -48,7 +48,7 @@ public class TEST {
 		est3.inscribirMateria("Programacion Orientada Objetos",materiasDisponibles);
 		est4.inscribirMateria("Programacion Orientada Objetos",materiasDisponibles);
 		
-		System.out.println(est2.getMaterias_Inscritas());
+		//System.out.println(est2.getMaterias_Inscritas());
 		
 		Tarea tallerP = new Tarea(materiasDisponibles.get(1),"NOSE");
 		//tallerP.setGrade(est,5.0);
@@ -81,37 +81,50 @@ public class TEST {
 		Estudiante.aplicarBeca(est4);
 		beca.asignarEstudiantesBeca();
 		
-		System.out.println("Admitidos a becas: ");
-		System.out.println("Beca Inicial: "+beca.estudiantesAptosInicial);
-		System.out.println("Beca Normal: "+beca.estudiantesAptosNormal);
-		System.out.println("Beca Avanzada: "+beca.estudiantesAptosAvanzada+"\n");
+		//System.out.println("Admitidos a becas: ");
+		//System.out.println("Beca Inicial: "+beca.estudiantesAptosInicial);
+		//System.out.println("Beca Normal: "+beca.estudiantesAptosNormal);
+		//System.out.println("Beca Avanzada: "+beca.estudiantesAptosAvanzada+"\n");
 		
 		double promedioEst = est.calcularPromedio();
 		double promedioEst2 = est2.calcularPromedio();
 		double promedioEst3 = est3.calcularPromedio();
 		double promedioEst4= est4.calcularPromedio();
 		
-		System.out.println("Promedios: ");
-		System.out.println(est+" promedio: "+promedioEst);
-		System.out.println(est2+" promedio: "+promedioEst2);
-		System.out.println(est3+" promedio: "+promedioEst3);
-		System.out.println(est4+" promedio: "+promedioEst4+"\n");
+		//System.out.println("Promedios: ");
+		//System.out.println(est+" promedio: "+promedioEst);
+		//System.out.println(est2+" promedio: "+promedioEst2);
+		//System.out.println(est3+" promedio: "+promedioEst3);
+		//System.out.println(est4+" promedio: "+promedioEst4+"\n");
 		
-		System.out.println("Horarios: ");
+		//System.out.println("Horarios: ");
 		
 		boolean nose = est.compararHorario(est.getMaterias_Inscritas());
 		
-		System.out.println("El horario de "+est+" es:");
-		System.out.println(est.getMaterias_Inscritas()+"\n");
+		//System.out.println("El horario de "+est+" es:");
+		//System.out.println(est.getMaterias_Inscritas()+"\n");
 		
-		System.out.println("El horario de "+est+" presenta fallas?");
-		System.out.println(nose+"\n");
+		//System.out.println("El horario de "+est+" presenta fallas?");
+		//System.out.println(nose+"\n");
 		
 		est.sugerirMaterias(materiasDisponibles);
 		
-		System.out.println("Nuevo horario del estudiante "+est.getNombre()+": ");
-		System.out.println(est.getMaterias_Inscritas()+"\n");
+		//System.out.println("Nuevo horario del estudiante "+est.getNombre()+": ");
+		//System.out.println(est.getMaterias_Inscritas()+"\n");
 		
+		for(Profesor profesor: est2.getProfesoresInscritos()) {
+			profesor.ingresarCalificacion(3.0);
+		}
+		
+		for (Profesor profesor: est3.getProfesoresInscritos()) {
+			profesor.ingresarCalificacion(4.0);
+		}
+		
+		for (Profesor profesor: est3.getProfesoresInscritos()) {
+			profesor.evaluacionDocente();
+			System.out.println(profesor.getCalificacionDocente());
+
+		}
 		
 	}
 
