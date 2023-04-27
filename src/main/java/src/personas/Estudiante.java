@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 import Calendario.*;
 import Calendario.Horario.dias;
+import Calendario.Materia.tipo;
 
 public class Estudiante extends Persona{
 	
@@ -15,6 +16,8 @@ public class Estudiante extends Persona{
 	private double porcentajeDeAvance;
 	private boolean fallaHorario;
 	protected ArrayList<Materia> materias_cursadas;
+	private int creditosInscritos = 0;
+	private ArrayList<Materia> intentoMaterias;
 		
 	//constructor
 	public Estudiante(String nombre, int ID, String Email, boolean fueBecado, ArrayList<Materia> materias_cursadas){
@@ -24,6 +27,7 @@ public class Estudiante extends Persona{
 		this.promedio =  0.0;
 		materias_inscritas = new ArrayList<Materia>();
 		this.materias_cursadas=materias_cursadas;
+		intentoMaterias = new ArrayList<Materia>();
 	}
 	
 	//Metodos get y set
@@ -34,26 +38,26 @@ public class Estudiante extends Persona{
 		materias_inscritas = materiasInscritas;
 	}
 	
+	
 	public void setfallaHorario(boolean fallaHorario) {
 		this.fallaHorario= fallaHorario;
 	}
-	
 	public boolean getfallaHorario() {
 		return fallaHorario;
 	}
 	
+	
 	public boolean getFueBecado() {
         return fueBecado;
     }
-	
 	public void setFueBecado(boolean fueBecado) {
         this.fueBecado = fueBecado;
     }
 	
+	
 	public double getPorcentajeDeAvance() {
 	 	return porcentajeDeAvance;
  	}
-	
 	public void setPorcentajeDeAvance(double PorcentajeDeAvance) {
 	 	porcentajeDeAvance = PorcentajeDeAvance;
  	}	 
@@ -63,22 +67,49 @@ public class Estudiante extends Persona{
 	 public void setMateriasCursadas(ArrayList<Materia> materias_cursadas) {
 			this.materias_cursadas=materias_cursadas;
 	    }
+	 
+	 
+	 public void setCreditosInscritos(int creditosInscritos) {
+			this.creditosInscritos= creditosInscritos;
+		}
+		public int getCreditosInscritos() {
+			return creditosInscritos;
+		}
+	 
+		
 	//metodos de la clase
-	public void inscribirMateria(String nombreMateria, ArrayList<Materia> materiasDisponibles) {
-	    for (Materia materia : materiasDisponibles) {
-	        if (materia .getNombre().equals(nombreMateria)) {
-	        	Materia prerrequisito = materia.getPrerrequisito();
-	        	if (prerrequisito == null || materias_cursadas.contains(prerrequisito)) {
-	           materias_inscritas.add(materia);
-	            break;
-	        	}
+		public void inscribirMateria(String nombreMateria, ArrayList<Materia> materiasDisponibles) {
+	        boolean tieneFundamentacion = false;
+	        int intentoCreditos = 0;
+
+	        for (Materia materia : materiasDisponibles) {
+	            if (materia.getNombre().equals(nombreMateria)) {
+	                Materia prerrequisito = materia.getPrerrequisito();
+	                if (prerrequisito == null || materias_cursadas.contains(prerrequisito)) {
+	                    intentoMaterias.add(materia);
+	                    break;
+	                }
+	            }
+	        }
+	        for (Materia m : intentoMaterias) {
+	            intentoCreditos += m.getCreditos();
+	            if (m.getTipo() == tipo.fundamentacion) {
+	                tieneFundamentacion = true;
+	            }
+	        }
+	        if (intentoCreditos >= 10 && tieneFundamentacion) {
+	            setMaterias_Inscritas(intentoMaterias);
+	            setCreditosInscritos(intentoCreditos);
 	        }
 	    }
+	
+	
 	        
-	}
+	
 	public void retirarMateria(Materia Materia) {
 		materias_inscritas.remove(Materia);
 	}
+	
 	
 	public static void aplicarBeca (Estudiante estudiante) {
 		Beca.estudiantes.add(estudiante);

@@ -27,10 +27,10 @@ public class TEST {
 		
 		
 		
-		System.out.println(est.getPorcentajeDeAvance());
-		System.out.println(est2.getPorcentajeDeAvance());
-		System.out.println(est3.getPorcentajeDeAvance());
-		System.out.println(est4.getPorcentajeDeAvance());
+		//System.out.println(est.getPorcentajeDeAvance());
+		//System.out.println(est2.getPorcentajeDeAvance());
+		//System.out.println(est3.getPorcentajeDeAvance());
+		//System.out.println(est4.getPorcentajeDeAvance());
 		
 		
 		est.inscribirMateria("Calculo VariasVariables",materiasDisponibles);
@@ -38,10 +38,17 @@ public class TEST {
 		est3.inscribirMateria("Calculo Integral",materiasDisponibles);
 		est4.inscribirMateria("Calculo Integral",materiasDisponibles);
 		
+		est.inscribirMateria("Catedra Apun",materiasDisponibles);
+		est2.inscribirMateria("Catedra Apun",materiasDisponibles);
+		est3.inscribirMateria("Catedra Apun",materiasDisponibles);
+		est4.inscribirMateria("Catedra Apun",materiasDisponibles);
+		
 		est.inscribirMateria("Programacion Orientada Objetos",materiasDisponibles);
 		est2.inscribirMateria("Programacion Orientada Objetos",materiasDisponibles);
 		est3.inscribirMateria("Programacion Orientada Objetos",materiasDisponibles);
 		est4.inscribirMateria("Programacion Orientada Objetos",materiasDisponibles);
+		
+		System.out.println(est2.getMaterias_Inscritas());
 		
 		Tarea tallerP = new Tarea(materiasDisponibles.get(1),"NOSE");
 		//tallerP.setGrade(est,5.0);
