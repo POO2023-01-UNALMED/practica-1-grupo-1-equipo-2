@@ -146,13 +146,36 @@ public class Materia {
 	 }	 
 	 
 	 public double calcularPromedio(Estudiante estudiante) {
-	        double totalScore = 0;
+		 double totalScore = 0;
+	        int contador = 0;
 	        for (Tarea tarea : tareas_de_materia) {
+	        	contador ++;
 	            totalScore += tarea.getGrade(estudiante);
 	        }
-	        return totalScore;
-	    }
+	        return Math.round((totalScore/contador) * 100.0) / 100.0;
+	 }
+	        
 	 public String toString() {
 		 return nombre + " " + horario;
 	 }
+	//5. Metodo calcular nota restante para pasar la materia
+
+	 public double Calcular_necesario_para_pasar(Estudiante estudiante) {
+		 double totalScore = 0;
+	        int contador = 0;
+	        for (Tarea tarea : tareas_de_materia) {
+	        	contador ++;
+	            totalScore += tarea.getGrade(estudiante);
+	        }
+	        double nota= Math.round((totalScore/contador) * 100.0) / 100.0;
+	 
+		 double Nota_necesaria = 0.0;
+		 
+		 if (nota < 3) {
+			 Nota_necesaria = 3*(contador+1)-totalScore;
+			 
+		 } return Nota_necesaria;
+			
+		}
+
 }

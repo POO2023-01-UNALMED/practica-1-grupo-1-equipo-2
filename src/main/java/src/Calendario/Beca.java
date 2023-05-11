@@ -8,7 +8,7 @@ import personas.Estudiante;
 
 public class Beca {
 
-	
+	//Funcionalidad 3: asignación de becas Becas
 	private String nombre;
 	private tipos tipo;
 	private enum tipos {becaInicial, becaNormal, becaAvanzada};

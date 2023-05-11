@@ -56,6 +56,13 @@ public class TEST {
 		tallerP.setGrade(est3,5.0);
 		tallerP.setGrade(est4,5.0);
 		materiasDisponibles.get(1).inscribirTarea(tallerP);
+		
+		Tarea tallerP4 = new Tarea(materiasDisponibles.get(1),"NOSE");
+		tallerP4.setGrade(est,3.0);
+		tallerP4.setGrade(est2,1.0);
+		tallerP4.setGrade(est3,3.0);
+		tallerP4.setGrade(est4,5.0);
+		materiasDisponibles.get(1).inscribirTarea(tallerP4);
 
 		
 		Tarea tallerP2 = new Tarea(materiasDisponibles.get(4),"NOSE2");
@@ -91,12 +98,16 @@ public class TEST {
 		double promedioEst3 = est3.calcularPromedio();
 		double promedioEst4= est4.calcularPromedio();
 		
-		//System.out.println("Promedios: ");
+		System.out.println("Promedios: ");
 		//System.out.println(est+" promedio: "+promedioEst);
 		//System.out.println(est2+" promedio: "+promedioEst2);
 		//System.out.println(est3+" promedio: "+promedioEst3);
 		//System.out.println(est4+" promedio: "+promedioEst4+"\n");
-		
+		System.out.println(materiasDisponibles.get(1).calcularPromedio(est2));
+		System.out.println(materiasDisponibles.get(1).calcularPromedio(est3));
+		System.out.println(materiasDisponibles.get(1).Calcular_necesario_para_pasar(est2));
+		System.out.println(materiasDisponibles.get(1).Calcular_necesario_para_pasar(est3));
+
 		//System.out.println("Horarios: ");
 		
 		boolean nose = est.compararHorario(est.getMaterias_Inscritas());
@@ -118,7 +129,8 @@ public class TEST {
 		
 		for (Profesor profesor: est3.getProfesoresInscritos()) {
 			profesor.ingresarCalificacion(4.0);
-		}
+		} 
+		System.out.println("Calificación docente:");
 		
 		for (Profesor profesor: est3.getProfesoresInscritos()) {
 			profesor.evaluacionDocente();

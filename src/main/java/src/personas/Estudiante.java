@@ -185,7 +185,7 @@ public class Estudiante extends Persona{
 		}
 		return fallaHorario;
 	}
-	
+	// Funcionalidad 2: Sugerir Horario y materia
 	public void sugerirHorario(boolean fallaHorario) {
 	    ArrayList<Materia> materiasSugeridas = new ArrayList<Materia>();
 	    if (fallaHorario) {
@@ -217,6 +217,7 @@ public class Estudiante extends Persona{
 	      this.materias_inscritas = materiasSugeridas;
 	    }
 	}
+	
 	public void sugerirMaterias(ArrayList<Materia> materiasDisponibles) {  
 		ArrayList<Materia> materiasRecomendadas = new ArrayList<Materia>();
 		for (Materia materia : materias_cursadas) {
@@ -259,6 +260,9 @@ public class Estudiante extends Persona{
 		double porcentajeAvance = (1.0/9)*materias_cursadas.size();
 		setPorcentajeDeAvance(Math.round(porcentajeAvance * 100.0) );
 	}
+	
+	
+	
 	
 }
 

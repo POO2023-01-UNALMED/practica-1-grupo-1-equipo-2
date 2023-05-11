@@ -59,7 +59,7 @@ public class Profesor extends Persona {
 	public void retirarCalificacion(double calificacion) {
 		calificacionesDocente.remove(calificacion);
 	}
-	
+	// Funcionalidad 4: Evaluacion docente
 	public void evaluacionDocente() {
 		double totalCalificaiones = 0;
 		for(double calificacion: calificacionesDocente) {
