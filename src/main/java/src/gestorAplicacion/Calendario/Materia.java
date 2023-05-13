@@ -3,8 +3,9 @@ package gestorAplicacion.Calendario;
 import gestorAplicacion.personas.Estudiante;
 import gestorAplicacion.personas.Profesor;
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Materia {
+public class Materia implements Serializable{
 	
 	//atributos de instancia
 	private int codigo;

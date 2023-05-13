@@ -1,8 +1,9 @@
 package gestorAplicacion.Calendario;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Horario {
+public class Horario implements Serializable{
 	
 	protected ArrayList<dias> dia;
 	private String hora_inicio;

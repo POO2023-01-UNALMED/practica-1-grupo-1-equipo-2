@@ -5,9 +5,10 @@ import gestorAplicacion.Calendario.Materia.tipo;
 import gestorAplicacion.Calendario.*;
 import gestorAplicacion.Calendario.Horario.dias;
 import gestorAplicacion.personas.Profesor;
+import java.io.Serializable;
 
 //Atributos de clase
-public class Facultad {
+public class Facultad implements Serializable{
 	private String nombre;
 	private String carrera;
 	protected ArrayList<Materia> materias;

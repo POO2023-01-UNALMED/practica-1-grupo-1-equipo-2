@@ -5,8 +5,9 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import gestorAplicacion.personas.Estudiante;
+import java.io.Serializable;
 
-public class Beca {
+public class Beca implements Serializable{
 
 	//Funcionalidad 3: asignación de becas Becas
 	private String nombre;

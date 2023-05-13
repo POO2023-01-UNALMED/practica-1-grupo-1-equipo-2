@@ -1,8 +1,9 @@
 package gestorAplicacion.Calendario;
 
 import gestorAplicacion.personas.Estudiante;
+import java.io.Serializable;
 
-class TareaEstudiante {
+public class TareaEstudiante implements Serializable{
     private Tarea tarea;
     private Estudiante estudiante;
     private double grade;

@@ -1,9 +1,9 @@
 package gestorAplicacion.personas;
 import gestorAplicacion.Calendario.*;
 import java.util.ArrayList;
+import java.io.Serializable;
 
-
-public class Profesor extends Persona {
+public class Profesor extends Persona implements Serializable{
 	
 	//atributos de instancia
 	protected ArrayList<Materia> materias_Asignadas;

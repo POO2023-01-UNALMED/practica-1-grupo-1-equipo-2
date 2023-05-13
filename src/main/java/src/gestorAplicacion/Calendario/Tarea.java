@@ -3,8 +3,9 @@ package gestorAplicacion.Calendario;
 import java.util.ArrayList;
 
 import gestorAplicacion.personas.Estudiante;
+import java.io.Serializable;
 
-public class Tarea {
+public class Tarea implements Serializable{
 	
 	//atributos
 	private ArrayList<TareaEstudiante> tareaEstudiantes;

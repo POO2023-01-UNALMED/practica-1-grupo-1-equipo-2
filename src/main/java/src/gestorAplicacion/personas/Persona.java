@@ -1,6 +1,8 @@
 package gestorAplicacion.personas;
 
-public abstract class Persona {
+import java.io.Serializable;
+
+public abstract class Persona implements Serializable{
 	//Atributos clase abstracta
 	public String nombre;
 	public long ID;

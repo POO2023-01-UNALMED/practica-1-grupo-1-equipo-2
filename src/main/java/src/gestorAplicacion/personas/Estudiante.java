@@ -6,8 +6,9 @@ import java.util.Set;
 import gestorAplicacion.Calendario.*;
 import gestorAplicacion.Calendario.Horario.dias;
 import gestorAplicacion.Calendario.Materia.tipo;
+import java.io.Serializable;
 
-public class Estudiante extends Persona{
+public class Estudiante extends Persona implements Serializable{
 	
 	//atributos
 	private double promedio;
