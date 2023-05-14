@@ -14,6 +14,7 @@ import gestorAplicacion.Calendario.*;
 public class Serializador {
 	static File file = new File ("");
 	
+	
 	public static void serializarBecas(ArrayList<Beca> listaDeBecas) {
 		try {
             FileOutputStream f = new FileOutputStream(new File(file.getAbsolutePath()+
