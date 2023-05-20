@@ -9,14 +9,14 @@ public class Tarea implements Serializable{
 	
 	//atributos
 	private ArrayList<TareaEstudiante> tareaEstudiantes;
-	protected String descipcion;
+	protected String descripcion;
 	protected String fecha_Entrega;
 	protected String fecha_Inicio;
 
 	
 	//constructor
 	public Tarea(String descripcion, Materia materia, String fecha_Entrega, String fecha_Inicio) {
-		this.descipcion =descripcion;
+		this.descripcion =descripcion;
 		this.fecha_Entrega = fecha_Entrega;
 		this.fecha_Inicio = fecha_Inicio;
 		tareaEstudiantes = new ArrayList<>();
@@ -30,11 +30,11 @@ public class Tarea implements Serializable{
 	}
 	
 	public void setDescripcion(String descripcion) {
-		this.descipcion=descripcion;
+		this.descripcion=descripcion;
 	}
 	
 	public String getDescripcion() {
-		return descipcion;
+		return descripcion;
 	}
 		
 	public void setFecha_Entrega(String fecha_Entrega) {
