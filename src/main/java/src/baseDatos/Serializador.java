@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import gestorAplicacion.personas.*;
@@ -12,6 +13,7 @@ import gestorAplicacion.Calendario.*;
 
 
 public class Serializador {
+	/**
 	static File file = new File ("");
 	
 	
@@ -194,5 +196,72 @@ public class Serializador {
         }
 
     }
+	**/
+	private static File rutaTemp = new File("src\\main\\practica1\\src\\baseDatos\\temp");
+
+	public static void serializar(gestionDatos gestor) {
+		FileOutputStream fos;
+		ObjectOutputStream oos;
+		File[] docs = rutaTemp.listFiles();
+		PrintWriter pw;
+		
+		for (File file : docs) {
+			try {
+				pw = new PrintWriter(file);
+			}
+			
+			catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+		
+		}
+		
+		for (File file : docs) {
+			if (file.getAbsolutePath().contains("estudiantes")) {
+				try {
+					fos = new FileOutputStream(file);
+					oos = new ObjectOutputStream(fos);
+					oos.writeObject(gestor.getEstudiantes());
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			else if(file.getAbsolutePath().contains("materias")) {
+				try {
+					fos = new FileOutputStream(file);
+					oos = new ObjectOutputStream(fos);
+					oos.writeObject(gestor.getMaterias());
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			else if(file.getAbsolutePath().contains("profesores")) {
+				try {
+					fos = new FileOutputStream(file);
+					oos = new ObjectOutputStream(fos);
+					oos.writeObject(gestor.getProfesores());
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			else if(file.getAbsolutePath().contains("sistemaBecas")) {
+				try {
+					fos = new FileOutputStream(file);
+					oos = new ObjectOutputStream(fos);
+					oos.writeObject(gestor.getSistemaBecas());
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 }
 

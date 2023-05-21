@@ -2,10 +2,15 @@ package baseDatos;
 
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.IOException;
+import java.io.ObjectInput;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.List;
+
 import uiMain.Main;
 import gestorAplicacion.*;
 import gestorAplicacion.Calendario.Beca;
@@ -14,13 +19,14 @@ import gestorAplicacion.Calendario.Horario;
 import gestorAplicacion.Calendario.Materia;
 import gestorAplicacion.Calendario.Tarea;
 import gestorAplicacion.Calendario.TareaEstudiante;
+import gestorAplicacion.Calendario.gestionDatos;
 import gestorAplicacion.personas.Estudiante;
 import gestorAplicacion.personas.Persona;
 import gestorAplicacion.personas.Profesor;
 
 
 public class Deserializador{
-	 
+	/** 
 	static File file = new File("");
 	    
 	 public static ArrayList<Beca> deserializarBecas(){
@@ -227,5 +233,76 @@ public class Deserializador{
 	            return new ArrayList<Profesor>();
 	        }
 	    }
+	**/
+	private static File rutaTemp =  new File("src\\main\\practica1\\src\\baseDatos\\temp");
+	
+	public static void deserializar(gestionDatos gestor) {
+		File[] docs = rutaTemp.listFiles();
+		FileOutputStream fis;
+		ObjectOutputStream ois;
+		
+		for (File file : docs) {
+			if (file.getAbsolutePath().contains("estudiantes")) {
+				try {
+					fis = new FileOutputStream(file);
+					ois = new ObjectOutputStream(fis);
+					gestor.setEstudiantes((List<Estudiante>) ((ObjectInput) ois).readObject());
+					
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				}
+			}
+			else if (file.getAbsolutePath().contains("materias")) {
+				try {
+					fis = new FileOutputStream(file);
+					ois = new ObjectOutputStream(fis);
+					gestor.setMaterias((List<Materia>) ((ObjectInput) ois).readObject());
+					
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				}
+			}
+			else if (file.getAbsolutePath().contains("profesores")) {
+				try {
+					fis = new FileOutputStream(file);
+					ois = new ObjectOutputStream(fis);
+					gestor.setProfesores((List<Profesor>) ((ObjectInput) ois).readObject());
+					
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				}
+			}
+			else if (file.getAbsolutePath().contains("sistemaBecas")) {
+				try {
+					fis = new FileOutputStream(file);
+					ois = new ObjectOutputStream(fis);
+					gestor.setSistemaBecas((Beca) ((ObjectInput) ois).readObject());
+					
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 }
 

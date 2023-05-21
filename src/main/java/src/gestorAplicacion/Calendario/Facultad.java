@@ -91,7 +91,13 @@ public class Facultad implements Serializable{
 	public void setMaterias (ArrayList<Materia> materias) {
 		this.materias=materias;
 	}
-
+	public ArrayList<Profesor> getProfesores() {
+		return profesores;
+	}
+	
+	public void setProfesores (ArrayList<Profesor> profesores) {
+		this.profesores=profesores;
+	}
 	
 //Enum con las materias y su categoria
 		//Calculo_Diferencial, 

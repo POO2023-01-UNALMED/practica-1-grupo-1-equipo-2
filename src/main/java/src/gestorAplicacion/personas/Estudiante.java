@@ -33,7 +33,15 @@ public class Estudiante extends Persona implements Serializable{
 		profesoreInscritos= new ArrayList<Profesor>();
 
 	}
-	
+	public Estudiante(String nombre, int ID, String Email, boolean fueBecado){
+		super (nombre, ID, Email);
+		this.fallaHorario = false;
+		this.fueBecado = fueBecado;
+		this.promedio =  0.0;
+		materias_inscritas = new ArrayList<Materia>();
+		intentoMaterias = new ArrayList<Materia>();
+		profesoreInscritos= new ArrayList<Profesor>();
+	}
 	//Metodos get y set
 	
 	public void setProfesoresInscritos(ArrayList<Profesor> profesor) {
