@@ -32,7 +32,8 @@ public class Main {
 		
 		System.out.println("Email: ");
 		String Email = readln();
-		
+
+
 		System.out.println("¿Fue becado anteriormente?: ");
 		System.out.println("1: Si");
 		System.out.println("2: No");
@@ -43,8 +44,8 @@ public class Main {
 		gestor.nuevoEstudiante(nombre, ID, Email, fueBecado);
 		System.out.println("Estudiante matriculado");
 	}
-	
 	public static void main(String args[]) {
+
 		
 		gestionDatos gestor = new gestionDatos();
 		int opcion;

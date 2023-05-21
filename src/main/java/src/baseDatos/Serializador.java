@@ -197,7 +197,7 @@ public class Serializador {
 
     }
 	**/
-	private static File rutaTemp = new File("src\\main\\practica1\\src\\baseDatos\\temp");
+	private static File rutaTemp = new File("src//baseDatos//temp");
 
 	public static void serializar(gestionDatos gestor) {
 		FileOutputStream fos;
