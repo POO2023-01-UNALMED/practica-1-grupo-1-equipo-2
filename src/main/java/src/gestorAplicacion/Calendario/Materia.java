@@ -13,7 +13,6 @@ public class Materia implements Serializable{
 	private Profesor profesor;
 	private Horario horario;
 	private int creditos;
-	//private Estudiante estudiante;
 	private ArrayList<TareaEstudiante> promedios;
 	private boolean aprobado;
 	protected ArrayList<Estudiante> estudiantes_inscritos;

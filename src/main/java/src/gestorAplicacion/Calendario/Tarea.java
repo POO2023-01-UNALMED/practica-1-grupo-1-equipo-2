@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class Tarea implements Serializable{
 	
 	//atributos
-	private ArrayList<TareaEstudiante> tareaEstudiantes;
+	public ArrayList<TareaEstudiante> tareaEstudiantes;
 	protected String descripcion;
 	protected String fecha_Entrega;
 	protected String fecha_Inicio;
@@ -28,6 +28,13 @@ public class Tarea implements Serializable{
 		tareaEstudiantes = new ArrayList<>();
 	}
 	
+	public ArrayList<TareaEstudiante> getTareaEstudiantes(){
+		return tareaEstudiantes;
+	}
+	
+	public void setTareaEstudiantes(ArrayList<TareaEstudiante> tareaEstudiantes) {
+		this.tareaEstudiantes = tareaEstudiantes;
+	}
 	public void setDescripcion(String descripcion) {
 		this.descripcion=descripcion;
 	}

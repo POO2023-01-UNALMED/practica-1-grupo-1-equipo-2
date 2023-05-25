@@ -54,6 +54,8 @@ public class Serializador {
 	            PrintWriter pw = new PrintWriter(ruta);
 	            FileOutputStream file = new FileOutputStream(ruta);
 	            ObjectOutputStream out = new ObjectOutputStream(file);
+	            
+	            
 	            out.writeObject(gestor.getMaterias());
 	            out.close();
 	            file.close();

@@ -87,10 +87,10 @@ public class TEST {
 		
 		Beca beca = new Beca("SISAS");
 		
-		Estudiante.aplicarBeca(est);
-		Estudiante.aplicarBeca(est2);
-		Estudiante.aplicarBeca(est3);
-		Estudiante.aplicarBeca(est4);
+		//Estudiante.aplicarBeca(est);
+		//Estudiante.aplicarBeca(est2);
+		//Estudiante.aplicarBeca(est3);
+		//Estudiante.aplicarBeca(est4);
 		beca.asignarEstudiantesBeca();
 		
 		//System.out.println("Admitidos a becas: ");

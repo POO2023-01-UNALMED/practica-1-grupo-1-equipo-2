@@ -38,5 +38,13 @@ public class TareaEstudiante implements Serializable{
 		this.tarea = tarea;
 	}
 
-    
+	@Override
+    public String toString() {
+        return "TareaEstudiante{" +
+                "tarea=" + tarea +
+                ", estudiante=" + estudiante +
+                ", grade=" + grade +
+                '}';
+    }
+
 }

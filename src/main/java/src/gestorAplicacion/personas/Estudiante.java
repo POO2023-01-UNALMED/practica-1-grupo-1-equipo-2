@@ -145,7 +145,7 @@ public class Estudiante extends Persona implements Serializable{
 		        }
 		    }
 
-		    if (intentoCreditos >= 10 && tieneFundamentacion) {
+		    if (intentoCreditos >= 6 && tieneFundamentacion) {
 		        for(Materia ma: intentoMaterias) {
 		            profesoreInscritos.add(ma.getProfesor());
 		            ma.inscribirEstudiante(this);
@@ -163,8 +163,8 @@ public class Estudiante extends Persona implements Serializable{
 	}
 	
 	
-	public static void aplicarBeca (Estudiante estudiante) {
-		Beca.estudiantes.add(estudiante);
+	public void aplicarBeca (Estudiante estudiante) {
+		Beca.estudiantes.add(this);
 	}
 	
 	
@@ -258,31 +258,65 @@ public class Estudiante extends Persona implements Serializable{
 	public void sugerirMaterias(ArrayList<Materia> materiasDisponibles) {  
 		ArrayList<Materia> materiasRecomendadas = new ArrayList<Materia>();
 		for (Materia materia : materias_cursadas) {
-			if(materia == materiasDisponibles.get(0) && !(materias_cursadas.contains(materiasDisponibles.get(1)))) {
-				materiasRecomendadas.add(materiasDisponibles.get(1));
+			
+			if(materia.getNombre().equalsIgnoreCase(materiasDisponibles.get(0).getNombre()) && !(materias_cursadas.contains(materiasDisponibles.get(0)))){
+				materiasRecomendadas.add(materiasDisponibles.get(0));
+				profesoreInscritos.add(materiasDisponibles.get(0).getProfesor());
+				materiasDisponibles.get(0).inscribirEstudiante(this);
 			}
-			else if(materia == materiasDisponibles.get(1) && !(materias_cursadas.contains(materiasDisponibles.get(2)))) {
+			
+			else if(materia.getNombre().equalsIgnoreCase(materiasDisponibles.get(0).getNombre()) && !(materias_cursadas.contains(materiasDisponibles.get(1)))) {
+				materiasRecomendadas.add(materiasDisponibles.get(1));
+				profesoreInscritos.add(materiasDisponibles.get(1).getProfesor());
+				materiasDisponibles.get(1).inscribirEstudiante(this);
+			}
+			else if(materia.getNombre().equalsIgnoreCase(materiasDisponibles.get(1).getNombre()) && !(materias_cursadas.contains(materiasDisponibles.get(2)))) {
 				materiasRecomendadas.add(materiasDisponibles.get(2));
+				profesoreInscritos.add(materiasDisponibles.get(2).getProfesor());
+				materiasDisponibles.get(2).inscribirEstudiante(this);
 			}
 		
-			if (materia == materiasDisponibles.get(3) && !(materias_cursadas.contains(materiasDisponibles.get(4)))) {
-				materiasRecomendadas.add(materiasDisponibles.get(4));
+			if (materia.getNombre().equalsIgnoreCase(materiasDisponibles.get(3).getNombre()) && !(materias_cursadas.contains(materiasDisponibles.get(3)))) {
+				materiasRecomendadas.add(materiasDisponibles.get(3));
+				profesoreInscritos.add(materiasDisponibles.get(3).getProfesor());
+				materiasDisponibles.get(3).inscribirEstudiante(this);
 				if(compararHorario(materiasRecomendadas)) {
-					materiasRecomendadas.remove(materiasDisponibles.get(4));
+					materiasRecomendadas.remove(materiasDisponibles.get(3));
+					profesoreInscritos.remove(materiasDisponibles.get(3).getProfesor());
+					materiasDisponibles.remove(3).inscribirEstudiante(this);
 				}
 			}
-			else if(materia == materiasDisponibles.get(4) && !(materias_cursadas.contains(materiasDisponibles.get(5)))) {
+			
+			else if (materia.getNombre().equalsIgnoreCase(materiasDisponibles.get(3).getNombre()) && !(materias_cursadas.contains(materiasDisponibles.get(4)))) {
+				materiasRecomendadas.add(materiasDisponibles.get(4));
+				profesoreInscritos.add(materiasDisponibles.get(4).getProfesor());
+				materiasDisponibles.get(4).inscribirEstudiante(this);
+				if(compararHorario(materiasRecomendadas)) {
+					materiasRecomendadas.remove(materiasDisponibles.get(4));
+					profesoreInscritos.remove(materiasDisponibles.get(4).getProfesor());
+					materiasDisponibles.remove(4).inscribirEstudiante(this);
+				}
+			}
+			else if(materia.getNombre().equalsIgnoreCase(materiasDisponibles.get(4).getNombre()) && !(materias_cursadas.contains(materiasDisponibles.get(5)))) {
 				materiasRecomendadas.add(materiasDisponibles.get(5));
+				profesoreInscritos.add(materiasDisponibles.get(5).getProfesor());
+				materiasDisponibles.get(5).inscribirEstudiante(this);
 				if(compararHorario(materiasRecomendadas)) {
 					materiasRecomendadas.remove(materiasDisponibles.get(5));
+					profesoreInscritos.remove(materiasDisponibles.get(5).getProfesor());
+					materiasDisponibles.remove(5).inscribirEstudiante(this);
 				}
 			}
 		}
 		
 		for (int i = 6; i<9;i++) {
 			materiasRecomendadas.add(materiasDisponibles.get(i));
+			profesoreInscritos.add(materiasDisponibles.get(i).getProfesor());
+			materiasDisponibles.get(i).inscribirEstudiante(this);
 			if(compararHorario(materiasRecomendadas)) {
 				materiasRecomendadas.remove(materiasDisponibles.get(i));
+				profesoreInscritos.remove(materiasDisponibles.get(i).getProfesor());
+				materiasDisponibles.remove(i).inscribirEstudiante(this);
 			}
 		}
 		this.materias_inscritas = materiasRecomendadas;
