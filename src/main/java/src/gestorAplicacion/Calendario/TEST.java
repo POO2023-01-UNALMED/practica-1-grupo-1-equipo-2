@@ -19,6 +19,9 @@ public class TEST {
 		Estudiante est3 = new Estudiante("BREADLEY", 67890, "pp@a.com",false,new ArrayList<Materia>(Arrays.asList(materiasDisponibles.get(0),materiasDisponibles.get(3))));
 		Estudiante est4 = new Estudiante("BAENA", 67890, "pp@a.com",false,new ArrayList<Materia>(Arrays.asList(materiasDisponibles.get(0),materiasDisponibles.get(3))));
 		
+		ArrayList<Profesor> profesoresMinas = Minas.getProfesores();
+		System.out.println(profesoresMinas);
+		
 		est.calcularPorcetajeAvance();
 		est2.calcularPorcetajeAvance();
 		est3.calcularPorcetajeAvance();
@@ -79,6 +82,8 @@ public class TEST {
 		tallerP3.setGrade(est4,4.5);
 		materiasDisponibles.get(4).inscribirTarea(tallerP3); 
 
+		System.out.println("TAREAS EN CALCULO INTEGRAL");
+		System.out.println(materiasDisponibles.get(1).getTareasDeMateria());
 		
 		Beca beca = new Beca("SISAS");
 		
@@ -100,9 +105,9 @@ public class TEST {
 		
 		System.out.println("Promedios: ");
 		//System.out.println(est+" promedio: "+promedioEst);
-		//System.out.println(est2+" promedio: "+promedioEst2);
-		//System.out.println(est3+" promedio: "+promedioEst3);
-		//System.out.println(est4+" promedio: "+promedioEst4+"\n");
+		System.out.println(est2+" promedio: "+promedioEst2);
+		System.out.println(est3+" promedio: "+promedioEst3);
+		System.out.println(est4+" promedio: "+promedioEst4+"\n");
 		System.out.println(materiasDisponibles.get(1).calcularPromedio(est2));
 		System.out.println(materiasDisponibles.get(1).calcularPromedio(est3));
 		System.out.println(materiasDisponibles.get(1).Calcular_necesario_para_pasar(est2));

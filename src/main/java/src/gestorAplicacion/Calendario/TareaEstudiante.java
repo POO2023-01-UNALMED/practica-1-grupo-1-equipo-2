@@ -9,16 +9,34 @@ public class TareaEstudiante implements Serializable{
     private double grade;
 
     public TareaEstudiante(Tarea tarea, Estudiante estudiante, double grade) {
-        this.tarea = tarea;
-        this.estudiante = estudiante;
-        this.grade = grade;
+        this.tarea=tarea;
+        this.estudiante=estudiante;
+        this.grade=grade;
     }
 
-    public Estudiante getEstudiante() {
-        return estudiante;
-    }
+	public Estudiante getEstudiante() {
+		return estudiante;
+	}
 
-    public double getGrade() {
-        return grade;
-    }
+	public void setEstudiante(Estudiante estudiante) {
+		this.estudiante = estudiante;
+	}
+
+	public double getGrade() {
+		return grade;
+	}
+
+	public void setGrade(double grade) {
+		this.grade = grade;
+	}
+
+	public Tarea getTarea() {
+		return tarea;
+	}
+
+	public void setTarea(Tarea tarea) {
+		this.tarea = tarea;
+	}
+
+    
 }

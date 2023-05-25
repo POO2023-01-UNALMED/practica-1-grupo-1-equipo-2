@@ -40,6 +40,7 @@ public class Materia implements Serializable{
         estudiantes_inscritos = new ArrayList<Estudiante>();
         this.prerrequisito=prerrequisito;
         this.tipo = tipo;
+        
 	}
 	public Materia(int codigo, String nombre, Profesor profesor, Horario horario, int creditos, tipo tipo) {
         this.codigo = codigo;

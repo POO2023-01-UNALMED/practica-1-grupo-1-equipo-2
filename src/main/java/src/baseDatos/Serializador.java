@@ -13,255 +13,70 @@ import gestorAplicacion.Calendario.*;
 
 
 public class Serializador {
-	/**
-	static File file = new File ("");
-	
-	
-	public static void serializarBecas(ArrayList<Beca> listaDeBecas) {
-		try {
-            FileOutputStream f = new FileOutputStream(new File(file.getAbsolutePath()+
-                    "\\src\\baseDatos\\temp\\Becas.txt"));
-            ObjectOutputStream o = new ObjectOutputStream(f);
 
-            o.writeObject(listaDeBecas);
+	    public static void serializar(gestionDatos gestor) {
+	    	serializarEstudiantes(gestor,new File("src\\baseDatos\\temp\\Estudiantes.txt"));
+	    	serializarProfesores(gestor,new File("src\\baseDatos\\temp\\Profesores.txt"));
+	    	serializarMaterias(gestor,new File("src\\baseDatos\\temp\\Materias.txt"));
+	    	serializarBeca(gestor,new File("src\\baseDatos\\temp\\Beca.txt"));
+	    }
 
-            o.close();
-            f.close();
+	    public static void serializarEstudiantes(gestionDatos gestor, File ruta) {
+	        try {
+	            PrintWriter pw = new PrintWriter(ruta);
+	            FileOutputStream file = new FileOutputStream(ruta);
+	            ObjectOutputStream out = new ObjectOutputStream(file);
+	            out.writeObject(gestor.getEstudiantes());
+	            out.close();
+	            file.close();
 
-        }catch(FileNotFoundException e){
-            System.out.println("No se encuentra el archivo"+e.getMessage());
-        }
-        catch(IOException e) {
-            System.out.println("No se encuentra en archivo");
-        }
+	        } catch (IOException e) {
+	            System.out.println("Error en la serializacion" + e);
+	        }
+	    }
 
-    }
-	
-	public static void serializarFacultades(ArrayList<Facultad> listaDeFacultades) {
-		try {
-            FileOutputStream f = new FileOutputStream(new File(file.getAbsolutePath()+
-                    "\\src\\baseDatos\\temp\\Facultades.txt"));
-            ObjectOutputStream o = new ObjectOutputStream(f);
+	    public static void serializarProfesores(gestionDatos gestor, File ruta) {
+	        try {
+	            PrintWriter pw = new PrintWriter(ruta);
+	            FileOutputStream file = new FileOutputStream(ruta);
+	            ObjectOutputStream out = new ObjectOutputStream(file);
+	            out.writeObject(gestor.getProfesores());
+	            out.close();
+	            file.close();
 
-            o.writeObject(listaDeFacultades);
+	        } catch (IOException e) {
+	            System.out.println("Error en la serializacion" + e);
+	        }
+	    }
 
-            o.close();
-            f.close();
+	    public static void serializarMaterias(gestionDatos gestor, File ruta) {
+	        try {
+	            PrintWriter pw = new PrintWriter(ruta);
+	            FileOutputStream file = new FileOutputStream(ruta);
+	            ObjectOutputStream out = new ObjectOutputStream(file);
+	            out.writeObject(gestor.getMaterias());
+	            out.close();
+	            file.close();
 
-        }catch(FileNotFoundException e){
-            System.out.println("No se encuentra el archivo"+e.getMessage());
-        }
-        catch(IOException e) {
-            System.out.println("No se encuentra en archivo");
-        }
+	        } catch (IOException e) {
+	            System.out.println("Error en la serializacion" + e);
+	        }
+	    }
 
-    }
-	
-	public static void serializarHorarios(ArrayList<Horario> listaDeHorarios) {
-		try {
-            FileOutputStream f = new FileOutputStream(new File(file.getAbsolutePath()+
-                    "\\src\\baseDatos\\temp\\Horarios.txt"));
-            ObjectOutputStream o = new ObjectOutputStream(f);
+	    public static void serializarBeca(gestionDatos gestor, File ruta) {
+	        try {
+	            PrintWriter pw = new PrintWriter(ruta);
+	            FileOutputStream file = new FileOutputStream(ruta);
+	            ObjectOutputStream out = new ObjectOutputStream(file);
+	            out.writeObject(gestor.getSistemaBecas());
+	            out.close();
+	            file.close();
 
-            o.writeObject(listaDeHorarios);
+	        } catch (IOException e) {
+	            System.out.println("Error en la serializacion" + e);
+	        }
+	    }
 
-            o.close();
-            f.close();
-
-        }catch(FileNotFoundException e){
-            System.out.println("No se encuentra el archivo"+e.getMessage());
-        }
-        catch(IOException e) {
-            System.out.println("No se encuentra en archivo");
-        }
-
-    }
-	
-	public static void serializarMaterias(ArrayList<Materia> listaDeMaterias) {
-		try {
-            FileOutputStream f = new FileOutputStream(new File(file.getAbsolutePath()+
-                    "\\src\\baseDatos\\temp\\Materias.txt"));
-            ObjectOutputStream o = new ObjectOutputStream(f);
-
-            o.writeObject(listaDeMaterias);
-
-            o.close();
-            f.close();
-
-        }catch(FileNotFoundException e){
-            System.out.println("No se encuentra el archivo"+e.getMessage());
-        }
-        catch(IOException e) {
-            System.out.println("No se encuentra en archivo");
-        }
-
-    }
-	
-	public static void serializarTareas(ArrayList<Tarea> listaDeTareas) {
-		try {
-            FileOutputStream f = new FileOutputStream(new File(file.getAbsolutePath()+
-                    "\\src\\baseDatos\\temp\\Tareas.txt"));
-            ObjectOutputStream o = new ObjectOutputStream(f);
-
-            o.writeObject(listaDeTareas);
-
-            o.close();
-            f.close();
-
-        }catch(FileNotFoundException e){
-            System.out.println("No se encuentra el archivo"+e.getMessage());
-        }
-        catch(IOException e) {
-            System.out.println("No se encuentra en archivo");
-        }
-
-    }
-
-	public static void serializarTareaEstudiante(ArrayList<TareaEstudiante> listaDeTareaEstudiante) {
-		try {
-            FileOutputStream f = new FileOutputStream(new File(file.getAbsolutePath()+
-                    "\\src\\baseDatos\\temp\\TareaEstudiante.txt"));
-            ObjectOutputStream o = new ObjectOutputStream(f);
-
-            o.writeObject(listaDeTareaEstudiante);
-
-            o.close();
-            f.close();
-
-        }catch(FileNotFoundException e){
-            System.out.println("No se encuentra el archivo"+e.getMessage());
-        }
-        catch(IOException e) {
-            System.out.println("No se encuentra en archivo");
-        }
-
-    }
-
-	public static void serializarPersona(ArrayList<Persona> listaDePersonas) {
-		try {
-            FileOutputStream f = new FileOutputStream(new File(file.getAbsolutePath()+
-                    "\\src\\baseDatos\\temp\\Personas.txt"));
-            ObjectOutputStream o = new ObjectOutputStream(f);
-
-            o.writeObject(listaDePersonas);
-
-            o.close();
-            f.close();
-
-        }catch(FileNotFoundException e){
-            System.out.println("No se encuentra el archivo"+e.getMessage());
-        }
-        catch(IOException e) {
-            System.out.println("No se encuentra en archivo");
-        }
-
-    }
-
-	public static void serializarEstudiantes(ArrayList<Estudiante> listaDeEstudiantes) {
-		try {
-            FileOutputStream f = new FileOutputStream(new File(file.getAbsolutePath()+
-                    "\\src\\baseDatos\\temp\\Estudiantes.txt"));
-            ObjectOutputStream o = new ObjectOutputStream(f);
-
-            o.writeObject(listaDeEstudiantes);
-
-            o.close();
-            f.close();
-
-        }catch(FileNotFoundException e){
-            System.out.println("No se encuentra el archivo"+e.getMessage());
-        }
-        catch(IOException e) {
-            System.out.println("No se encuentra en archivo");
-        }
-
-    }
-
-	public static void serializarProfesores(ArrayList<Profesor> listaDeProfesores) {
-		try {
-            FileOutputStream f = new FileOutputStream(new File(file.getAbsolutePath()+
-                    "\\src\\baseDatos\\temp\\Profesores.txt"));
-            ObjectOutputStream o = new ObjectOutputStream(f);
-
-            o.writeObject(listaDeProfesores);
-
-            o.close();
-            f.close();
-
-        }catch(FileNotFoundException e){
-            System.out.println("No se encuentra el archivo"+e.getMessage());
-        }
-        catch(IOException e) {
-            System.out.println("No se encuentra en archivo");
-        }
-
-    }
-	**/
-	private static File rutaTemp = new File("src//baseDatos//temp");
-
-	public static void serializar(gestionDatos gestor) {
-		FileOutputStream fos;
-		ObjectOutputStream oos;
-		File[] docs = rutaTemp.listFiles();
-		PrintWriter pw;
-		
-		for (File file : docs) {
-			try {
-				pw = new PrintWriter(file);
-			}
-			
-			catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
-		
-		}
-		
-		for (File file : docs) {
-			if (file.getAbsolutePath().contains("estudiantes")) {
-				try {
-					fos = new FileOutputStream(file);
-					oos = new ObjectOutputStream(fos);
-					oos.writeObject(gestor.getEstudiantes());
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			else if(file.getAbsolutePath().contains("materias")) {
-				try {
-					fos = new FileOutputStream(file);
-					oos = new ObjectOutputStream(fos);
-					oos.writeObject(gestor.getMaterias());
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			else if(file.getAbsolutePath().contains("profesores")) {
-				try {
-					fos = new FileOutputStream(file);
-					oos = new ObjectOutputStream(fos);
-					oos.writeObject(gestor.getProfesores());
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			else if(file.getAbsolutePath().contains("sistemaBecas")) {
-				try {
-					fos = new FileOutputStream(file);
-					oos = new ObjectOutputStream(fos);
-					oos.writeObject(gestor.getSistemaBecas());
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
 	}
-}
+
 

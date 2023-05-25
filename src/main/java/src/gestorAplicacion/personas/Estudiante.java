@@ -12,6 +12,7 @@ public class Estudiante extends Persona implements Serializable{
 	
 	//atributos
 	private double promedio;
+	private boolean calificacionAsignada;
 	private boolean fueBecado;
 	public ArrayList<Materia> materias_inscritas;
 	private double porcentajeDeAvance;
@@ -25,6 +26,7 @@ public class Estudiante extends Persona implements Serializable{
 	public Estudiante(String nombre, int ID, String Email, boolean fueBecado, ArrayList<Materia> materias_cursadas){
 		super (nombre, ID, Email);
 		this.fallaHorario = false;
+		this.calificacionAsignada = false;
 		this.fueBecado = fueBecado;
 		this.promedio =  0.0;
 		materias_inscritas = new ArrayList<Materia>();
@@ -39,6 +41,7 @@ public class Estudiante extends Persona implements Serializable{
 		this.fueBecado = fueBecado;
 		this.promedio =  0.0;
 		materias_inscritas = new ArrayList<Materia>();
+		materias_cursadas = new ArrayList<Materia>();
 		intentoMaterias = new ArrayList<Materia>();
 		profesoreInscritos= new ArrayList<Profesor>();
 	}
@@ -90,6 +93,12 @@ public class Estudiante extends Persona implements Serializable{
 			this.materias_cursadas=materias_cursadas;
 	    }
 	 
+	 public boolean getCalificacionAsignada() {
+			return calificacionAsignada;
+		}
+		public void setCalificacionAsignada(boolean calificacionAsignada) {
+			this.calificacionAsignada = calificacionAsignada;
+		}
 	 
 	 public void setCreditosInscritos(int creditosInscritos) {
 			this.creditosInscritos= creditosInscritos;
@@ -100,35 +109,53 @@ public class Estudiante extends Persona implements Serializable{
 	 
 		
 	//metodos de la clase
-		public void inscribirMateria(String nombreMateria, ArrayList<Materia> materiasDisponibles) {
-	        boolean tieneFundamentacion = false;
-	        int intentoCreditos = 0;
+		public boolean inscribirMateria(String nombreMateria, ArrayList<Materia> materiasDisponibles) {
+		    boolean tieneFundamentacion = false;
+		    boolean falloPrerrequsito = false;
+		    int intentoCreditos = 0;
 
-	        for (Materia materia : materiasDisponibles) {
-	            if (materia.getNombre().equals(nombreMateria)) {
-	                Materia prerrequisito = materia.getPrerrequisito();
-	                if (prerrequisito == null || materias_cursadas.contains(prerrequisito)) {
-	                    intentoMaterias.add(materia);
-	                    break;
-	                }
-	            }
-	        }
-	        for (Materia m : intentoMaterias) {
-	            intentoCreditos += m.getCreditos();
-	            if (m.getTipo() == tipo.fundamentacion) {
-	                tieneFundamentacion = true;
-	            }
-	        }
-	        if (intentoCreditos >= 10 && tieneFundamentacion) {
-	            for(Materia ma: intentoMaterias) {
-	            	profesoreInscritos.add(ma.getProfesor());
-	            }
-	        	setMaterias_Inscritas(intentoMaterias);
-	            setCreditosInscritos(intentoCreditos);
-	        }
-	    }
-	
-	
+		    for (Materia materia : materiasDisponibles) {
+		        if (materia.getNombre().equals(nombreMateria)) {
+		            if (materias_inscritas.contains(materia)) {
+		                return false;
+		            }
+		            Materia prerrequisito = materia.getPrerrequisito();
+		            boolean tienePrerrequisito = false;
+		            if (prerrequisito != null) {
+		                for (Materia materiaCursada : materias_cursadas) {
+		                    if (materiaCursada.getNombre().equals(prerrequisito.getNombre())) {
+		                        tienePrerrequisito = true;
+		                        break;
+		                    }
+		                }
+		            }
+		            if (prerrequisito == null || tienePrerrequisito) {
+		                intentoMaterias.add(materia);
+		                break;
+		            } else {
+		                falloPrerrequsito = true;
+		            } 
+		        }
+		    }
+
+		    for (Materia m : intentoMaterias) {
+		        intentoCreditos += m.getCreditos();
+		        if (m.getTipo() == tipo.fundamentacion) {
+		            tieneFundamentacion = true;
+		        }
+		    }
+
+		    if (intentoCreditos >= 10 && tieneFundamentacion) {
+		        for(Materia ma: intentoMaterias) {
+		            profesoreInscritos.add(ma.getProfesor());
+		            ma.inscribirEstudiante(this);
+		        }
+		        setMaterias_Inscritas(intentoMaterias);
+		        setCreditosInscritos(intentoCreditos);
+		    }
+
+		    return !falloPrerrequsito;
+		}
 	        
 	
 	public void retirarMateria(Materia Materia) {
@@ -227,6 +254,7 @@ public class Estudiante extends Persona implements Serializable{
 	    }
 	}
 	
+	//Funcionalidad 3: Crear un horario en base a las materias vistas
 	public void sugerirMaterias(ArrayList<Materia> materiasDisponibles) {  
 		ArrayList<Materia> materiasRecomendadas = new ArrayList<Materia>();
 		for (Materia materia : materias_cursadas) {
@@ -269,6 +297,7 @@ public class Estudiante extends Persona implements Serializable{
 		double porcentajeAvance = (1.0/9)*materias_cursadas.size();
 		setPorcentajeDeAvance(Math.round(porcentajeAvance * 100.0) );
 	}
+	
 	
 	
 	

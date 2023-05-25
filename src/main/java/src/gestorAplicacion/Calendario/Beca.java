@@ -8,7 +8,7 @@ import gestorAplicacion.personas.Estudiante;
 import java.io.Serializable;
 
 public class Beca implements Serializable{
-
+	private static final long serialVersionUID = 1L;
 	//Funcionalidad 3: asignación de becas Becas
 	private String nombre;
 	private tipos tipo;
@@ -94,6 +94,18 @@ public class Beca implements Serializable{
 	        else if (estudiantesAptosAvanzada2.size()==1) {
 	        	this.estudiantesAptosAvanzada.add(estudiantesAptosAvanzada2.get(0));
 	        }
+		}
+
+
+	public ArrayList<Estudiante> getEstudiantesAptosInicial() {
+		return estudiantesAptosInicial;
+		
+	}
+	public ArrayList<Estudiante> getEstudiantesAptosNormal() {
+		return estudiantesAptosNormal;
+	}
+	public ArrayList<Estudiante> getEstudiantesAptosAvanzada() {
+		return estudiantesAptosAvanzada;
 		}
 }
 	

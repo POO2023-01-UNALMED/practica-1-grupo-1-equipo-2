@@ -8,7 +8,7 @@ import gestorAplicacion.personas.Profesor;
 import java.io.Serializable;
 
 //Atributos de clase
-public class Facultad implements Serializable{
+public class Facultad{
 	private String nombre;
 	private String carrera;
 	protected ArrayList<Materia> materias;
@@ -16,43 +16,44 @@ public class Facultad implements Serializable{
 //Constructor de la clase
 	public Facultad(){
 		this.nombre = "Minas";
-		this.carrera = "IngenieriaSistemas";
+		this.carrera = "Ingenieria de Sistemas";
 		materias = new ArrayList<>();
 		profesores = new ArrayList<>();
 		
 		Horario horario1 = new Horario(new ArrayList<dias>(Arrays.asList(dias.lunes, dias.miercoles, dias.viernes)),"8","10");
-		Profesor Guillermo = new Profesor("Juan Guillermo", 0001, "guille@unal.edu.co");
+		Profesor Guillermo = new Profesor("Juan Guillermo", 10, "guille@unal.edu.co");
 		Materia Calculo_Diferencial = new Materia(10012,"Calculo Diferencial",Guillermo,horario1,4, tipo.fundamentacion);
+		//Guillermo.asignarMateria(Calculo_Diferencial);
 		
 		Horario horario2 = new Horario(new ArrayList<dias>(Arrays.asList(dias.lunes, dias.martes, dias.jueves)),"8","10");
-		Profesor Diego = new Profesor("Diego", 0002, "diego@unal.edu.co");
+		Profesor Diego = new Profesor("Diego", 11, "diego@unal.edu.co");
 		Materia Calculo_Integral = new Materia(10013, "Calculo Integral", Diego, horario2, 4, Calculo_Diferencial, tipo.fundamentacion);
 		
 		Horario horario3 = new Horario(new ArrayList<dias>(Arrays.asList(dias.lunes, dias.martes, dias.jueves)),"14","16");
-		Profesor Marcos = new Profesor("Marcos", 0003, "marcos@unal.edu.co");
-		Materia Calculo_VariasVariables = new Materia(10014, "Calculo VariasVariables", Marcos, horario3, 4, Calculo_Integral, tipo.fundamentacion);
+		Profesor Marcos = new Profesor("Marcos", 12, "marcos@unal.edu.co");
+		Materia Calculo_VariasVariables = new Materia(10014, "Calculo Varias Variables", Marcos, horario3, 4, Calculo_Integral, tipo.fundamentacion);
 		
 		Horario horario4 = new Horario(new ArrayList<dias>(Arrays.asList(dias.martes, dias.jueves)),"18","20");
-		Profesor Nelson = new Profesor("Nelson", 0004, "nelson@unal.edu.co");
+		Profesor Nelson = new Profesor("Nelson", 13, "nelson@unal.edu.co");
 		Materia Fundamentos_Programacion = new Materia(10015, "Fundamentos Programacion", Nelson, horario4, 3, tipo.disciplinar);
 		
 		Horario horario5 = new Horario(new ArrayList<dias>(Arrays.asList(dias.martes, dias.jueves)),"14","16");
-		Profesor Jaime = new Profesor("Jaime", 0005, "jaime@unal.edu.co");
+		Profesor Jaime = new Profesor("Jaime", 14, "jaime@unal.edu.co");
 		Materia Programacion_Orientada_Objetos = new Materia(10016, "Programacion Orientada Objetos", Jaime, horario5, 3, Fundamentos_Programacion, tipo.disciplinar);
 		
 		Horario horario6 = new Horario(new ArrayList<dias>(Arrays.asList(dias.miercoles, dias.viernes)),"8","10");
-		Profesor Julian = new Profesor("Julian", 0006, "julian@unal.edu.co");
+		Profesor Julian = new Profesor("Julian", 15, "julian@unal.edu.co");
 		Materia Estructura_Datos = new Materia(10017, "Estructura Datos", Julian, horario6, 3, Programacion_Orientada_Objetos, tipo.disciplinar);
 		
 		Horario horario7 = new Horario(new ArrayList<dias>(Arrays.asList(dias.lunes)),"14","16");
-		Profesor Sierra = new Profesor("Sierra", 0007, "sierra@unal.edu.co");
+		Profesor Sierra = new Profesor("Sierra", 16, "sierra@unal.edu.co");
 		Materia Catedra_Antioquia = new Materia(10018, "Catedra Antioquia", Sierra, horario7, 3, tipo.libreEleccion);
 		
 		Horario horario8 = new Horario(new ArrayList<dias>(Arrays.asList(dias.sabado)),"8","10");
 		Materia Catedra_Apun = new Materia(10019, "Catedra Apun", Sierra, horario8, 3, tipo.libreEleccion);
 		
 		Horario horario9 = new Horario(new ArrayList<dias>(Arrays.asList(dias.martes)),"8","10");
-		Profesor Marisol = new Profesor("Marisol", 0011, "marisol@unal.edu.co");
+		Profesor Marisol = new Profesor("Marisol", 17, "marisol@unal.edu.co");
 		Materia Catedra_Felicidad = new Materia(10019, "Catedra Felicidad", Marisol, horario9, 3, tipo.libreEleccion);
 		
 		
@@ -66,6 +67,12 @@ public class Facultad implements Serializable{
 		materias.add(Catedra_Apun);
 		materias.add(Catedra_Felicidad);
 		
+		for (int i = 0; i<materias.size();i++) {
+			Profesor profesor = materias.get(i).getProfesor();
+			if (!profesores.contains(profesor))
+				profesores.add(profesor);
+			profesor.asignarMateria(materias.get(i));
+		}
 		
 	}
 	

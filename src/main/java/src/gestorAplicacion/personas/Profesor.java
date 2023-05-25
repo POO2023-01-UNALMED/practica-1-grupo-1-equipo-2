@@ -3,11 +3,10 @@ import gestorAplicacion.Calendario.*;
 import java.util.ArrayList;
 import java.io.Serializable;
 
-public class Profesor extends Persona implements Serializable{
+public class Profesor extends Persona{
 	
 	//atributos de instancia
 	protected ArrayList<Materia> materias_Asignadas;
-	
 	private ArrayList<Double> calificacionesDocente;
 	private double calificacionDocente;
 	
@@ -15,6 +14,7 @@ public class Profesor extends Persona implements Serializable{
 	public Profesor (String nombre, int ID, String Email) {
 		super(nombre, ID, Email);
 		calificacionesDocente = new ArrayList<Double>();
+		materias_Asignadas = new ArrayList<Materia>();
 		calificacionDocente = 0;
 	}
 	//metodos set y get
@@ -66,6 +66,10 @@ public class Profesor extends Persona implements Serializable{
 			totalCalificaiones += calificacion;
 		}
 		calificacionDocente = Math.round((totalCalificaiones/calificacionesDocente.size())*10)/10.0;
+	}
+	
+	public String toString() {
+		return "Docente "+getNombre();
 	}
 	
 }

@@ -16,16 +16,15 @@ public class Tarea implements Serializable{
 	
 	//constructor
 	public Tarea(String descripcion, Materia materia, String fecha_Entrega, String fecha_Inicio) {
-		this.descripcion =descripcion;
+		this.descripcion = descripcion;
 		this.fecha_Entrega = fecha_Entrega;
 		this.fecha_Inicio = fecha_Inicio;
 		tareaEstudiantes = new ArrayList<>();
 
 	}
 	//constructor 2
-	public Tarea(Materia materia, String fecha_Entrega) {
-		fecha_Inicio = "fecha";
-		this.fecha_Entrega = fecha_Entrega;
+	public Tarea(Materia materia, String descripcion) {
+		this.descripcion = descripcion;
 		tareaEstudiantes = new ArrayList<>();
 	}
 	
@@ -53,9 +52,20 @@ public class Tarea implements Serializable{
 		return fecha_Inicio;
 	}
 	
-    public void setGrade(Estudiante estudiante, double grade) {
-    	tareaEstudiantes.add(new TareaEstudiante(this, estudiante, grade));
-    }
+	public void setGrade(Estudiante estudiante, double grade) {
+	    boolean found = false;
+	    for (TareaEstudiante tareaEstudiante : tareaEstudiantes) {
+	        if (tareaEstudiante.getEstudiante().equals(estudiante)) {
+	            tareaEstudiante.setGrade(grade);
+	            found = true;
+	            break;
+	        }
+	    }
+	    if (!found) {
+	        tareaEstudiantes.add(new TareaEstudiante(this, estudiante, grade));
+	    }
+	}
+
 
     public double getGrade(Estudiante estudiante) {
         for (TareaEstudiante tareaEstudiante : tareaEstudiantes) {
@@ -65,5 +75,7 @@ public class Tarea implements Serializable{
         }
         return 0.0;
     }
-
+ public String toString() {
+	 return "Tarea sobre "+descripcion;
+ }
 }
