@@ -1,0 +1,12 @@
+Manual de usuario
+
+Alumnos ID
+- 123
+- 1234
+-12345
+-123456
+-1234567
+
+Profesores ID
+del numero 10 al 17
+
