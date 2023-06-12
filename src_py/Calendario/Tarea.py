@@ -1,7 +1,4 @@
-from Materia import Materia
-from TareaEstudiante import TareaEstudiante
-from personas.Estudiante import Estudiante
-
+from Calendario.TareaEstudiante import TareaEstudiante
 from typing import List
 
 class Tarea:

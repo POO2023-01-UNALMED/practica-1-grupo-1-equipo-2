@@ -1,9 +1,9 @@
-from Tarea import Tarea
-from Horario import Horario
+from Calendario.Tarea import Tarea
+from Calendario.Horario import Horario
+from personas.Profesor import Profesor
 from typing import List
 from enum import Enum
 
-from src.personas import Profesor
 
 class Materia:
     class Tipo(Enum):
@@ -45,7 +45,6 @@ class Materia:
 
     @profesor.setter
     def profesor(self, profesor: 'Profesor'):
-        from personas.Profesor import Profesor  # import moved inside method
         self.__profesor = profesor
 
     @property
@@ -78,7 +77,6 @@ class Materia:
 
     @estudiantes_inscritos.setter
     def estudiantes_inscritos(self, estudiantes_inscritos):
-        from personas.Estudiante import Estudiante  # import moved inside method
         self.__estudiantes_inscritos = estudiantes_inscritos
 
     @property
@@ -87,7 +85,6 @@ class Materia:
 
     @tareas_de_materia.setter
     def tareas_de_materia(self, tareas_de_materia):
-        from Calendario.Tarea import Tarea  # import moved inside method
         self.__tareas_de_materia = tareas_de_materia
 
     @property
@@ -99,23 +96,18 @@ class Materia:
         self.__prerrequisito = prerrequisito
 
     def inscribir_estudiante(self, nuevo_estudiante: 'Estudiante'):
-        from personas.Estudiante import Estudiante  # import moved inside method
         self.estudiantes_inscritos.append(nuevo_estudiante)
 
     def retirar_estudiante(self, estudiante: 'Estudiante'):
-        from personas.Estudiante import Estudiante  # import moved inside method
         self.estudiantes_inscritos.remove(estudiante)
 
     def inscribir_tarea(self,tarea: 'Tarea'):
-        from Calendario.Tarea import Tarea  # import moved inside method
         self.tareas_de_materia.append(tarea)
 
     def retirar_tarea(self,tarea: 'Tarea'):
-        from Calendario.Tarea import Tarea  # import moved inside method
         self.tareas_de_materia.remove(tarea)
 
     def calcular_promedio(self, estudiante: 'Estudiante') -> float:
-        from personas.Estudiante import Estudiante  # import moved inside method
         total_score = 0
         contador = 0
         for tarea in self.tareas_de_materia:
@@ -127,7 +119,6 @@ class Materia:
         return f'{self.nombre} {self.horario}'
 
     def calcular_necesario_para_pasar(self, estudiante: 'Estudiante') -> float:
-        from personas.Estudiante import Estudiante  # import moved inside method
         total_score = 0
         contador = 0
         for tarea in self.tareas_de_materia:

@@ -8,24 +8,24 @@ from Calendario.Tarea import Tarea
 if __name__ == "__main__":
     Minas = Facultad()
 
-    materiasDisponibles = Minas.get_materias()
+    materiasDisponibles = Minas.getMaterias()
 
     est = Estudiante("PEPE", 67890, "pp@a.com", False, [materiasDisponibles[0], materiasDisponibles[1], materiasDisponibles[3]])
     est2 = Estudiante("JHON", 67890, "pp@a.com", False, [materiasDisponibles[0], materiasDisponibles[3]])
     est3 = Estudiante("BREADLEY", 67890, "pp@a.com", False, [materiasDisponibles[0], materiasDisponibles[3]])
     est4 = Estudiante("BAENA", 67890, "pp@a.com", False, [materiasDisponibles[0], materiasDisponibles[3]])
 
-    est.calcularPorcetajeAvance()
-    est2.calcularPorcetajeAvance()
-    est3.calcularPorcetajeAvance()
-    est4.calcularPorcetajeAvance()
+    est.calcular_porcentaje_avance()
+    est2.calcular_porcentaje_avance()
+    est3.calcular_porcentaje_avance()
+    est4.calcular_porcentaje_avance()
 
     print(materiasDisponibles)
 
-    print(est.getPorcentajeDeAvance())
-    print(est2.getPorcentajeDeAvance())
-    print(est3.getPorcentajeDeAvance())
-    print(est4.getPorcentajeDeAvance())
+    print(est.porcentaje_avance)
+    print(est2.porcentaje_avance)
+    print(est3.porcentaje_avance)
+    print(est4.porcentaje_avance)
 
     est.inscribirMateria("Calculo VariasVariables", materiasDisponibles)
     est2.inscribirMateria("Calculo Integral", materiasDisponibles)
@@ -45,7 +45,7 @@ if __name__ == "__main__":
     # print(est2.getMaterias_Inscritas())
 
     tallerP = Tarea(materiasDisponibles[1], "NOSE")
-    # tallerP.setGrade(est, 5.0)
+    tallerP.setGrade(est, 5.0)
     tallerP.setGrade(est2, 4.0)
     tallerP.setGrade(est3, 5.0)
     tallerP.setGrade(est4, 5.0)

@@ -1,5 +1,4 @@
 from personas.Persona import Persona
-from Calendario.Materia import Materia
 from typing import List
 
 class Profesor(Persona):

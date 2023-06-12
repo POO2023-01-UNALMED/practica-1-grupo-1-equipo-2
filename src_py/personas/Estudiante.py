@@ -6,7 +6,7 @@ from Calendario.Materia import Materia
 from Calendario.Beca import Beca
 
 class Estudiante(Persona):
-    def __init__(self, nombre: str, ID: int, email: str, fue_becado: bool, materias_cursadas: List['Materia']):
+    def __init__(self, nombre: str, ID: int, email: str, fue_becado: bool, materias_cursadas: List['Materia'] = None):
         super().__init__(nombre, ID, email)
         self.falla_horario = False
         self.calificacion_asignada = False
@@ -14,16 +14,7 @@ class Estudiante(Persona):
         self.promedio = 0.0
         self.materias_inscritas = []
         self.materias_cursadas = materias_cursadas
-        self.intento_materias = []
-        self.profesores_inscritos = []
-
-    def __init__(self, nombre: str, ID: int, email: str, fue_becado: bool):
-        super().__init__(nombre, ID, email)
-        self.falla_horario = False
-        self.fue_becado = fue_becado
-        self.promedio = 0.0
-        self.materias_inscritas = []
-        self.materias_cursadas = []
+        self.porcentaje_avance = 0.0
         self.intento_materias = []
         self.profesores_inscritos = []
 
@@ -134,11 +125,9 @@ class Estudiante(Persona):
         self.materias_inscritas.remove(materia)
 
     def aplicar_beca(self, estudiante: 'Estudiante'):
-        from Calendario.Beca import Beca
         Beca.estudiantes.append(self)
 
     def calcular_promedio(self) -> float:
-        from Calendario.Materia import Materia
         final_score = 0.0
         num_materias = len(self.materias_inscritas)
         for materia in self.materias_inscritas:
@@ -182,7 +171,6 @@ class Estudiante(Persona):
         return self.falla_horario
     
     def sugerir_horario(self, falla_horario: bool):
-        from Calendario.Materia import Materia
         materias_sugeridas = []
         if falla_horario:
             for materia in self.materias_inscritas:
@@ -239,7 +227,7 @@ class Estudiante(Persona):
                 if self.comparar_horario(materias_recomendadas):
                     materias_recomendadas.remove(materias_disponibles[3])
                     self.profesores_inscritos.remove(materias_disponibles[3].profesor)
-                    materias_disponibles.remove(3).inscribir_estudiante(self)
+                    materias_disponibles.pop(3).inscribir_estudiante(self)
 
             elif materia.nombre == materias_disponibles[3].nombre and materia not in self.materias_cursadas:
                 materias_recomendadas.append(materias_disponibles[4])
@@ -248,7 +236,7 @@ class Estudiante(Persona):
                 if self.comparar_horario(materias_recomendadas):
                     materias_recomendadas.remove(materias_disponibles[4])
                     self.profesores_inscritos.remove(materias_disponibles[4].profesor)
-                    materias_disponibles.remove(4).inscribir_estudiante(self)
+                    materias_disponibles.pop(4).inscribir_estudiante(self)
 
             elif materia.nombre == materias_disponibles[4].nombre and materia not in self.materias_cursadas:
                 materias_recomendadas.append(materias_disponibles[5])
@@ -257,7 +245,7 @@ class Estudiante(Persona):
                 if self.comparar_horario(materias_recomendadas):
                     materias_recomendadas.remove(materias_disponibles[5])
                     self.profesores_inscritos.remove(materias_disponibles[5].profesor)
-                    materias_disponibles.remove(5).inscribir_estudiante(self)
+                    materias_disponibles.pop(5).inscribir_estudiante(self)
 
         for i in range(6, 9):
             materias_recomendadas.append(materias_disponibles[i])
@@ -266,7 +254,7 @@ class Estudiante(Persona):
             if self.comparar_horario(materias_recomendadas):
                 materias_recomendadas.remove(materias_disponibles[i])
                 self.profesores_inscritos.remove(materias_disponibles[i].profesor)
-                materias_disponibles.remove(i).inscribir_estudiante(self)
+                materias_disponibles.pop(i).inscribir_estudiante(self)
 
         self.materias_inscritas = materias_recomendadas
 

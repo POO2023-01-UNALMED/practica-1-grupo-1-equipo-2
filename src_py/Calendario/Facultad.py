@@ -78,13 +78,13 @@ class Facultad:
     def carrera(self, carrera: str):
         self.__carrera = carrera
 
-    @property
-    def materias(self):
-        return self.__materias
+    
+    def getMaterias(self):
+        return self.materias
 
-    @materias.setter
-    def materias(self, materias):
-        self.__materias = materias
+    
+    def setMaterias(self, materias):
+        self.materias = materias
 
     @property
     def profesores(self):

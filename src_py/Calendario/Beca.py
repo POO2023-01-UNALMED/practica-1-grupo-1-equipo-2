@@ -1,5 +1,4 @@
 
-from personas.Estudiante import Estudiante
 from typing import List
 from enum import Enum
 

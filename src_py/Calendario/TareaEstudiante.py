@@ -1,5 +1,4 @@
-from Tarea import Tarea
-from personas.Estudiante import Estudiante
+
 
 class TareaEstudiante:
     def __init__(self, tarea: 'Tarea', estudiante: 'Estudiante', grade: float):
