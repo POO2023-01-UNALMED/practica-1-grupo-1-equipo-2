@@ -6,10 +6,10 @@ from typing import List
 
 class Facultad:
     def __init__(self):
-        self.nombre = 'Minas'
-        self.carrera = 'Ingenieria de Sistemas'
+        self.__nombre = 'Minas'
+        self.__carrera = 'Ingenieria de Sistemas'
         self.materias = []
-        self.profesores = []
+        self.__profesores = []
 
         horario1 = Horario([Horario.Dias.LUNES, Horario.Dias.MIERCOLES, Horario.Dias.VIERNES], '8', '10')
         guillermo = Profesor('Juan Guillermo', 10, 'guille@unal.edu.co')
@@ -57,40 +57,32 @@ class Facultad:
         self.materias.append(catedra_felicidad)
 
         for i in range(len(self.materias)):
-            profesor = self.materias[i].profesor
-            if profesor not in self.profesores:
-                self.profesores.append(profesor)
+            profesor = Materia(self.materias[i]).getProfesor()
+            if profesor not in self.__profesores:
+                self.__profesores.append(profesor)
             profesor.asignar_materia(self.materias[i])
 
-    @property
-    def nombre(self) -> str:
+    def getNombre(self) -> str:
         return self.__nombre
 
-    @nombre.setter
-    def nombre(self, nombre: str):
+    def setNombre(self, nombre: str):
         self.__nombre = nombre
 
-    @property
-    def carrera(self) -> str:
+    def getCarrera(self) -> str:
         return self.__carrera
 
-    @carrera.setter
-    def carrera(self, carrera: str):
+    def setCarrera(self, carrera: str):
         self.__carrera = carrera
 
-    
     def getMaterias(self):
         return self.materias
-
     
     def setMaterias(self, materias):
         self.materias = materias
 
-    @property
-    def profesores(self):
+    def getProfesores(self):
         return self.__profesores
-
-    @profesores.setter
-    def profesores(self, profesores):
+    
+    def setProfesores(self, profesores):
         self.__profesores = profesores
 

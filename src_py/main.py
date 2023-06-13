@@ -2,6 +2,8 @@ from personas.Estudiante import Estudiante
 from Calendario.Facultad import Facultad
 from Calendario.Beca import Beca
 from Calendario.Tarea import Tarea
+from Calendario.Materia import Materia
+from personas.Profesor import Profesor
 
 
 
@@ -27,102 +29,103 @@ if __name__ == "__main__":
     print(est3.porcentaje_avance)
     print(est4.porcentaje_avance)
 
-    est.inscribirMateria("Calculo VariasVariables", materiasDisponibles)
-    est2.inscribirMateria("Calculo Integral", materiasDisponibles)
-    est3.inscribirMateria("Calculo Integral", materiasDisponibles)
-    est4.inscribirMateria("Calculo Integral", materiasDisponibles)
 
-    est.inscribirMateria("Catedra Apun", materiasDisponibles)
-    est2.inscribirMateria("Catedra Apun", materiasDisponibles)
-    est3.inscribirMateria("Catedra Apun", materiasDisponibles)
-    est4.inscribirMateria("Catedra Apun", materiasDisponibles)
+    est.inscribir_materia("Calculo VariasVariables", materiasDisponibles)
+    est2.inscribir_materia("Calculo Integral", materiasDisponibles)
+    est3.inscribir_materia("Calculo Integral", materiasDisponibles)
+    est4.inscribir_materia("Calculo Integral", materiasDisponibles)
 
-    est.inscribirMateria("Programacion Orientada Objetos", materiasDisponibles)
-    est2.inscribirMateria("Programacion Orientada Objetos", materiasDisponibles)
-    est3.inscribirMateria("Programacion Orientada Objetos", materiasDisponibles)
-    est4.inscribirMateria("Programacion Orientada Objetos", materiasDisponibles)
+    est.inscribir_materia("Catedra Apun", materiasDisponibles)
+    est2.inscribir_materia("Catedra Apun", materiasDisponibles)
+    est3.inscribir_materia("Catedra Apun", materiasDisponibles)
+    est4.inscribir_materia("Catedra Apun", materiasDisponibles)
+
+    est.inscribir_materia("Programacion Orientada Objetos", materiasDisponibles)
+    est2.inscribir_materia("Programacion Orientada Objetos", materiasDisponibles)
+    est3.inscribir_materia("Programacion Orientada Objetos", materiasDisponibles)
+    est4.inscribir_materia("Programacion Orientada Objetos", materiasDisponibles)
 
     # print(est2.getMaterias_Inscritas())
 
     tallerP = Tarea(materiasDisponibles[1], "NOSE")
-    tallerP.setGrade(est, 5.0)
-    tallerP.setGrade(est2, 4.0)
-    tallerP.setGrade(est3, 5.0)
-    tallerP.setGrade(est4, 5.0)
-    materiasDisponibles[1].inscribirTarea(tallerP)
+    tallerP.set_grade(est, 5.0)
+    tallerP.set_grade(est2, 4.0)
+    tallerP.set_grade(est3, 5.0)
+    tallerP.set_grade(est4, 5.0)
+    Materia(materiasDisponibles[1]).inscribir_tarea(tallerP)
 
     tallerP4 = Tarea(materiasDisponibles[1], "NOSE")
-    tallerP4.setGrade(est, 3.0)
-    tallerP4.setGrade(est2, 1.0)
-    tallerP4.setGrade(est3, 3.0)
-    tallerP4.setGrade(est4, 5.0)
-    materiasDisponibles[1].inscribirTarea(tallerP4)
+    tallerP4.set_grade(est, 3.0)
+    tallerP4.set_grade(est2, 1.0)
+    tallerP4.set_grade(est3, 3.0)
+    tallerP4.set_grade(est4, 5.0)
+    Materia(materiasDisponibles[1]).inscribir_tarea(tallerP4)
 
     tallerP2 = Tarea(materiasDisponibles[4], "NOSE2")
-    tallerP2.setGrade(est, 5.0)
-    tallerP2.setGrade(est2, 5.0)
-    tallerP2.setGrade(est3, 5.0)
-    tallerP2.setGrade(est4, 3.5)
-    materiasDisponibles[4].inscribirTarea(tallerP2)
+    tallerP2.set_grade(est, 5.0)
+    tallerP2.set_grade(est2, 5.0)
+    tallerP2.set_grade(est3, 5.0)
+    tallerP2.set_grade(est4, 3.5)
+    Materia(materiasDisponibles[4]).inscribir_tarea(tallerP2)
 
     tallerP3 = Tarea(materiasDisponibles[4], "NOSE3")
-    tallerP3.setGrade(est, 5.0)
-    tallerP3.setGrade(est2, 5.0)
-    tallerP3.setGrade(est3, 4.0)
-    tallerP3.setGrade(est4, 4.5)
-    materiasDisponibles[4].inscribirTarea(tallerP3)
+    tallerP3.set_grade(est, 5.0)
+    tallerP3.set_grade(est2, 5.0)
+    tallerP3.set_grade(est3, 4.0)
+    tallerP3.set_grade(est4, 4.5)
+    Materia(materiasDisponibles[4]).inscribir_tarea(tallerP3)
 
     beca = Beca("SISAS")
 
-    Estudiante.aplicarBeca(est)
-    Estudiante.aplicarBeca(est2)
-    Estudiante.aplicarBeca(est3)
-    Estudiante.aplicarBeca(est4)
-    beca.asignarEstudiantesBeca()
+    Estudiante.aplicar_beca(est)
+    Estudiante.aplicar_beca(est2)
+    Estudiante.aplicar_beca(est3)
+    Estudiante.aplicar_beca(est4)
+    beca.asignar_estudiantes_beca()
 
     print("Admitidos a becas: ")
-    print("Beca Inicial: " + beca.estudiantesAptosInicial)
-    print("Beca Normal: " + beca.estudiantesAptosNormal)
-    print("Beca Avanzada: " + beca.estudiantesAptosAvanzada + "\n")
+    print("Beca Inicial: " + beca.getEstudiantes_aptos_inicial())
+    print("Beca Normal: " + beca.getEstudiantes_aptos_normal())
+    print("Beca Avanzada: " + beca.getEstudiantes_aptos_avanzada() + "\n")
 
-    promedioEst = est.calcularPromedio()
-    promedioEst2 = est2.calcularPromedio()
-    promedioEst3 = est3.calcularPromedio()
-    promedioEst4 = est4.calcularPromedio()
+    promedioEst = est.calcular_promedio()
+    promedioEst2 = est2.calcular_promedio()
+    promedioEst3 = est3.calcular_promedio()
+    promedioEst4 = est4.calcular_promedio()
 
     print("Promedios: ")
     print(est + " promedio: " + promedioEst)
     print(est2 + " promedio: " + promedioEst2)
     print(est3 + " promedio: " + promedioEst3)
     print(est4 + " promedio: " + promedioEst4 + "\n")
-    print(materiasDisponibles[1].calcularPromedio(est2))
-    print(materiasDisponibles[1].calcularPromedio(est3))
-    print(materiasDisponibles[1].Calcular_necesario_para_pasar(est2))
-    print(materiasDisponibles[1].Calcular_necesario_para_pasar(est3))
+    print(Materia(materiasDisponibles[1]).calcular_promedio(est2))
+    print(Materia(materiasDisponibles[1]).calcular_promedio(est3))
+    print(Materia(materiasDisponibles[1]).calcular_necesario_para_pasar(est2))
+    print(Materia(materiasDisponibles[1]).calcular_necesario_para_pasar(est3))
 
     print("Horarios: ")
 
-    nose = est.compararHorario(est.getMaterias_Inscritas())
+    nose = est.comparar_horario(est.getMaterias_inscritas())
 
     print("El horario de " + est + " es:")
-    print(est.getMaterias_Inscritas() + "\n")
+    print(est.getMaterias_inscritas() + "\n")
 
     print("El horario de " + est + " presenta fallas?")
     print(nose + "\n")
 
-    est.sugerirMaterias(materiasDisponibles)
+    est.sugerir_materias(materiasDisponibles)
 
     print("Nuevo horario del estudiante " + est.getNombre() + ": ")
-    print(est.getMaterias_Inscritas() + "\n")
+    print(est.getMaterias_inscritas() + "\n")
 
-    for profesor in est2.getProfesoresInscritos():
-        profesor.ingresarCalificacion(3.0)
+    for profesor in est2.getProfesores_inscritos():
+        Profesor(profesor).ingresar_calificacion(3.0)
 
-    for profesor in est3.getProfesoresInscritos():
-        profesor.ingresarCalificacion(4.0)
+    for profesor in est3.getProfesores_inscritos():
+        Profesor(profesor).ingresar_calificacion(4.0)
 
     print("Calificación docente:")
 
-    for profesor in est3.getProfesoresInscritos():
-        profesor.evaluacionDocente()
-        print(profesor.getCalificacionDocente())
+    for profesor in est3.getProfesores_inscritos():
+        Profesor(profesor).evaluacion_docente()
+        print(Profesor(profesor).getCalificacion_docente())

@@ -2,30 +2,24 @@ from abc import ABC
 
 class Persona(ABC):
     def __init__(self, nombre: str, ID: int, Email: str):
-        self.nombre = nombre
-        self.ID = ID
-        self.Email = Email
+        self.__nombre = nombre
+        self.__ID = ID
+        self.__Email = Email
 
-    @property
-    def nombre(self) -> str:
+    def getNombre(self):
         return self.__nombre
 
-    @nombre.setter
-    def nombre(self, nombre: str):
+    def setNombre(self, nombre):
         self.__nombre = nombre
 
-    @property
-    def ID(self) -> int:
+    def getID(self) -> int:
         return self.__ID
 
-    @ID.setter
-    def ID(self, ID: int):
+    def setID(self, ID: int):
         self.__ID = ID
 
-    @property
-    def Email(self) -> str:
+    def getEmail(self) -> str:
         return self.__Email
 
-    @Email.setter
-    def Email(self, Email: str):
+    def setEmail(self, Email: str):
         self.__Email = Email

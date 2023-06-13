@@ -106,15 +106,4 @@ public class Facultad{
 		this.profesores=profesores;
 	}
 	
-//Enum con las materias y su categoria
-		//Calculo_Diferencial, 
-		//Calculo_Integral,
-		//Calculo_VariasVariables,
-		//Fundamentos_Programacion,
-		//Programacion_Orientada_Objetos,
-		//Estructura_Datos,
-		//Catedra_Antioquia,
-		//Catedra_Felicidad,
-		//Catedra_Apun,
-
 }

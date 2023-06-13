@@ -3,87 +3,72 @@ from typing import List
 from personas.Persona import Persona
 from personas.Profesor import Profesor
 from Calendario.Materia import Materia
-from Calendario.Beca import Beca
+from Calendario.Tarea import Tarea
+from Calendario.Horario import Horario
 
 class Estudiante(Persona):
     def __init__(self, nombre: str, ID: int, email: str, fue_becado: bool, materias_cursadas: List['Materia'] = None):
         super().__init__(nombre, ID, email)
-        self.falla_horario = False
-        self.calificacion_asignada = False
-        self.fue_becado = fue_becado
+        self.__falla_horario = False
+        self.__calificacion_asignada = False
+        self.__fue_becado = fue_becado
         self.promedio = 0.0
-        self.materias_inscritas = []
+        self.__materias_inscritas = []
         self.materias_cursadas = materias_cursadas
         self.porcentaje_avance = 0.0
         self.intento_materias = []
-        self.profesores_inscritos = []
+        self.__profesores_inscritos = []
 
-    @property
-    def profesores_inscritos(self) -> List['Profesor']:
+    def getProfesores_inscritos(self):
         return self.__profesores_inscritos
 
-    @profesores_inscritos.setter
-    def profesores_inscritos(self, profesor: List['Profesor']):
+    def setProfesores_inscritos(self, profesor):
         self.__profesores_inscritos = profesor
 
-    @property
-    def materias_inscritas(self) -> List['Materia']:
+    def getMaterias_inscritas(self):
         return self.__materias_inscritas
 
-    @materias_inscritas.setter
-    def materias_inscritas(self, materias_inscritas: List['Materia']):
+    def setMaterias_inscritas(self, materias_inscritas):
         self.__materias_inscritas = materias_inscritas
 
-    @property
-    def falla_horario(self) -> bool:
+    def getFalla_horario(self):
         return self.__falla_horario
 
-    @falla_horario.setter
-    def falla_horario(self, falla_horario: bool):
+    def setFalla_horario(self, falla_horario):
         self.__falla_horario = falla_horario
 
-    @property
-    def fue_becado(self) -> bool:
+    def getFue_becado(self):
         return self.__fue_becado
 
-    @fue_becado.setter
-    def fue_becado(self, fue_becado: bool):
+    def setFue_becado(self, fue_becado):
         self.__fue_becado = fue_becado
 
-    @property
-    def porcentaje_de_avance(self) -> float:
+    def getPorcentaje_de_avance(self):
         return self.__porcentaje_de_avance
 
-    @porcentaje_de_avance.setter
-    def porcentaje_de_avance(self, porcentaje_de_avance: float):
+    def setPorcentaje_de_avance(self, porcentaje_de_avance):
         self.__porcentaje_de_avance = porcentaje_de_avance
 
-    @property
-    def materias_cursadas(self) -> List['Materia']:
+    def getMaterias_cursadas(self):
         return self.__materias_cursadas
 
-    @materias_cursadas.setter
-    def materias_cursadas(self, materias_cursadas: List['Materia']):
+    def setMaterias_cursadas(self, materias_cursadas):
         self.__materias_cursadas = materias_cursadas
 
-    @property
-    def calificacion_asignada(self) -> bool:
+    def getCalificacion_asignada(self):
         return self.__calificacion_asignada
 
-    @calificacion_asignada.setter
-    def calificacion_asignada(self, calificacion_asignada: bool):
+    def setCalificacion_asignada(self, calificacion_asignada):
         self.__calificacion_asignada = calificacion_asignada
 
-    @property
-    def creditos_inscritos(self) -> int:
+    def getCreditos_inscritos(self):
         return self.__creditos_inscritos
 
-    @creditos_inscritos.setter
-    def creditos_inscritos(self, creditos_inscritos: int):
+    def setCreditos_inscritos(self, creditos_inscritos):
         self.__creditos_inscritos = creditos_inscritos
 
 
-    def inscribir_materia(self, nombre_materia: str, materias_disponibles: List['Materia']) -> bool:
+    def inscribir_materia(self, nombre_materia: str, materias_disponibles):
         from Calendario.Materia import Materia
         
         tiene_fundamentacion = False
@@ -91,14 +76,14 @@ class Estudiante(Persona):
         intento_creditos = 0
 
         for materia in materias_disponibles:
-            if materia.nombre == nombre_materia:
+            if Materia(materia).getNombre() == nombre_materia:
                 if materia in self.materias_inscritas:
                     return False
-                prerrequisito = materia.prerrequisito
+                prerrequisito = Materia(materia).prerrequisito
                 tiene_prerrequisito = False
                 if prerrequisito is not None:
                     for materia_cursada in self.materias_cursadas:
-                        if materia_cursada.nombre == prerrequisito.nombre:
+                        if Materia(materia_cursada).getNombre() == Materia(prerrequisito).getNombre():
                             tiene_prerrequisito = True
                             break
                 if prerrequisito is None or tiene_prerrequisito:
@@ -108,33 +93,34 @@ class Estudiante(Persona):
                     fallo_prerrequisito = True
 
         for m in self.intento_materias:
-            intento_creditos += m.creditos
-            if m.tipo == Materia.Tipo.FUNDAMENTACION:
+            intento_creditos += Materia(m).getCreditos()
+            if Materia(m).tipo == Materia.Tipo.FUNDAMENTACION:
                 tiene_fundamentacion = True
 
         if intento_creditos >= 6 and tiene_fundamentacion:
             for ma in self.intento_materias:
-                self.profesores_inscritos.append(ma.profesor)
-                ma.inscribir_estudiante(self)
+                self.__profesores_inscritos.append(Materia(ma).getProfesor())
+                Materia(ma).inscribir_estudiante(self)
             self.materias_inscritas = self.intento_materias
             self.creditos_inscritos = intento_creditos
 
         return not fallo_prerrequisito
 
-    def retirar_materia(self, materia: 'Materia'):
+    def retirar_materia(self, materia):
         self.materias_inscritas.remove(materia)
 
-    def aplicar_beca(self, estudiante: 'Estudiante'):
+    def aplicar_beca(self, estudiante):
+        from Calendario.Beca import Beca
         Beca.estudiantes.append(self)
 
-    def calcular_promedio(self) -> float:
+    def calcular_promedio(self):
         final_score = 0.0
         num_materias = len(self.materias_inscritas)
         for materia in self.materias_inscritas:
             materia_score = 0.0
-            num_tareas = len(materia.tareas_de_materia)
-            for tarea in materia.tareas_de_materia:
-                materia_score += tarea.get_grade(self)
+            num_tareas = len(Materia(materia).__tareas_de_materia)
+            for tarea in Materia(materia).__tareas_de_materia:
+                materia_score += Tarea(tarea).get_grade(self)
             if num_tareas > 0:
                 materia_score /= num_tareas
             final_score += materia_score
@@ -142,22 +128,20 @@ class Estudiante(Persona):
             final_score /= num_materias
         return round(final_score * 100.0) / 100.0
 
-    def comparar_horario(self, materias_inscritas: List['Materia']) -> bool:
-        from Calendario.Materia import Materia
-        from Calendario.Horario import Horario
+    def comparar_horario(self, materias_inscritas):
         materias_error = []
         self.falla_horario = False
         for i in range(len(materias_inscritas)):
-            horario = materias_inscritas[i].horario
-            hora1 = horario.hora_inicio
-            hora2 = horario.hora_fin
-            dia1 = horario.dia
+            horario = Materia(materias_inscritas[i]).getHorario()
+            hora1 = Horario(horario).getHora_inicio()
+            hora2 = Horario(horario).getHora_fin()
+            dia1 = Horario(horario).getDia()
 
             for j in range(i + 1, len(materias_inscritas)):
-                horario2 = materias_inscritas[j].horario
-                hora3 = horario2.hora_inicio
-                hora4 = horario2.hora_fin
-                dia2 = horario2.dia
+                horario2 = Materia(materias_inscritas[j]).getHorario()
+                hora3 = Horario(horario2).getHora_inicio()
+                hora4 = Horario(horario2).getHora_fin()
+                dia2 = Horario(horario2).getDia()
 
                 for k in range(len(dia1)):
                     dia11 = dia1[k]
@@ -170,15 +154,15 @@ class Estudiante(Persona):
                                 materias_error.append(materias_inscritas[j])
         return self.falla_horario
     
-    def sugerir_horario(self, falla_horario: bool):
+    def sugerir_horario(self, falla_horario):
         materias_sugeridas = []
         if falla_horario:
             for materia in self.materias_inscritas:
                 conflicto = False
                 for materia_sugerida in materias_sugeridas:
 
-                    dias_materia = materia.horario.dia
-                    dias_materia_sugerida = materia_sugerida.horario.dia
+                    dias_materia = Materia(materia).getHorario().getDia()
+                    dias_materia_sugerida = Materia(materia_sugerida).getHorario().getDia()
                     fallo_dias = False
                     for dia_materia in dias_materia:
                         if dia_materia in dias_materia_sugerida:
@@ -186,10 +170,10 @@ class Estudiante(Persona):
                             break
 
                     if fallo_dias:
-                        hora_inicio_materia = int(materia.horario.hora_inicio)
-                        hora_fin_materia = int(materia.horario.hora_fin)
-                        hora_inicio_materia_sugerida = int(materia_sugerida.horario.hora_inicio)
-                        hora_fin_materia_sugerida = int(materia_sugerida.horario.hora_fin)
+                        hora_inicio_materia = int(Materia(materia).getHorario().getHora_inicio())
+                        hora_fin_materia = int(Materia(materia).getHorario().getHora_fin())
+                        hora_inicio_materia_sugerida = int(Materia(materia_sugerida).getHorario().getHora_inicio())
+                        hora_fin_materia_sugerida = int(Materia(materia_sugerida).getHorario().getHora_fin())
 
                         if hora_inicio_materia < hora_fin_materia_sugerida and hora_fin_materia > hora_inicio_materia_sugerida:
                             conflicto = True
@@ -205,55 +189,55 @@ class Estudiante(Persona):
         materias_recomendadas = []
         for materia in self.materias_cursadas:
 
-            if materia.nombre == materias_disponibles[0].nombre and materia not in self.materias_cursadas:
+            if materia.getNombre == materias_disponibles[0].getNombre and materia not in self.materias_cursadas:
                 materias_recomendadas.append(materias_disponibles[0])
-                self.profesores_inscritos.append(materias_disponibles[0].profesor)
+                self.__profesores_inscritos.append(materias_disponibles[0].getProfesor)
                 materias_disponibles[0].inscribir_estudiante(self)
 
-            elif materia.nombre == materias_disponibles[0].nombre and materia not in self.materias_cursadas:
+            elif materia.getNombre == materias_disponibles[0].getNombre and materia not in self.materias_cursadas:
                 materias_recomendadas.append(materias_disponibles[1])
-                self.profesores_inscritos.append(materias_disponibles[1].profesor)
+                self.__profesores_inscritos.append(materias_disponibles[1].getProfesor)
                 materias_disponibles[1].inscribir_estudiante(self)
 
-            elif materia.nombre == materias_disponibles[1].nombre and materia not in self.materias_cursadas:
+            elif materia.getNombre == materias_disponibles[1].getNombre and materia not in self.materias_cursadas:
                 materias_recomendadas.append(materias_disponibles[2])
-                self.profesores_inscritos.append(materias_disponibles[2].profesor)
+                self.__profesores_inscritos.append(materias_disponibles[2].getProfesor)
                 materias_disponibles[2].inscribir_estudiante(self)
 
-            if materia.nombre == materias_disponibles[3].nombre and materia not in self.materias_cursadas:
+            if materia.getNombre == materias_disponibles[3].getNombre and materia not in self.materias_cursadas:
                 materias_recomendadas.append(materias_disponibles[3])
-                self.profesores_inscritos.append(materias_disponibles[3].profesor)
+                self.__profesores_inscritos.append(materias_disponibles[3].getProfesor)
                 materias_disponibles[3].inscribir_estudiante(self)
                 if self.comparar_horario(materias_recomendadas):
                     materias_recomendadas.remove(materias_disponibles[3])
-                    self.profesores_inscritos.remove(materias_disponibles[3].profesor)
+                    self.__profesores_inscritos.remove(materias_disponibles[3].getProfesor)
                     materias_disponibles.pop(3).inscribir_estudiante(self)
 
-            elif materia.nombre == materias_disponibles[3].nombre and materia not in self.materias_cursadas:
+            elif materia.getNombre == materias_disponibles[3].getNombre and materia not in self.materias_cursadas:
                 materias_recomendadas.append(materias_disponibles[4])
-                self.profesores_inscritos.append(materias_disponibles[4].profesor)
+                self.__profesores_inscritos.append(materias_disponibles[4].getProfesor)
                 materias_disponibles[4].inscribir_estudiante(self)
                 if self.comparar_horario(materias_recomendadas):
                     materias_recomendadas.remove(materias_disponibles[4])
-                    self.profesores_inscritos.remove(materias_disponibles[4].profesor)
+                    self.__profesores_inscritos.remove(materias_disponibles[4].getProfesor)
                     materias_disponibles.pop(4).inscribir_estudiante(self)
 
-            elif materia.nombre == materias_disponibles[4].nombre and materia not in self.materias_cursadas:
+            elif materia.getNombre == materias_disponibles[4].getNombre and materia not in self.materias_cursadas:
                 materias_recomendadas.append(materias_disponibles[5])
-                self.profesores_inscritos.append(materias_disponibles[5].profesor)
+                self.__profesores_inscritos.append(materias_disponibles[5].getProfesor)
                 materias_disponibles[5].inscribir_estudiante(self)
                 if self.comparar_horario(materias_recomendadas):
                     materias_recomendadas.remove(materias_disponibles[5])
-                    self.profesores_inscritos.remove(materias_disponibles[5].profesor)
+                    self.__profesores_inscritos.remove(materias_disponibles[5].getProfesor)
                     materias_disponibles.pop(5).inscribir_estudiante(self)
 
         for i in range(6, 9):
             materias_recomendadas.append(materias_disponibles[i])
-            self.profesores_inscritos.append(materias_disponibles[i].profesor)
+            self.__profesores_inscritos.append(materias_disponibles[i].getProfesor)
             materias_disponibles[i].inscribir_estudiante(self)
             if self.comparar_horario(materias_recomendadas):
                 materias_recomendadas.remove(materias_disponibles[i])
-                self.profesores_inscritos.remove(materias_disponibles[i].profesor)
+                self.__profesores_inscritos.remove(materias_disponibles[i].getProfesor)
                 materias_disponibles.pop(i).inscribir_estudiante(self)
 
         self.materias_inscritas = materias_recomendadas
@@ -263,5 +247,5 @@ class Estudiante(Persona):
         self.porcentaje_de_avance = round(porcentaje_avance * 100.0)
 
     
-    def __str__(self) -> str:
-        return f'Estudiante: {self.nombre}'  
+    def __str__(self):
+        return f'Estudiante: {self.getNombre}'  

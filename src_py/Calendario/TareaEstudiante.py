@@ -1,34 +1,28 @@
 
 
 class TareaEstudiante:
-    def __init__(self, tarea: 'Tarea', estudiante: 'Estudiante', grade: float):
-        self.tarea = tarea
-        self.estudiante = estudiante
-        self.grade = grade
-
-    @property
-    def estudiante(self) -> 'Estudiante':
-        return self.__estudiante
-
-    @estudiante.setter
-    def estudiante(self, estudiante: 'Estudiante'):
+    def __init__(self, tarea, estudiante, grade: float):
+        self.__tarea = tarea
         self.__estudiante = estudiante
-
-    @property
-    def grade(self) -> float:
-        return self.__grade
-
-    @grade.setter
-    def grade(self, grade: float):
         self.__grade = grade
 
-    @property
-    def tarea(self) -> 'Tarea':
+    def getEstudiante(self):
+        return self.__estudiante
+
+    def setEstudiante(self, estudiante):
+        self.__estudiante = estudiante
+
+    def getGrade(self) -> float:
+        return self.__grade
+
+    def setGrade(self, grade: float):
+        self.__grade = grade
+
+    def getTarea(self):
         return self.__tarea
 
-    @tarea.setter
-    def tarea(self, tarea: 'Tarea'):
+    def setTarea(self, tarea):
         self.__tarea = tarea
 
     def __str__(self) -> str:
-        return f'TareaEstudiante{{tarea={self.tarea}, estudiante={self.estudiante}, grade={self.grade}}}'
+        return f'TareaEstudiante{{tarea={self.__tarea}, estudiante={self.__estudiante}, grade={self.__grade}}}'
