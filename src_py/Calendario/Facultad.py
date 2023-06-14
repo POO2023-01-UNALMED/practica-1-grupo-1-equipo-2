@@ -57,7 +57,7 @@ class Facultad:
         self.materias.append(catedra_felicidad)
 
         for i in range(len(self.materias)):
-            profesor = Materia(self.materias[i]).getProfesor()
+            profesor = self.materias[i].getProfesor()
             if profesor not in self.__profesores:
                 self.__profesores.append(profesor)
             profesor.asignar_materia(self.materias[i])

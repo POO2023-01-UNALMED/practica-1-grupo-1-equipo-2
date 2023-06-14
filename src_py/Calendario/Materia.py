@@ -11,6 +11,7 @@ class Materia:
         DISCIPLINAR = 'disciplinar'
         LIBRE_ELECCION = 'libreEleccion'
 
+
     def __init__(self, codigo: int, nombre: str, profesor: 'Profesor', horario: 'Horario', creditos: int, prerrequisito: 'Materia' = None, tipo: Tipo = None):
         self.__codigo = codigo
         self.__nombre = nombre
@@ -75,7 +76,7 @@ class Materia:
     def getPrerrequisito(self) :
         return self.__prerrequisito
     
-    def prerrequisito(self, prerrequisito):
+    def setPrerrequisito(self, prerrequisito):
         self.__prerrequisito = prerrequisito
 
     def inscribir_estudiante(self, nuevo_estudiante):
@@ -98,9 +99,6 @@ class Materia:
             total_score +=Tarea(tarea).get_grade(estudiante)
         return round((total_score/contador) * 100.0) / 100.0
 
-    def __str__(self):
-        return f'{self.__nombre} {self.__horario}'
-
     def calcular_necesario_para_pasar(self, estudiante):
         total_score = 0
         contador = 0
@@ -115,3 +113,6 @@ class Materia:
             nota_necesaria = 3*(contador+1)-total_score
 
         return nota_necesaria
+    
+    def __str__(self):
+        return f'{self.__nombre} {self.__horario}'

@@ -45,35 +45,35 @@ if __name__ == "__main__":
     est3.inscribir_materia("Programacion Orientada Objetos", materiasDisponibles)
     est4.inscribir_materia("Programacion Orientada Objetos", materiasDisponibles)
 
-    # print(est2.getMaterias_Inscritas())
+    print(est2.getMaterias_inscritas())
 
-    tallerP = Tarea(materiasDisponibles[1], "NOSE")
+    tallerP = Tarea("NOSE")
     tallerP.set_grade(est, 5.0)
     tallerP.set_grade(est2, 4.0)
     tallerP.set_grade(est3, 5.0)
     tallerP.set_grade(est4, 5.0)
-    Materia(materiasDisponibles[1]).inscribir_tarea(tallerP)
+    materiasDisponibles[1].inscribir_tarea(tallerP)
 
-    tallerP4 = Tarea(materiasDisponibles[1], "NOSE")
+    tallerP4 = Tarea("NOSE")
     tallerP4.set_grade(est, 3.0)
     tallerP4.set_grade(est2, 1.0)
     tallerP4.set_grade(est3, 3.0)
     tallerP4.set_grade(est4, 5.0)
-    Materia(materiasDisponibles[1]).inscribir_tarea(tallerP4)
+    materiasDisponibles[1].inscribir_tarea(tallerP4)
 
-    tallerP2 = Tarea(materiasDisponibles[4], "NOSE2")
+    tallerP2 = Tarea("NOSE2")
     tallerP2.set_grade(est, 5.0)
     tallerP2.set_grade(est2, 5.0)
     tallerP2.set_grade(est3, 5.0)
     tallerP2.set_grade(est4, 3.5)
-    Materia(materiasDisponibles[4]).inscribir_tarea(tallerP2)
+    materiasDisponibles[4].inscribir_tarea(tallerP2)
 
-    tallerP3 = Tarea(materiasDisponibles[4], "NOSE3")
+    tallerP3 = Tarea("NOSE3")
     tallerP3.set_grade(est, 5.0)
     tallerP3.set_grade(est2, 5.0)
     tallerP3.set_grade(est3, 4.0)
     tallerP3.set_grade(est4, 4.5)
-    Materia(materiasDisponibles[4]).inscribir_tarea(tallerP3)
+    materiasDisponibles[4].inscribir_tarea(tallerP3)
 
     beca = Beca("SISAS")
 
@@ -84,9 +84,9 @@ if __name__ == "__main__":
     beca.asignar_estudiantes_beca()
 
     print("Admitidos a becas: ")
-    print("Beca Inicial: " + beca.getEstudiantes_aptos_inicial())
-    print("Beca Normal: " + beca.getEstudiantes_aptos_normal())
-    print("Beca Avanzada: " + beca.getEstudiantes_aptos_avanzada() + "\n")
+    print("Beca Inicial: " + str(beca.getEstudiantes_aptos_inicial()))
+    print("Beca Normal: " + str(beca.getEstudiantes_aptos_normal()))
+    print("Beca Avanzada: " + str(beca.getEstudiantes_aptos_avanzada()) + "\n") 
 
     promedioEst = est.calcular_promedio()
     promedioEst2 = est2.calcular_promedio()
@@ -94,38 +94,38 @@ if __name__ == "__main__":
     promedioEst4 = est4.calcular_promedio()
 
     print("Promedios: ")
-    print(est + " promedio: " + promedioEst)
-    print(est2 + " promedio: " + promedioEst2)
-    print(est3 + " promedio: " + promedioEst3)
-    print(est4 + " promedio: " + promedioEst4 + "\n")
-    print(Materia(materiasDisponibles[1]).calcular_promedio(est2))
-    print(Materia(materiasDisponibles[1]).calcular_promedio(est3))
-    print(Materia(materiasDisponibles[1]).calcular_necesario_para_pasar(est2))
-    print(Materia(materiasDisponibles[1]).calcular_necesario_para_pasar(est3))
+    print(str(est) + " promedio: " + str(promedioEst))
+    print(str(est2) + " promedio: " + str(promedioEst2))
+    print(str(est3) + " promedio: " + str(promedioEst3))
+    print(str(est4) + " promedio: " + str(promedioEst4) + "\n")
+    print(materiasDisponibles[1].calcular_promedio(est2))
+    print(materiasDisponibles[1].calcular_promedio(est3))
+    print(materiasDisponibles[1].calcular_necesario_para_pasar(est2))
+    print(materiasDisponibles[1].calcular_necesario_para_pasar(est3))
 
     print("Horarios: ")
 
     nose = est.comparar_horario(est.getMaterias_inscritas())
 
-    print("El horario de " + est + " es:")
-    print(est.getMaterias_inscritas() + "\n")
+    print("El horario de " + str(est) + " es:")
+    print(str(est.getMaterias_inscritas()) + "\n")
 
-    print("El horario de " + est + " presenta fallas?")
-    print(nose + "\n")
+    print("El horario de " + str(est) + " presenta fallas?")
+    print(str(nose) + "\n")
 
     est.sugerir_materias(materiasDisponibles)
 
-    print("Nuevo horario del estudiante " + est.getNombre() + ": ")
-    print(est.getMaterias_inscritas() + "\n")
+    print("Nuevo horario del estudiante " + str(est.getNombre()) + ": ")
+    print(str(est.getMaterias_inscritas()) + "\n")
 
     for profesor in est2.getProfesores_inscritos():
-        Profesor(profesor).ingresar_calificacion(3.0)
+        profesor.ingresar_calificacion(3.0)
 
     for profesor in est3.getProfesores_inscritos():
-        Profesor(profesor).ingresar_calificacion(4.0)
+        profesor.ingresar_calificacion(4.0)
 
     print("Calificación docente:")
 
     for profesor in est3.getProfesores_inscritos():
-        Profesor(profesor).evaluacion_docente()
-        print(Profesor(profesor).getCalificacion_docente())
+        profesor.evaluacion_docente()
+        print(profesor.getCalificacion_docente())

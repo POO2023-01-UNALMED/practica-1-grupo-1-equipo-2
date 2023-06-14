@@ -2,15 +2,11 @@ from Calendario.TareaEstudiante import TareaEstudiante
 from typing import List
 
 class Tarea:
-    def __init__(self, descripcion: str, fecha_entrega: str, fecha_inicio: str):
+    def __init__(self, descripcion: str="", fecha_entrega: str="", fecha_inicio: str=""):
         self.__descripcion = descripcion
         self.__fecha_entrega = fecha_entrega
         self.__fecha_inicio = fecha_inicio
         self.__tarea_estudiantes = []
-
-    def __init__(self, descripcion):
-        self.descripcion = descripcion
-        self.tarea_estudiantes = []
 
     def getTarea_estudiantes(self):
         return self.__tarea_estudiantes
@@ -38,18 +34,18 @@ class Tarea:
 
     def set_grade(self, estudiante, grade):
         found = False
-        for tarea_estudiante in self.tarea_estudiantes:
-            if TareaEstudiante(tarea_estudiante).getEstudiante == estudiante:
-                TareaEstudiante(tarea_estudiante).getGrade = grade
+        for tarea_estudiante in self.__tarea_estudiantes:
+            if tarea_estudiante.getEstudiante() == estudiante:
+                tarea_estudiante.setGrade(grade)
                 found = True
                 break
         if not found:
-            self.tarea_estudiantes.append(TareaEstudiante(self, estudiante, grade))
+            self.__tarea_estudiantes.append(TareaEstudiante(self, estudiante, grade))
 
     def get_grade(self, estudiante):
-        for tarea_estudiante in self.tarea_estudiantes:
-            if TareaEstudiante(tarea_estudiante).getEstudiante == estudiante:
-                return TareaEstudiante(tarea_estudiante).getGrade
+        for tarea_estudiante in self.__tarea_estudiantes:
+            if tarea_estudiante.getEstudiante() == estudiante:
+                return tarea_estudiante.getGrade()
         return 0.0
 
     def __str__(self):

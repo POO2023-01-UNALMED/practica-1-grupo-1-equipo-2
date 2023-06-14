@@ -9,27 +9,27 @@ class Beca:
         BECA_NORMAL = 'becaNormal'
         BECA_AVANZADA = 'becaAvanzada'
 
+    estudiantes:List['Estudiante']=[]
     
-    def __init__(self, nombre, estudiantes:List[Estudiante]):
+    def __init__(self, nombre):
         self.nombre = nombre
         self.__estudiantes_aptos_inicial = []
         self.__estudiantes_aptos_normal = []
         self.__estudiantes_aptos_avanzada = []
-        self.__estudiantes = estudiantes  
 
 
     def getEstudiantes(self):
-        return Beca.__estudiantes
+        return Beca.estudiantes
 
     def setEstudiantes(self, estudiantes):
-        Beca.__estudiantes = estudiantes
+        Beca.estudiantes = estudiantes
 
     def asignar_estudiantes_beca(self):
         estudiantes_aptos_inicial2 = []
         estudiantes_aptos_normal2 = []
         estudiantes_aptos_avanzada2 = []
 
-        for estudiante in Beca.__estudiantes:
+        for estudiante in Beca.estudiantes:
             if estudiante.porcentaje_de_avance >= 20 and estudiante.porcentaje_de_avance < 40 and estudiante.calcular_promedio() >= 4.5 and not estudiante.__fue_becado:
                 estudiantes_aptos_inicial2.append(estudiante)
             elif estudiante.porcentaje_de_avance >= 40 and estudiante.porcentaje_de_avance < 60 and estudiante.calcular_promedio() >= 4.0 and not estudiante.__fue_becado:
