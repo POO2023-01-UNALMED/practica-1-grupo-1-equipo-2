@@ -25,16 +25,16 @@ if __name__ == "__main__":
     for materia in materiasDisponibles:
         print(materia)
 
-    print(est.porcentaje_avance)
-    print(est2.porcentaje_avance)
-    print(est3.porcentaje_avance)
-    print(est4.porcentaje_avance)
+    print(f"{int(est.porcentaje_avance * 100)}%")
+    print(f"{int(est2.porcentaje_avance * 100)}%")
+    print(f"{int(est3.porcentaje_avance * 100)}%")
+    print(f"{int(est4.porcentaje_avance * 100)}%")
 
 
-    est.inscribir_materia("Calculo VariasVariables", materiasDisponibles)
-    est2.inscribir_materia("Calculo Integral", materiasDisponibles)
-    est3.inscribir_materia("Calculo Integral", materiasDisponibles)
-    est4.inscribir_materia("Calculo Integral", materiasDisponibles)
+    est.inscribir_materia("Calculo Varias Variables", materiasDisponibles)
+    est2.inscribir_materia('Calculo Integral', materiasDisponibles)
+    est3.inscribir_materia('Calculo Integral', materiasDisponibles)
+    est4.inscribir_materia('Calculo Integral', materiasDisponibles)
 
     est.inscribir_materia("Catedra Apun", materiasDisponibles)
     est2.inscribir_materia("Catedra Apun", materiasDisponibles)
@@ -46,7 +46,10 @@ if __name__ == "__main__":
     est3.inscribir_materia("Programacion Orientada Objetos", materiasDisponibles)
     est4.inscribir_materia("Programacion Orientada Objetos", materiasDisponibles)
 
+    print(est.getMaterias_inscritas())
     print(est2.getMaterias_inscritas())
+    print(est3.getMaterias_inscritas())
+    print(est4.getMaterias_inscritas())
 
     tallerP = Tarea("NOSE")
     tallerP.set_grade(est, 5.0)

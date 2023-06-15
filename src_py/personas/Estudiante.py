@@ -44,10 +44,10 @@ class Estudiante(Persona):
         self.__fue_becado = fue_becado
 
     def getPorcentaje_de_avance(self):
-        return self.__porcentaje_de_avance
+        return self.porcentaje_de_avance
 
     def setPorcentaje_de_avance(self, porcentaje_de_avance):
-        self.__porcentaje_de_avance = porcentaje_de_avance
+        self.porcentaje_de_avance = porcentaje_de_avance
 
     def getMaterias_cursadas(self):
         return self.__materias_cursadas
@@ -243,8 +243,8 @@ class Estudiante(Persona):
         self.materias_inscritas = materias_recomendadas
 
     def calcular_porcentaje_avance(self):
-        porcentaje_avance = (1.0 / 9) * len(self.materias_cursadas)
-        self.porcentaje_de_avance = round(porcentaje_avance * 100.0)
+        self.porcentaje_avance = (1.0/9) * len(self.materias_cursadas)
+        self.porcentaje_de_avance = round(self.porcentaje_avance * 100.0)
 
     
     def __str__(self):
