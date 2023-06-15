@@ -1,5 +1,5 @@
 
-from personas.Estudiante import Profesor
+from personas.Profesor import Profesor
 from Calendario.Horario import Horario
 from Calendario.Materia import Materia
 from typing import List
@@ -85,4 +85,5 @@ class Facultad:
     
     def setProfesores(self, profesores):
         self.__profesores = profesores
+
 

@@ -35,4 +35,6 @@ class Horario:
         self.__hora_fin = hora_fin
 
     def __str__(self):
-        return f'Los dias {self.__dia} de {self.__hora_inicio} a {self.__hora_fin}'
+        dias_str = ', '.join(day.name for day in self.__dia)
+        return f'Los días [{dias_str}] de {self.__hora_inicio} a {self.__hora_fin}'
+

@@ -22,7 +22,8 @@ if __name__ == "__main__":
     est3.calcular_porcentaje_avance()
     est4.calcular_porcentaje_avance()
 
-    print(materiasDisponibles)
+    for materia in materiasDisponibles:
+        print(materia)
 
     print(est.porcentaje_avance)
     print(est2.porcentaje_avance)
