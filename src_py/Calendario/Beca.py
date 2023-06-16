@@ -30,16 +30,16 @@ class Beca:
         estudiantes_aptos_avanzada2 = []
 
         for estudiante in Beca.estudiantes:
-            if estudiante.porcentaje_de_avance >= 20 and estudiante.porcentaje_de_avance < 40 and estudiante.calcular_promedio() >= 4.5 and not estudiante.__fue_becado:
+            if estudiante.porcentaje_de_avance >= 20 and estudiante.porcentaje_de_avance < 40 and estudiante.calcular_promedio() >= 4.5 and not estudiante.getFue_becado():
                 estudiantes_aptos_inicial2.append(estudiante)
-            elif estudiante.porcentaje_de_avance >= 40 and estudiante.porcentaje_de_avance < 60 and estudiante.calcular_promedio() >= 4.0 and not estudiante.__fue_becado:
+            elif estudiante.porcentaje_de_avance >= 40 and estudiante.porcentaje_de_avance < 60 and estudiante.calcular_promedio() >= 4.0 and not estudiante.getFue_becado():
                 estudiantes_aptos_normal2.append(estudiante)
-            elif estudiante.porcentaje_de_avance >= 60 and estudiante.porcentaje_de_avance < 100 and estudiante.calcular_promedio() >= 3.5 and not estudiante.__fue_becado:
+            elif estudiante.porcentaje_de_avance >= 60 and estudiante.porcentaje_de_avance < 100 and estudiante.calcular_promedio() >= 3.5 and not estudiante.getFue_becado():
                 estudiantes_aptos_avanzada2.append(estudiante)
 
-        estudiantes_aptos_inicial2.sort(key=lambda x: Estudiante(x).calcular_promedio(), reverse=True)
-        estudiantes_aptos_normal2.sort(key=lambda x: Estudiante(x).calcular_promedio(), reverse=True)
-        estudiantes_aptos_avanzada2.sort(key=lambda x: Estudiante(x).calcular_promedio(), reverse=True)
+        estudiantes_aptos_inicial2.sort(key=lambda x: x.calcular_promedio(), reverse=True)
+        estudiantes_aptos_normal2.sort(key=lambda x: x.calcular_promedio(), reverse=True)
+        estudiantes_aptos_avanzada2.sort(key=lambda x: x.calcular_promedio(), reverse=True)
 
         if len(estudiantes_aptos_inicial2) >= 2:
             for i in range(2):

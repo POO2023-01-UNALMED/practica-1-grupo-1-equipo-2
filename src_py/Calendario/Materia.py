@@ -96,7 +96,7 @@ class Materia:
         contador = 0
         for tarea in self.__tareas_de_materia:
             contador += 1
-            total_score +=Tarea(tarea).get_grade(estudiante)
+            total_score +=tarea.get_grade(estudiante)
         return round((total_score/contador) * 100.0) / 100.0
 
     def calcular_necesario_para_pasar(self, estudiante):
@@ -104,7 +104,7 @@ class Materia:
         contador = 0
         for tarea in self.__tareas_de_materia:
             contador += 1
-            total_score +=Tarea(tarea).get_grade(estudiante)
+            total_score +=tarea.get_grade(estudiante)
         nota = round((total_score/contador) * 100.0) / 100.0
 
         nota_necesaria = 0.0
