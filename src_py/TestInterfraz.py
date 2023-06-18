@@ -80,10 +80,10 @@ y la adaptación rápida a nuevos entornos.\n
 
 # Lista de imágenes
 imagenes = [
-    ImageTk.PhotoImage(Image.open("src_py/Images/imagen1.png").resize((150, 120)).convert("RGBA")),
-    ImageTk.PhotoImage(Image.open("src_py/Images/imagen2.png").resize((150, 120)).convert("RGBA")),
-    ImageTk.PhotoImage(Image.open("src_py/Images/imagen3.png").resize((150, 120)).convert("RGBA")),
-    ImageTk.PhotoImage(Image.open("src_py/Images/imagen4.png").resize((150, 120)).convert("RGBA")),
+    ImageTk.PhotoImage(Image.open("Images/imagen1.png").resize((150, 120)).convert("RGBA")),
+    ImageTk.PhotoImage(Image.open("Images/imagen2.png").resize((150, 120)).convert("RGBA")),
+    ImageTk.PhotoImage(Image.open("Images/imagen3.png").resize((150, 120)).convert("RGBA")),
+    ImageTk.PhotoImage(Image.open("Images/imagen4.png").resize((150, 120)).convert("RGBA")),
 ]
 
 # Variables para almacenar el índice actual
@@ -132,11 +132,11 @@ frame3.grid_columnconfigure(0, weight=1)
 frame3.grid_columnconfigure(3, weight=1)
 
 # Crear imágenes asociadas al sistema
-imagen_sis1 = ImageTk.PhotoImage(Image.open("src_py/Images/sis1.png").resize((100, 120)).convert("RGBA"))
-imagen_sis2 = ImageTk.PhotoImage(Image.open("src_py/Images/sis2.png").resize((100, 120)).convert("RGBA"))
-imagen_sis3 = ImageTk.PhotoImage(Image.open("src_py/Images/sis3.png").resize((100, 120)).convert("RGBA"))
-imagen_sis4 = ImageTk.PhotoImage(Image.open("src_py/Images/sis4.png").resize((100, 120)).convert("RGBA"))
-imagen_sis5 = ImageTk.PhotoImage(Image.open("src_py/Images/sis5.png").resize((100, 120)).convert("RGBA"))
+imagen_sis1 = ImageTk.PhotoImage(Image.open("Images/sis1.png").resize((100, 120)).convert("RGBA"))
+imagen_sis2 = ImageTk.PhotoImage(Image.open("Images/sis2.png").resize((100, 120)).convert("RGBA"))
+imagen_sis3 = ImageTk.PhotoImage(Image.open("Images/sis3.png").resize((100, 120)).convert("RGBA"))
+imagen_sis4 = ImageTk.PhotoImage(Image.open("Images/sis4.png").resize((100, 120)).convert("RGBA"))
+imagen_sis5 = ImageTk.PhotoImage(Image.open("Images/sis5.png").resize((100, 120)).convert("RGBA"))
 
 # Imágenes en labels asociadas al sistema
 label_imagen_sis1 = Label(frame4, image=imagen_sis1,highlightthickness=2)
