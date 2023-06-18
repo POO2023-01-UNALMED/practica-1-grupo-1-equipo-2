@@ -6,13 +6,14 @@ from src_py.personas.Estudiante import Estudiante
 
 class gestionDatos:
     def __init__(self):
+
         from src_py.baseDatos import Deserializador
         self.facultadMinas = Facultad()
         self.estudiantes = []
         self.materias = self.facultadMinas.getMaterias()
         self.profesores = self.facultadMinas.getProfesores()
         self.sistemaBecas = Beca("")
-        Deserializador.deserializar(self)
+        Deserializador.Deserializador()
     
     def getMaterias(self):
         return self.materias
@@ -43,7 +44,4 @@ class gestionDatos:
         self.estudiantes.append(nuevoEstudiante)
         return nuevoEstudiante
     
-    def nuevoEstudiante(self, nombre, ID, Email, fueBecado):
-        nuevoEstudiante = Estudiante(nombre, ID, Email, fueBecado)
-        self.estudiantes.append(nuevoEstudiante)
-        return nuevoEstudiante
+
