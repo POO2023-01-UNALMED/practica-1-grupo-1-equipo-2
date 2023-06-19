@@ -1,5 +1,12 @@
 from tkinter import *
 from PIL import Image, ImageTk
+from src_py.Calendario.gestionDatos import gestionDatos
+from src_py.baseDatos.Serializador import Serializador
+import sys
+import tkinter as tk
+import os
+from PIL import ImageTk, Image
+from tkinter import messagebox
 
 # Crear la ventana principal
 root = Tk()
@@ -23,6 +30,7 @@ color_fondo =(177,178,176)
 color_hex2 = rgb_to_hex(color_fondo)
 color_hex1 =rgb_to_hex(color_rgb1)
 color_hex = rgb_to_hex(color_rgb)
+
 
 # Espacios de Frame
 frame = Frame(root,background=color_hex,borderwidth=2,highlightthickness=2)
@@ -157,8 +165,148 @@ frame4.grid_columnconfigure(0, weight=1)
 frame4.grid_columnconfigure(4, weight=1)
 
 
+def salir_aplicacion():
+    root.destroy()
+
+
+def mostrar_descripcion():
+    messagebox.showinfo("Descripción del sistema", "El sistema es una aplicación diseñada para...")
+
+
+# Crear el menú
+menubar = tk.Menu(root)
+root.config(menu=menubar)
+
+# Menú Inicio
+menu_inicio = tk.Menu(menubar, tearoff=0)
+menu_inicio.add_command(label="Salir de la aplicación", command=salir_aplicacion)
+menu_inicio.add_command(label="Descripción del sistema", command=mostrar_descripcion)
+
+# Agregar los menús al menú principal
+menubar.add_cascade(label="Inicio", menu=menu_inicio)
+
+def salir_del_sistema(gestor):
+    print("Proceso terminado")
+    # Serializar the 'gestor' object
+    Serializador.serializador(gestor)
+    # Exit the application
+    sys.exit(0)
+
+
+def ingresar_sistema():
+    datos_sistema = gestionDatos()
+
+    # Eventos
+    def sign_in():
+        documento = documento_entry.get()
+        if documento == "":
+            messagebox.showerror("Error", "Para iniciar sesión, ingrese su documento en el espacio.")
+        else:
+            if documento in datos_sistema.getEstudiantes():
+                # Open a new window or perform desired actions for successful sign-in
+                messagebox.showinfo("Success", "Sign In successful! Opening new window...")
+                # Add your code here to open a new window or perform desired actions
+            else:
+                messagebox.showerror("Error", "Documento no registrado. Registrese antes de ingresar al sistema.")
+
+    def sign_up():
+        def register():
+            nombre = nombre_entry.get()
+            documento = id_entry.get()
+            email = email_entry.get()
+            fue_becado = fue_becado_var.get()
+            selected_materias = [materia.getNombre() for materia, var in materias_vars.items() if var.get()]
+
+            if nombre == "" or documento == "" or email == "":
+                messagebox.showerror("Error", "Por favor, rellene todos los espacios para registrarse.")
+                ventana_registro.destroy()
+            else:
+                datos_sistema.nuevoEstudiante(nombre, documento, email, fue_becado, selected_materias)
+                print("Selected Materias:", selected_materias)
+                print("Registro realizado con exito")
+                salir_del_sistema(datos_sistema)
+
+        # Create the sign-up window
+        ventana_registro = tk.Toplevel()
+        ventana_registro.title("Registro")
+
+        # Labels
+        tk.Label(ventana_registro, text="Nombre:").grid(row=0, column=0, padx=10, pady=10)
+        tk.Label(ventana_registro, text="ID:").grid(row=1, column=0, padx=10, pady=10)
+        tk.Label(ventana_registro, text="Email:").grid(row=2, column=0, padx=10, pady=10)
+        tk.Label(ventana_registro, text="¿Fue becado anteriormente?").grid(row=3, column=0, padx=10, pady=10)
+
+        # Materias label
+        materias_label = tk.Label(ventana_registro, text="Materias del programa académico:")
+        materias_label.grid(row=5, column=0, columnspan=2, padx=10, pady=10)
+
+        # Entry fields
+        nombre_entry = tk.Entry(ventana_registro)
+        nombre_entry.grid(row=0, column=1, padx=10, pady=10)
+
+        id_entry = tk.Entry(ventana_registro)
+        id_entry.grid(row=1, column=1, padx=10, pady=10)
+
+        email_entry = tk.Entry(ventana_registro)
+        email_entry.grid(row=2, column=1, padx=10, pady=10)
+
+        # Radio buttons for "Fue becado anteriormente?"
+        fue_becado_var = tk.BooleanVar()
+        fue_becado_var.set(False)
+        tk.Radiobutton(ventana_registro, text="Sí", variable=fue_becado_var, value=True).grid(row=3, column=1,
+                                                                                              padx=10, pady=10)
+        tk.Radiobutton(ventana_registro, text="No", variable=fue_becado_var, value=False).grid(row=3, column=2,
+                                                                                               padx=10, pady=10)
+
+        # Checkbuttons for subjects
+        materias_vars = {}  # Dictionary to store the subject checkbutton variables
+        row_counter = 6  # Variable to keep track of the current row for grid positioning
+
+        for i, materia in enumerate(datos_sistema.getMaterias()):
+            var = tk.BooleanVar()
+            var.set(False)
+            materias_vars[materia] = var
+            tk.Checkbutton(ventana_registro, text=materia.getNombre(), variable=var).grid(row=row_counter, column=0,
+                                                                                          columnspan=2, padx=10,
+                                                                                          pady=5, sticky="w")
+            row_counter += 1
+
+        # Register button
+        register_button = tk.Button(ventana_registro, text="Registrarse", command=register)
+        register_button.grid(row=row_counter, column=0, columnspan=3, padx=10, pady=10)
+
+        # Show materias button
+        # show_materias_button = tk.Button(ventana_registro, text="Mostrar materias", command=show_materias)
+        # show_materias_button.grid(row=7, column=0, columnspan=2, padx=10, pady=10, sticky="nsew")
+
+        ventana_registro.mainloop()
+
+    root.destroy()
+    ventana_principal = tk.Tk()
+
+    # Etiquetas
+    contenido_principal = tk.Label(ventana_principal, text="¡Bienvenido a la Ventana Principal del Sistema!")
+    contenido_principal.grid(row=0, column=0, columnspan=2, padx=10, pady=10)
+
+    # "Documento" label
+    documento_label = tk.Label(ventana_principal, text="ID:")
+    documento_label.grid(row=1, column=0, padx=10, pady=10)
+
+    # Entry field for the document
+    documento_entry = tk.Entry(ventana_principal)
+    documento_entry.grid(row=1, column=1, padx=10, pady=10)
+
+    # Espacios de Inicio de Sesion
+    sign_in_button = tk.Button(ventana_principal, text="Iniciar Sesion", command=sign_in)
+    sign_in_button.grid(row=2, column=0, padx=10, pady=10)
+
+    sign_up_button = tk.Button(ventana_principal, text="Registrarse", command=sign_up)
+    sign_up_button.grid(row=2, column=1, padx=10, pady=10)
+
+    ventana_principal.mainloop()
+
 # Boton "ingresar"
-boton_ingresar = Button(frame4, text="Ingresar")
+boton_ingresar = Button(frame4, text="Ingresar", command=ingresar_sistema)
 boton_ingresar.grid(row=4, column=2, padx=10, pady=10, sticky="s")
 
 root.mainloop()
