@@ -2,7 +2,7 @@ from tkinter import *
 from PIL import Image, ImageTk
 from src_py.personas.Estudiante import Estudiante
 from tkinter import Button
-
+from src_py.Calendario.gestionDatos import gestionDatos
 from src_py.Calendario.Facultad import Facultad
 from src_py.Calendario.Materia import Materia
 
@@ -62,10 +62,10 @@ def menuEstudiante(estudiante: Estudiante):
         materia.config(font=("Times New Roman", 12, "bold"))
         materia.grid(row=6, column=0, padx=10, pady=10, sticky="w")
 
-        imagenEst = ImageTk.PhotoImage(Image.open("Images/sis4.png").resize((200, 350)).convert("RGBA"))
+        imagenEst = ImageTk.PhotoImage(Image.open("Images/sis4.png").resize((100, 120)).convert("RGBA"))
         imagen = Label(frameVentanaInicio, image=imagenEst, highlightthickness=2)
         imagen.image = imagenEst  # Guardar una referencia para evitar que la imagen se recolecte con el garbage collector
-        imagen.grid(row=0, column=1, rowspan=5, padx=10, pady=10, sticky="nsew")
+        imagen.grid(row=0, column=2, rowspan=5, padx=10, pady=10, sticky="ne")
 
     opcionSeleccionada = StringVar(ventanaInicio)
     opcionSeleccionada.set(opciones[0])  # Set the default option
@@ -145,12 +145,10 @@ def menuEstudiante(estudiante: Estudiante):
         label2.config(font=("Times New Roman", 12, "bold"))
         label2.pack()
 
-        materias_inscritas = estudiante.getMaterias_inscritas()
-
-        for i, materia in enumerate(materias_inscritas):
-            label_materia = Label(frameVentanaInicio, text=f"{i + 1}. {materia.getNombre()}")
-            label_materia.config(font=("Times New Roman", 12))
-            label_materia.pack()
+        materia = Label(frameVentanaInicio,
+                        text=str([materia.getNombre() for materia in estudiante.getMaterias_inscritas()]))
+        materia.config(font=("Times New Roman", 12, "bold"))
+        materia.pack()
 
     def mostrarCalificacionDocente():
         clearFrame()
@@ -171,12 +169,22 @@ def menuEstudiante(estudiante: Estudiante):
         label_texto.config(font=("Times New Roman", 10, "bold"))
         label_texto.grid(row=1, column=0, padx=10, pady=10, sticky="nsew")
 
-
     def mostrarMateriasCursadas():
+        datos_sistema = gestionDatos()
         clearFrame()
         label = Label(frameVentanaInicio, text="Materias cursadas anteriormente")
         label.config(font=("Times New Roman", 12, "bold"))
         label.pack()
+        label2 = Label(frameVentanaInicio, text="Usted ha cursado: ")
+        label2.config(font=("Times New Roman", 12, "bold"))
+        label2.pack()
+
+        materias_cursadas = estudiante.getMaterias_cursadas()
+
+        for i, materia in enumerate(materias_cursadas):
+            label_materia = Label(frameVentanaInicio, text=materia)
+            label_materia.config(font=("Times New Roman", 12, "bold"))
+            label_materia.pack()
 
     def mostrarCalificacionDocente():
         clearFrame()
