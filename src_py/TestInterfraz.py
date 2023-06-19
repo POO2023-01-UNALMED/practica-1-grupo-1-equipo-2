@@ -13,7 +13,7 @@ from tkinter import messagebox
 root = Tk()
 root.title("Ventana de Inicio")
 root.geometry("800x600")
-root.configure(background="light blue")
+root.configure(background="white")
 
 root.grid_rowconfigure(0, weight=1)
 root.grid_rowconfigure(1, weight=1)
@@ -34,13 +34,13 @@ color_hex = rgb_to_hex(color_rgb)
 
 
 # Espacios de Frame
-frame = Frame(root,background=color_hex,borderwidth=2,highlightthickness=2)
+frame = Frame(root,background=color_hex, borderwidth=2, highlightthickness=2)
 frame.grid(row=0, column=0, sticky="nsew")
-frame2 = Frame(root,background=color_hex1,borderwidth=2,highlightthickness=2)
+frame2 = Frame(root,background=color_hex1, borderwidth=2, highlightthickness=2)
 frame2.grid(row=0, column=1, sticky="nsew")
-frame3 = Frame(root,background=color_hex1,borderwidth=2,highlightthickness=2)
+frame3 = Frame(root,background=color_hex1, borderwidth=2, highlightthickness=2)
 frame3.grid(row=1, column=1, sticky="nsew")
-frame4 = Frame(root,background=color_hex ,borderwidth=2,highlightthickness=2)
+frame4 = Frame(root,background=color_hex,borderwidth=2, highlightthickness=2)
 frame4.grid(row=1, column=0, sticky="nsew")
 
 # Configurar la cuadrícula de los frames
@@ -57,10 +57,14 @@ saludo.grid(row=0, column=0, padx=10, pady=10, sticky="n")
 # Lista de títulos y textos
 titulos = [" --> Juan <--", " --> Breadley <--", " --> Jhon <--", " --> Baena <--"]
 textos = [
-    """-- Estudiante de ING de Sistemas de la UNAL --
-=> gustos:
-=> Virtudes:
-=> Contacto: Correo@unal.edu.co
+    """-- Estudiante de ING de Sistemas de la UNAL --\n
+=> Gustos: Amines, monas chinas y 
+super fan de Boku no pico, además 
+de siempre andar arrecho\n
+=> Virtudes: carismatico, fuerte en 
+la solución de problemas, amante de
+la programación orientada a objetos\n
+=> Contacto: jtrejosg@unal.edu.co\n
 """,
     """-- Estudiante de C. de la Computación de la UNAL --\n 
 => Gustos: Resolución de problemas, 
@@ -191,7 +195,12 @@ def salir_del_sistema(gestor):
     # Exit the application
     sys.exit(0)
 
+
 def ingresar_sistema():
+
+    for widget in root.winfo_children():
+        widget.destroy()
+
     datos_sistema = gestionDatos()
 
     # Eventos
@@ -206,15 +215,17 @@ def ingresar_sistema():
                     if estudiante.getID() == documento:
                         estudianteSeleccionado = estudiante
                         break
-                ventana_principal.destroy()
                 menuEstudiante(estudianteSeleccionado)
 
 
             else:
                 messagebox.showerror("Error", "Documento no registrado. Registrese antes de ingresar al sistema.")
 
-
     def sign_up():
+
+        for widget in root.winfo_children():
+            widget.destroy()
+
         def register():
             nombre = nombre_entry.get()
             documento = id_entry.get()
@@ -235,13 +246,13 @@ def ingresar_sistema():
                 print("Registro realizado con exito")
                 salir_del_sistema(datos_sistema)
 
-        registro_frame = tk.Frame(root)
+        registro_frame = Frame(root)
         registro_frame.grid(row=3, column=0, columnspan=2, padx=10, pady=10)
 
-        nombre_label = tk.Label(registro_frame, text="Nombre:")
+        nombre_label = Label(registro_frame, text="Nombre:")
         nombre_label.grid(row=0, column=0, padx=10, pady=10)
 
-        nombre_entry = tk.Entry(registro_frame)
+        nombre_entry = Entry(registro_frame)
         nombre_entry.grid(row=0, column=1, padx=10, pady=10)
 
         id_label = tk.Label(registro_frame, text="ID:")
@@ -250,19 +261,19 @@ def ingresar_sistema():
         id_entry = tk.Entry(registro_frame)
         id_entry.grid(row=1, column=1, padx=10, pady=10)
 
-        email_label = tk.Label(registro_frame, text="Email:")
+        email_label = Label(registro_frame, text="Email:")
         email_label.grid(row=2, column=0, padx=10, pady=10)
 
-        email_entry = tk.Entry(registro_frame)
+        email_entry = Entry(registro_frame)
         email_entry.grid(row=2, column=1, padx=10, pady=10)
 
-        fue_becado_var = tk.BooleanVar()
+        fue_becado_var = BooleanVar()
         fue_becado_var.set(False)
-        fue_becado_label = tk.Label(registro_frame, text="¿Fue becado anteriormente?")
+        fue_becado_label = Label(registro_frame, text="¿Fue becado anteriormente?")
         fue_becado_label.grid(row=3, column=0, padx=10, pady=10)
-        fue_becado_yes = tk.Radiobutton(registro_frame, text="Sí", variable=fue_becado_var, value=True)
+        fue_becado_yes = Radiobutton(registro_frame, text="Sí", variable=fue_becado_var, value=True)
         fue_becado_yes.grid(row=3, column=1, padx=10, pady=10)
-        fue_becado_no = tk.Radiobutton(registro_frame, text="No", variable=fue_becado_var, value=False)
+        fue_becado_no = Radiobutton(registro_frame, text="No", variable=fue_becado_var, value=False)
         fue_becado_no.grid(row=3, column=2, padx=10, pady=10)
 
         materias_label = tk.Label(registro_frame, text="Materias del programa académico:")
@@ -285,26 +296,21 @@ def ingresar_sistema():
 
         registro_frame.tkraise()
 
-    ventana_principal = tk.Tk()
-    ventana_principal.title("Ventana Principal del Sistema")
 
-    contenido_principal = tk.Label(ventana_principal, text="¡Bienvenido a la Ventana Principal del Sistema!")
+    contenido_principal = Label(root, text="¡Bienvenido a la Ventana Principal del Sistema!")
     contenido_principal.grid(row=0, column=0, columnspan=2, padx=10, pady=10)
 
-    documento_label = tk.Label(ventana_principal, text="ID:")
+    documento_label = Label(root, text="ID:")
     documento_label.grid(row=1, column=0, padx=10, pady=10)
 
-    documento_entry = tk.Entry(ventana_principal)
+    documento_entry = Entry(root)
     documento_entry.grid(row=1, column=1, padx=10, pady=10)
 
-    sign_in_button = tk.Button(ventana_principal, text="Iniciar Sesion", command=sign_in)
+    sign_in_button = Button(root, text="Iniciar Sesion", command=sign_in)
     sign_in_button.grid(row=2, column=0, padx=10, pady=10)
 
-    sign_up_button = tk.Button(ventana_principal, text="Registrarse", command=sign_up)
+    sign_up_button = Button(root, text="Registrarse", command=sign_up)
     sign_up_button.grid(row=2, column=1, padx=10, pady=10)
-
-    root.destroy()
-    ventana_principal.mainloop()
 
 # Boton "ingresar"
 boton_ingresar = Button(frame4, text="Ingresar", command=ingresar_sistema)
