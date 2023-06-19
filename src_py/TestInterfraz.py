@@ -2,6 +2,7 @@ from tkinter import *
 from PIL import Image, ImageTk
 from src_py.Calendario.gestionDatos import gestionDatos
 from src_py.baseDatos.Serializador import Serializador
+from src_py.perfilEstudiante import *
 import sys
 import tkinter as tk
 import os
@@ -205,7 +206,7 @@ def ingresar_sistema():
                     if estudiante.getID() == documento:
                         estudianteSeleccionado = estudiante
                         break
-                messagebox.showinfo("Success", "Sign In successful! Opening new window...")
+                menuEstudiante(estudianteSeleccionado)
 
 
             else:
