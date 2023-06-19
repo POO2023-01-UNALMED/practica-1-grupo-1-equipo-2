@@ -1,6 +1,10 @@
 from tkinter import *
 from PIL import Image, ImageTk
 from src_py.personas.Estudiante import Estudiante
+from tkinter import Button
+
+from src_py.Calendario.Facultad import Facultad
+from src_py.Calendario.Materia import Materia
 
 
 def menuEstudiante(estudiante: Estudiante):
@@ -23,7 +27,6 @@ def menuEstudiante(estudiante: Estudiante):
         "Ver materias inscritas",
         "Realizar calificacion de docente",
         "Ver horario",
-        "Ver perfil estudiante",
         "Materias cursadas anteriormente",
         "Ver calificacion docente",
         "Volver al menu principal"
@@ -43,7 +46,7 @@ def menuEstudiante(estudiante: Estudiante):
         show_id.config(font=("Times New Roman", 12, "bold"))
         show_id.grid(row=2, column=0, padx=10, pady=10, sticky="w")
 
-        iD = Label(frameVentanaInicio, text=estudiante.getID())
+        iD = Label(frameVentanaInicio, text=int(estudiante.getID()))
         iD.config(font=("Times New Roman", 12, "bold"))
         iD.grid(row=3, column=0, padx=10, pady=10, sticky="w")
 
@@ -51,9 +54,13 @@ def menuEstudiante(estudiante: Estudiante):
         show_correo.config(font=("Times New Roman", 12, "bold"))
         show_correo.grid(row=4, column=0, padx=10, pady=10, sticky="w")
 
-        correo = Label(frameVentanaInicio, text=estudiante.getEmail())
+        correo = Label(frameVentanaInicio, text=str(estudiante.getEmail()))
         correo.config(font=("Times New Roman", 12, "bold"))
         correo.grid(row=5, column=0, padx=10, pady=10, sticky="w")
+
+        materia = Label(frameVentanaInicio, text=str(estudiante.getMaterias_cursadas()))
+        materia.config(font=("Times New Roman", 12, "bold"))
+        materia.grid(row=6, column=0, padx=10, pady=10, sticky="w")
 
         imagenEst = ImageTk.PhotoImage(Image.open("Images/sis4.png").resize((200, 350)).convert("RGBA"))
         imagen = Label(frameVentanaInicio, image=imagenEst, highlightthickness=2)
@@ -72,8 +79,6 @@ def menuEstudiante(estudiante: Estudiante):
             mostrarCalificacionDocente()
         elif opcion == "Ver horario":
             mostrarHorario()
-        elif opcion == "Ver perfil estudiante":
-            mostrarPerfilEstudiante()
         elif opcion == "Materias cursadas anteriormente":
             mostrarMateriasCursadas()
         elif opcion == "Ver calificacion docente":
@@ -94,55 +99,87 @@ def menuEstudiante(estudiante: Estudiante):
     frameVentanaInicio.columnconfigure(1, weight=1)  # Expand column 1 in frameVentanaInicio
     frameVentanaInicio.rowconfigure(5, weight=1)  # Expand row 5 in frameVentanaInicio
 
+    materias_vars = {}
+
     def clearFrame():
         for widget in frameVentanaInicio.winfo_children():
             widget.destroy()
 
     def mostrarInscribirAsignaturas():
         clearFrame()
-        # Code to create and display widgets for "Inscribir asignaturas" option
+        from src_py.Calendario.gestionDatos import gestionDatos
+        datos_sistema = gestionDatos()
+
         label = Label(frameVentanaInicio, text="Inscribir asignaturas")
         label.config(font=("Times New Roman", 12, "bold"))
         label.pack()
 
+        label2 = Label(frameVentanaInicio, text="Seleccione las materias a inscribir:")
+        label2.config(font=("Times New Roman", 12))
+        label2.pack()
+
+        materias_vars = {}  # Dictionary to store the subject checkbutton variables
+        row_counter = 5  # Variable to keep track of the current row for grid positioning
+
+        for i, materia in enumerate(datos_sistema.getMaterias()):
+            var = BooleanVar()
+            var.set(False)
+            materias_vars[materia] = var
+            Checkbutton(frameVentanaInicio, text=materia.getNombre(), variable=var).pack()
+
+        def guardarSelecciones():
+            materias_seleccionadas = [materia for materia, var in materias_vars.items() if var.get()]
+            # Aquí puedes hacer lo que desees con las materias seleccionadas, como guardarlas en el estudiante, etc.
+            estudiante.setMaterias_inscritas(materias_seleccionadas)
+            print("Materias seleccionadas:", materias_seleccionadas)
+
+        boton_guardar = Button(frameVentanaInicio, text="Guardar selecciones", command=guardarSelecciones)
+        boton_guardar.pack(side=BOTTOM)
+
     def mostrarMateriasInscritas():
         clearFrame()
-        # Code to create and display widgets for "Ver materias inscritas" option
         label = Label(frameVentanaInicio, text="Ver materias inscritas")
         label.config(font=("Times New Roman", 12, "bold"))
         label.pack()
+        label2 = Label(frameVentanaInicio, text="Estas son tus Materias Inscritas")
+        label2.config(font=("Times New Roman", 12, "bold"))
+        label2.pack()
+
+        materias_inscritas = estudiante.getMaterias_inscritas()
+
+        for i, materia in enumerate(materias_inscritas):
+            label_materia = Label(frameVentanaInicio, text=f"{i + 1}. {materia.getNombre()}")
+            label_materia.config(font=("Times New Roman", 12))
+            label_materia.pack()
 
     def mostrarCalificacionDocente():
         clearFrame()
-        # Code to create and display widgets for "Realizar calificacion de docente" option
         label = Label(frameVentanaInicio, text="Realizar calificacion de docente")
         label.config(font=("Times New Roman", 12, "bold"))
         label.pack()
 
     def mostrarHorario():
         clearFrame()
-        # Code to create and display widgets for "Ver horario" option
         label = Label(frameVentanaInicio, text="Ver horario")
         label.config(font=("Times New Roman", 12, "bold"))
         label.pack()
+        label2 = Label(frameVentanaInicio, text="Tu horario es:")
+        label2.config(font=("Times New Roman", 12, "bold"))
+        label2.pack()
 
-    def mostrarPerfilEstudiante():
-        clearFrame()
-        # Code to create and display widgets for "Ver perfil estudiante" option
-        label = Label(frameVentanaInicio, text="Ver perfil estudiante")
-        label.config(font=("Times New Roman", 12, "bold"))
-        label.pack()
+        label_texto = Label(frameVentanaInicio, text=common.horario(), background="white")
+        label_texto.config(font=("Times New Roman", 10, "bold"))
+        label_texto.grid(row=1, column=0, padx=10, pady=10, sticky="nsew")
+
 
     def mostrarMateriasCursadas():
         clearFrame()
-        # Code to create and display widgets for "Materias cursadas anteriormente" option
         label = Label(frameVentanaInicio, text="Materias cursadas anteriormente")
         label.config(font=("Times New Roman", 12, "bold"))
         label.pack()
 
     def mostrarCalificacionDocente():
         clearFrame()
-        # Code to create and display widgets for "Ver calificacion docente" option
         label = Label(frameVentanaInicio, text="Ver calificacion docente")
         label.config(font=("Times New Roman", 12, "bold"))
         label.pack()
