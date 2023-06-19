@@ -206,6 +206,7 @@ def ingresar_sistema():
                     if estudiante.getID() == documento:
                         estudianteSeleccionado = estudiante
                         break
+                ventana_principal.destroy()
                 menuEstudiante(estudianteSeleccionado)
 
 
@@ -302,6 +303,7 @@ def ingresar_sistema():
     sign_up_button = tk.Button(ventana_principal, text="Registrarse", command=sign_up)
     sign_up_button.grid(row=2, column=1, padx=10, pady=10)
 
+    root.destroy()
     ventana_principal.mainloop()
 
 # Boton "ingresar"
