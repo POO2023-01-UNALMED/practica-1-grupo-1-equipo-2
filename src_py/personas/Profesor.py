@@ -1,4 +1,4 @@
-from src_py.personas.Persona import Persona
+from personas.Persona import Persona
 from typing import List
 
 class Profesor(Persona):

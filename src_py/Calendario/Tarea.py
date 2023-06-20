@@ -1,4 +1,4 @@
-from src_py.Calendario.TareaEstudiante import TareaEstudiante
+from Calendario.TareaEstudiante import TareaEstudiante
 from typing import List
 
 class Tarea:

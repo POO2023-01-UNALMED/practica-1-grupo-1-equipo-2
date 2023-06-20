@@ -1,6 +1,6 @@
-from src_py.Calendario.Tarea import Tarea
-from src_py.Calendario.Horario import Horario
-from src_py.personas.Profesor import Profesor
+from Calendario.Tarea import Tarea
+from Calendario.Horario import Horario
+from personas.Profesor import Profesor
 from typing import List
 from enum import Enum
 

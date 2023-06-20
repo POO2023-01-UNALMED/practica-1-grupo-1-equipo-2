@@ -1,5 +1,5 @@
 from enum import Enum
-from src_py.Calendario.TareaEstudiante import TareaEstudiante
+from Calendario.TareaEstudiante import TareaEstudiante
 from typing import List
 class Materia:
     class Tipo(Enum):

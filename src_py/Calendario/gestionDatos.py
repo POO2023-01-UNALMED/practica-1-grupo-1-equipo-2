@@ -1,9 +1,9 @@
 import pickle
 import os
-from src_py.Calendario.Facultad import Facultad
-from src_py.Calendario.Beca import Beca
-from src_py.personas.Estudiante import Estudiante
-from src_py.baseDatos.Deserializador import Deserializador
+from Calendario.Facultad import Facultad
+from Calendario.Beca import Beca
+from personas.Estudiante import Estudiante
+from baseDatos.Deserializador import Deserializador
 
 
 class gestionDatos:

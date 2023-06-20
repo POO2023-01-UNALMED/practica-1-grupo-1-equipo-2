@@ -1,7 +1,7 @@
 
-from src_py.personas.Profesor import Profesor
-from src_py.Calendario.Horario import Horario
-from src_py.Calendario.Materia import Materia
+from personas.Profesor import Profesor
+from Calendario.Horario import Horario
+from Calendario.Materia import Materia
 from typing import List
 
 class Facultad:

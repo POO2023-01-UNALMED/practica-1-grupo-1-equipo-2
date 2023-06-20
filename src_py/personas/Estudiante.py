@@ -1,10 +1,10 @@
 from typing import List
 
-from src_py.personas.Persona import Persona
-from src_py.personas.Profesor import Profesor
-from src_py.Calendario.Materia import Materia
-from src_py.Calendario.Tarea import Tarea
-from src_py.Calendario.Horario import Horario
+from personas.Persona import Persona
+from personas.Profesor import Profesor
+from Calendario.Materia import Materia
+from Calendario.Tarea import Tarea
+from Calendario.Horario import Horario
 
 class Estudiante(Persona):
     def __init__(self, nombre: str, ID: int, email: str, fue_becado: bool, materias_cursadas: List['Materia'] = None):
@@ -79,7 +79,7 @@ class Estudiante(Persona):
 
 
     def inscribir_materia(self, nombre_materia: str, materias_disponibles: List['Materia']):
-        from src_py.Calendario.Materia import Materia
+        from Calendario.Materia import Materia
 
         tiene_fundamentacion = False
         fallo_prerrequisito = False
@@ -141,7 +141,7 @@ class Estudiante(Persona):
         self.materias_inscritas.remove(materia)
 
     def aplicar_beca(self):
-        from src_py.Calendario.Beca import Beca
+        from Calendario.Beca import Beca
         Beca.estudiantes.append(self)
 
     def calcular_promedio(self):

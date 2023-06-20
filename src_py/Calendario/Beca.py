@@ -1,7 +1,7 @@
 
 from typing import List
 from enum import Enum
-from src_py.personas.Estudiante import Estudiante
+from personas.Estudiante import Estudiante
 
 class Beca:
     class Tipos(Enum):
