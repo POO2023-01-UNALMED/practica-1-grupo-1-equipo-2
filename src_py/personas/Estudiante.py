@@ -188,32 +188,37 @@ class Estudiante(Persona):
         
         return self.falla_horario
 
-    def sugerir_horario(self, falla_horario):
-        materias_sugeridas = []
-        
-        if falla_horario:
-            for materia in self.getMaterias_inscritas():
-                conflicto = False
-                
-                for materia_sugerida in materias_sugeridas:
-                    dias_materia = materia.getHorario().getDia()
-                    dias_materia_sugerida = materia_sugerida.getHorario().getDia()
-                    fallo_dias = any(dia_materia in dias_materia_sugerida for dia_materia in dias_materia)
+    def sugerir_materias(self, materias_disponibles: List['Materia']):
+        materias_recomendadas = []
 
-                    if fallo_dias:
-                        hora_inicio_materia = int(materia.getHorario().getHora_inicio())
-                        hora_fin_materia = int(materia.getHorario().getHora_fin())
-                        hora_inicio_materia_sugerida = int(materia_sugerida.getHorario().getHora_inicio())
-                        hora_fin_materia_sugerida = int(materia_sugerida.getHorario().getHora_fin())
+        # Get the names of the completed subjects
+        materias_cursadas_nombres = [materia.getNombre() for materia in self.materias_cursadas]
 
-                        if hora_inicio_materia < hora_fin_materia_sugerida and hora_fin_materia > hora_inicio_materia_sugerida:
-                            conflicto = True
-                            break
+        # Prioritize fundamentacion and disciplinar subjects
+        for materia in materias_disponibles:
+            if materia.tipo == Materia.Tipo.FUNDAMENTACION or materia.tipo == Materia.Tipo.DISCIPLINAR:
+                # Check if the student has not completed the subject yet
+                if materia.getNombre() not in materias_cursadas_nombres:
+                    # Check if the student has completed the prerequisite subject
+                    if materia.getPrerrequisito() is None or materia.getPrerrequisito().getNombre() in materias_cursadas_nombres:
+                        # Check for schedule collision
+                        if not self.comparar_horario(materias_recomendadas + [materia]):
+                            materias_recomendadas.append(materia)
+                            self.__profesores_inscritos.append(materia.getProfesor())
+                            materia.inscribir_estudiante(self)
 
-                if not conflicto:
-                    materias_sugeridas.append(materia)
+        # If no fundamentacion or disciplinar subjects are available or can be taken, consider libreEleccion subjects
+        for materia in materias_disponibles:
+            if materia.tipo == Materia.Tipo.LIBRE_ELECCION:
+                # Check if the student has not completed the subject yet
+                if materia.getNombre() not in materias_cursadas_nombres:
+                    # Check for schedule collision
+                    if not self.comparar_horario(materias_recomendadas + [materia]):
+                        materias_recomendadas.append(materia)
+                        self.__profesores_inscritos.append(materia.getProfesor())
+                        materia.inscribir_estudiante(self)
 
-        self.__materias_inscritas = materias_sugeridas
+        self.__materias_inscritas = materias_recomendadas
 
     def sugerir_materias(self, materias_disponibles: List['Materia']):
         materias_recomendadas = []

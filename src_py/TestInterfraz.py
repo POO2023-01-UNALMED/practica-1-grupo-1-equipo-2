@@ -62,9 +62,9 @@ saludo.grid(row=0, column=0, padx=10, pady=10, sticky="n")
 titulos = [" --> Juan <--", " --> Breadley <--", " --> Jhon <--", " --> Baena <--"]
 textos = [
     """-- Estudiante de ING de Sistemas de la UNAL --\n
-=> Gustos: Amines, monas chinas y 
-super fan de Boku no pico, además 
-de siempre andar arrecho\n
+=> Gustos: Me gusta ayudar a los demas, 
+superarme a mi mismo y siempre
+ver todo con una sonrisa.\n
 => Virtudes: carismatico, fuerte en 
 la solución de problemas, amante de
 la programación orientada a objetos\n
@@ -238,6 +238,7 @@ def menuEstudiante(estudiante: Estudiante):
         "Ver horario",
         "Materias cursadas anteriormente",
         "Ver calificacion docente",
+        "Visualizar becados",
         "Volver al menu principal"
     ]
 
@@ -285,40 +286,7 @@ def menuEstudiante(estudiante: Estudiante):
         Porcentaje = Label(frameVentanaInicio, text=str(estudiante.getPorcentaje_de_avance()), font=font_label)
         Porcentaje.grid(row=4, column=1, padx=10, pady=10, sticky="w")
 
-        # BECAS
-        Becas_label = Label(frameVentanaInicio, text="Estudiantes seleccionados para Beca:", font=font_title)
-        Becas_label.grid(row=5, column=0, padx=10, pady=10, sticky="e")
 
-        label = Label(frameVentanaInicio, text="Beca Inicial:", font=font_title)
-        label.grid(row=6, column=0, padx=10, pady=10, sticky="e")
-        row = 6
-        for becado in datos_sistema.getSistemaBecas().getEstudiantes_aptos_inicial():
-            becado_label = Label(frameVentanaInicio, text=str(becado), font=font_label)
-            becado_label.grid(row=row, column=0, padx=10, pady=10, sticky="w")
-            row += 1
-
-        label2 = Label(frameVentanaInicio, text="Beca Normal:", font=font_title)
-        label2.grid(row=7, column=0, padx=10, pady=10, sticky="e")
-        row = 6
-        for becado in datos_sistema.getSistemaBecas().getEstudiantes_aptos_normal():
-            becado_label = Label(frameVentanaInicio, text=str(becado), font=font_label)
-            becado_label.grid(row=row, column=0, padx=10, pady=10, sticky="w")
-            row += 1
-
-        label3 = Label(frameVentanaInicio, text="Beca Avanzada:", font=font_title)
-        label3.grid(row=8, column=0, padx=10, pady=10, sticky="e")
-        row = 6
-        for becado in datos_sistema.getSistemaBecas().getEstudiantes_aptos_avanzada():
-            becado_label = Label(frameVentanaInicio, text=str(becado), font=font_label)
-            becado_label.grid(row=row, column=0, padx=10, pady=10, sticky="w")
-            row += 1
-
-        # Configuración de alineación y estilos
-        frameVentanaInicio.columnconfigure([0, 1], weight=1)
-        frameVentanaInicio.rowconfigure([0, 1, 2], weight=1)
-        frameVentanaInicio.configure(bg="#E6E6FA")  # Color de fondo
-
-        root.update()  # Actualizar la ventana
 
     opcionSeleccionada = StringVar(ventanaInicio)
     opcionSeleccionada.set(opciones[0])  # Set the default option
@@ -401,6 +369,8 @@ def menuEstudiante(estudiante: Estudiante):
             mostrarMateriasCursadas()
         elif opcion == "Ver calificacion docente":
             mostrarCalificacionDocente()
+        elif opcion == "Visualizar becados":
+            visualizarBecados()
         elif opcion == "Volver al menu principal":
             volverAlMenuPrincipal()
 
@@ -418,7 +388,40 @@ def menuEstudiante(estudiante: Estudiante):
     frameVentanaInicio.rowconfigure(5, weight=1)  # Expand row 5 in frameVentanaInicio
 
     materias_vars = {}
+    def visualizarBecados():
+            clearFrame()
+            label = Label(frameVentanaInicio, text="Estudiantes seleccionados para Beca")
+            label.config(font=("Times New Roman", 12, "bold"))
+            label.pack()
 
+            # Beca Inicial
+            label1 = Label(frameVentanaInicio, text="Beca Inicial:", font=("Times New Roman", 12, "bold"))
+            label1.pack()
+            for becado in datos_sistema.getSistemaBecas().getEstudiantes_aptos_inicial():
+                becado_label = Label(frameVentanaInicio, text=str(becado))
+                becado_label.config(font=("Times New Roman", 12))
+                becado_label.pack()
+
+            # Beca Normal
+            label2 = Label(frameVentanaInicio, text="Beca Normal:", font=("Times New Roman", 12, "bold"))
+            label2.pack()
+            for becado in datos_sistema.getSistemaBecas().getEstudiantes_aptos_normal():
+                becado_label = Label(frameVentanaInicio, text=str(becado))
+                becado_label.config(font=("Times New Roman", 12))
+                becado_label.pack()
+
+            # Beca Avanzada
+            label3 = Label(frameVentanaInicio, text="Beca Avanzada:", font=("Times New Roman", 12, "bold"))
+            label3.pack()
+            for becado in datos_sistema.getSistemaBecas().getEstudiantes_aptos_avanzada():
+                becado_label = Label(frameVentanaInicio, text=str(becado))
+                becado_label.config(font=("Times New Roman", 12))
+                becado_label.pack()
+
+            # Botón para volver al menú principal
+            volver_btn = Button(frameVentanaInicio, text="Volver al menú principal", command=volverAlMenuPrincipal)
+            volver_btn.config(font=("Times New Roman", 12, "bold"))
+            volver_btn.pack()
     def clearFrame():
         for widget in frameVentanaInicio.winfo_children():
             widget.destroy()
@@ -431,42 +434,79 @@ def menuEstudiante(estudiante: Estudiante):
 
         # Obtener las materias inscritas por el estudiante
         materias_inscritas = estudiante.getMaterias_inscritas()
-        respuesta_booleano = False
+
         # Verificar si el estudiante tiene materias inscritas
         if len(materias_inscritas) == 0:
-            respuesta = messagebox.askyesno("No tienes materias inscritas",
-                                            "No se encuentran materias inscritas por usted en el sistema. ¿Quieres que te proporcione materias dependiendo de lo ya visto?")
+            mensaje_label = Label(frameVentanaInicio, text="No tienes materias inscritas")
+            mensaje_label.config(font=("Times New Roman", 12))
+            mensaje_label.pack()
 
-            if respuesta:
-                # El usuario seleccionó "Sí"
-                # Realizar la lógica para proporcionar las materias dependiendo de lo ya visto
-                # ...
-
-                # Establecer el valor del booleano
-                respuesta_booleano = True
-            else:
-                # El usuario seleccionó "No"
-                # Establecer el valor del booleano
-                respuesta_booleano = False
-
-                if not respuesta_booleano:
-                    # Devolver al estudiante al menú principal
-                    volverAlMenuPrincipal()
-                    return
-
-            # Continuar con el resto de la lógica o mostrar otra ventana según sea necesario
+            # Agregar un botón para inscribir materias sugeridas
+            inscribir_btn = Button(frameVentanaInicio, text="Inscribir materias sugeridas",
+                                   command=inscribirMateriasSugeridas)
+            inscribir_btn.config(font=("Times New Roman", 12, "bold"))
+            inscribir_btn.pack()
         else:
-            # Mostrar las materias inscritas
+            # Verificar si hay conflictos de horario
+            if estudiante.comparar_horario(materias_inscritas):
+                mensaje_label = Label(frameVentanaInicio, text="Hay conflictos de horario en las materias inscritas, por lo que hemos eliminado el conflicto")
+                mensaje_label.config(font=("Times New Roman", 12))
+                mensaje_label.pack()
+
+                # Corregir el horario sugiriendo nuevas materias
+                estudiante.sugerir_horario(falla_horario=True)
+
+                # Obtener las materias inscritas actualizadas
+                materias_inscritas = estudiante.getMaterias_inscritas()
+
+                # Mostrar las materias inscritas actualizadas
+                for materia in materias_inscritas:
+                    materia_label = Label(frameVentanaInicio, text=materia.getNombre())
+                    materia_label.config(font=("Times New Roman", 12, "bold"))
+                    materia_label.pack()
+            else:
+                # Mostrar las materias inscritas
+                for materia in materias_inscritas:
+                    materia_label = Label(frameVentanaInicio, text=materia.getNombre())
+                    materia_label.config(font=("Times New Roman", 12, "bold"))
+                    materia_label.pack()
+
+        # Botón para volver al menú principal
+        volver_btn = Button(frameVentanaInicio, text="Volver al menú principal", command=volverAlMenuPrincipal)
+        volver_btn.config(font=("Times New Roman", 12, "bold"))
+        volver_btn.pack()
+
+    def inscribirMateriasSugeridas():
+        # Obtener las materias disponibles del sistema
+        materias_disponibles = datos_sistema.getMaterias()
+
+        # Inscribir las materias sugeridas
+        estudiante.sugerir_materias(materias_disponibles)
+
+        # Verificar si hay conflictos de horario en las materias inscritas
+        if estudiante.comparar_horario(estudiante.getMaterias_inscritas()):
+            # Corregir el horario sugiriendo nuevas materias
+            estudiante.sugerir_horario(falla_horario=True)
+
+        # Obtener las materias inscritas actualizadas
+        materias_inscritas = estudiante.getMaterias_inscritas()
+
+        # Limpiar la ventana
+        clearFrame()
+
+        # Verificar si el estudiante tiene materias inscritas después de la sugerencia
+        if len(materias_inscritas) == 0:
+            mensaje_label = Label(frameVentanaInicio, text="No se pudieron inscribir materias sugeridas")
+            mensaje_label.config(font=("Times New Roman", 12))
+            mensaje_label.pack()
+        else:
+            # Mostrar las materias inscritas actualizadas
             for materia in materias_inscritas:
                 materia_label = Label(frameVentanaInicio, text=materia.getNombre())
                 materia_label.config(font=("Times New Roman", 12, "bold"))
                 materia_label.pack()
 
-            # Establecer el valor del booleano (en este caso no se muestra la ventana emergente, asumimos que el estudiante ya tiene las materias inscritas)
-            respuesta_booleano = False
-
         # Botón para volver al menú principal
-        salir_del_sistema(datos_sistema)
         volver_btn = Button(frameVentanaInicio, text="Volver al menú principal", command=volverAlMenuPrincipal)
         volver_btn.config(font=("Times New Roman", 12, "bold"))
         volver_btn.pack()
