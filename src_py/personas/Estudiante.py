@@ -215,17 +215,19 @@ class Estudiante(Persona):
 
         self.__materias_inscritas = materias_sugeridas
 
-
     def sugerir_materias(self, materias_disponibles: List['Materia']):
         materias_recomendadas = []
+
+        # Get the names of the completed subjects
+        materias_cursadas_nombres = [materia.getNombre() for materia in self.materias_cursadas]
 
         # Prioritize fundamentacion and disciplinar subjects
         for materia in materias_disponibles:
             if materia.tipo == Materia.Tipo.FUNDAMENTACION or materia.tipo == Materia.Tipo.DISCIPLINAR:
                 # Check if the student has not completed the subject yet
-                if materia not in self.materias_cursadas:
+                if materia.getNombre() not in materias_cursadas_nombres:
                     # Check if the student has completed the prerequisite subject
-                    if materia.getPrerrequisito() is None or materia.getPrerrequisito() in self.materias_cursadas:
+                    if materia.getPrerrequisito() is None or materia.getPrerrequisito().getNombre() in materias_cursadas_nombres:
                         # Check for schedule collision
                         if not self.comparar_horario(materias_recomendadas + [materia]):
                             materias_recomendadas.append(materia)
@@ -235,10 +237,10 @@ class Estudiante(Persona):
         # If no fundamentacion or disciplinar subjects are available or can be taken, consider libreEleccion subjects
         for materia in materias_disponibles:
             if materia.tipo == Materia.Tipo.LIBRE_ELECCION:
-                    # Check if the student has not completed the subject yet
-                if materia not in self.materias_cursadas:
-                        # Check for schedule collision
-                     if not self.comparar_horario(materias_recomendadas + [materia]):
+                # Check if the student has not completed the subject yet
+                if materia.getNombre() not in materias_cursadas_nombres:
+                    # Check for schedule collision
+                    if not self.comparar_horario(materias_recomendadas + [materia]):
                         materias_recomendadas.append(materia)
                         self.__profesores_inscritos.append(materia.getProfesor())
                         materia.inscribir_estudiante(self)

@@ -14,10 +14,10 @@ class Profesor(Persona):
     def getCalificacion_docente(self):
         return self.calificacion_docente
 
-    def setMaterias_asignadas(self):
+    def getMaterias_asignadas(self):
         return self.__materias_asignadas
 
-    def getMaterias_asignadas(self, materias_asignadas):
+    def setMaterias_asignadas(self, materias_asignadas):
         self.__materias_asignadas = materias_asignadas
 
     #Metodos de clase

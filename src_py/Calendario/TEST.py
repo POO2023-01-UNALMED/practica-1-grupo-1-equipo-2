@@ -17,6 +17,13 @@ if __name__ == "__main__":
     est3 = Estudiante("BREADLEY", 67890, "pp@a.com", False, [materiasDisponibles[0], materiasDisponibles[3]])
     est4 = Estudiante("BAENA", 67890, "pp@a.com", False, [materiasDisponibles[0], materiasDisponibles[3]])
     est5 = Estudiante("JOSSHUEN", 67890, "pp@a.com", False, [materiasDisponibles[0], materiasDisponibles[3]])
+    est6 = Estudiante("NOSE", 67890, "pp@a.com", False,
+                     [materiasDisponibles[0], materiasDisponibles[3], materiasDisponibles[6]])
+
+    est6.sugerir_materias(materiasDisponibles)
+
+    for materia in est6.getMaterias_inscritas():
+        print(materia)
 
     est.calcular_porcentaje_avance()
     est2.calcular_porcentaje_avance()
@@ -47,8 +54,8 @@ if __name__ == "__main__":
     est3.inscribir_materia("Programacion Orientada Objetos", materiasDisponibles)
     est4.inscribir_materia("Programacion Orientada Objetos", materiasDisponibles)
 
-    for materia in est.getMaterias_inscritas():
-        print(materia)
+    #for materia in est.getMaterias_inscritas():
+    #    print(materia)
 
     """
     for materia in est2.getMaterias_inscritas():
@@ -157,16 +164,16 @@ if __name__ == "__main__":
 
     est5.sugerir_materias(materiasDisponibles)
 
-    print(F"Nuevo horario sugerido por el sistema de: {est5}")
+    #print(F"Nuevo horario sugerido por el sistema de: {est5}")
 
-    for materia in est5.getMaterias_inscritas():
-        print(materia)
+    #for materia in est5.getMaterias_inscritas():
+    #    print(materia)
 
-    for profesor in est2.getProfesores_inscritos():
-        profesor.ingresar_calificacion(3.0)
+    #for profesor in est2.getProfesores_inscritos():
+    #    profesor.ingresar_calificacion(3.0)
 
-    for profesor in est3.getProfesores_inscritos():
-        profesor.ingresar_calificacion(4.0)
+    #for profesor in est3.getProfesores_inscritos():
+    #    profesor.ingresar_calificacion(4.0)
 
     """
     print("Calificación docente:")
