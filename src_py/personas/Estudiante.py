@@ -16,6 +16,7 @@ class Estudiante(Persona):
         self.__materias_inscritas = []
         self.materias_cursadas = materias_cursadas
         self.porcentaje_avance = 0.0
+        self.creditos_inscritos = 0
         self.intento_materias = []
         self.__profesores_inscritos = []
         self.materias_seleccionadas = []
@@ -63,10 +64,12 @@ class Estudiante(Persona):
         self.__calificacion_asignada = calificacion_asignada
 
     def getCreditos_inscritos(self):
-        return self.__creditos_inscritos
+        return self.creditos_inscritos
 
     def setCreditos_inscritos(self, creditos_inscritos):
-        self.__creditos_inscritos = creditos_inscritos
+        self.creditos_inscritos = creditos_inscritos
+
+
 
     def inscribir_materia(self, nombre_materia: str, materias_disponibles: List['Materia']):
         from src_py.Calendario.Materia import Materia
@@ -79,47 +82,31 @@ class Estudiante(Persona):
             if materia.getNombre() == nombre_materia:
                 if materia in self.__materias_inscritas:
                     return False
-
-                if self.materias_cursadas is not None:
+                prerrequisito = materia.getPrerrequisito()
+                tiene_prerrequisito = False
+                if prerrequisito is not None:
                     for materia_cursada in self.materias_cursadas:
-                        if materia_cursada.getNombre() == materia.getFundamentacion():
-                            tiene_fundamentacion = True
+                        if materia_cursada.getNombre() == prerrequisito.getNombre():
+                            tiene_prerrequisito = True
                             break
+                if prerrequisito is None or tiene_prerrequisito:
+                    self.__materias_inscritas.append(materia)
+                    break
+                else:
+                    fallo_prerrequisito = True
 
-                    for prerrequisito in materia.getPrerrequisitos():
-                        if prerrequisito not in [materia_cursada.getNombre() for materia_cursada in
-                                                 self.materias_cursadas]:
-                            fallo_prerrequisito = True
-                            break
+        for m in self.__materias_inscritas:
+            intento_creditos += m.getCreditos()
+            if m.tipo == Materia.Tipo.FUNDAMENTACION:
+                tiene_fundamentacion = True
 
-                if not tiene_fundamentacion or fallo_prerrequisito:
-                    self.intento_materias.append(materia)
-                    return False
+        if intento_creditos >= 10 and tiene_fundamentacion:
+            for ma in self.__materias_inscritas:
+                self.__profesores_inscritos.append(ma.getProfesor())
+                ma.inscribir_estudiante(self)
+            return True
 
-                self.__materias_inscritas.append(materia)
-                self.materias_seleccionadas.append(materia)
-
-                intento_creditos += materia.getCreditos()
-
-                self.__creditos_inscritos += materia.getCreditos()
-
-                self.setPorcentaje_de_avance(
-                    self.getPorcentaje_de_avance() + (materia.getCreditos() / 24) * 100)
-                break
-
-        if intento_creditos < 12:
-            self.intento_materias = []
-            self.__creditos_inscritos -= intento_creditos
-            self.setFalla_horario(True)
-            return False
-
-        if intento_creditos > 24:
-            self.intento_materias = []
-            self.__creditos_inscritos -= intento_creditos
-            return False
-
-        self.promedio = self.promedio / len(self.materias_cursadas)
-        return True
+        return not fallo_prerrequisito
 
     def agregar_promedio(self, calificacion: float):
         if self.getCalificacion_asignada():

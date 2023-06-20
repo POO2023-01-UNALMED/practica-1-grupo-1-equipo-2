@@ -24,6 +24,11 @@ class Materia:
         self.__prerrequisito = prerrequisito
         self.tipo = tipo
 
+    def getTipo(self):
+        return self.tipo
+
+    def setTipo(self, tipo):
+        self.tipo = tipo
 
     def getCodigo(self):
         return self.__codigo
