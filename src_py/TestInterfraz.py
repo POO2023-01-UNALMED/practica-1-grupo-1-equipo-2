@@ -225,37 +225,41 @@ def menuEstudiante(estudiante: Estudiante):
 
     def VentanaPrincipal():
         clearFrame()
-        name = Label(frameVentanaInicio, text="Nombre del Estudiante: ")
-        name.config(font=("Times New Roman", 12, "bold"))
-        name.grid(row=0, column=0, padx=10, pady=10, sticky="w")
 
-        nombre = Label(frameVentanaInicio, text=estudiante.getNombre())
-        nombre.config(font=("Times New Roman", 12))
-        nombre.grid(row=1, column=0, padx=10, pady=10, sticky="w")
+        # Estilos
+        font_title = ("Times New Roman", 15, "bold")
+        font_label = ("Times New Roman", 15)
 
-        show_id = Label(frameVentanaInicio, text="ID del Estudiante: ")
-        show_id.config(font=("Times New Roman", 12, "bold"))
-        show_id.grid(row=2, column=0, padx=10, pady=10, sticky="w")
+        # Nombre del Estudiante
+        name_label = Label(frameVentanaInicio, text="Nombre del Estudiante:", font=font_title)
+        name_label.grid(row=0, column=0, padx=10, pady=10, sticky="e")
 
-        iD = Label(frameVentanaInicio, text=int(estudiante.getID()))
-        iD.config(font=("Times New Roman", 12, "bold"))
-        iD.grid(row=3, column=0, padx=10, pady=10, sticky="w")
+        nombre = Label(frameVentanaInicio, text=estudiante.getNombre(), font=font_label)
+        nombre.grid(row=0, column=1, padx=10, pady=10, sticky="w")
 
-        show_correo = Label(frameVentanaInicio, text="Correo del Estudiante: ")
-        show_correo.config(font=("Times New Roman", 12, "bold"))
-        show_correo.grid(row=4, column=0, padx=10, pady=10, sticky="w")
+        # ID del Estudiante
+        id_label = Label(frameVentanaInicio, text="ID del Estudiante:", font=font_title)
+        id_label.grid(row=1, column=0, padx=10, pady=10, sticky="e")
 
-        correo = Label(frameVentanaInicio, text=str(estudiante.getEmail()))
-        correo.config(font=("Times New Roman", 12, "bold"))
-        correo.grid(row=5, column=0, padx=10, pady=10, sticky="w")
+        iD = Label(frameVentanaInicio, text=int(estudiante.getID()), font=font_label)
+        iD.grid(row=1, column=1, padx=10, pady=10, sticky="w")
 
-        materia = Label(frameVentanaInicio, text=str(estudiante.getMaterias_cursadas()))
-        materia.config(font=("Times New Roman", 12, "bold"))
-        materia.grid(row=6, column=0, padx=10, pady=10, sticky="w")
+        # Correo del Estudiante
+        correo_label = Label(frameVentanaInicio, text="Correo del Estudiante:", font=font_title)
+        correo_label.grid(row=2, column=0, padx=10, pady=10, sticky="e")
+
+        correo = Label(frameVentanaInicio, text=str(estudiante.getEmail()), font=font_label)
+        correo.grid(row=2, column=1, padx=10, pady=10, sticky="w")
+
+        # Configuración de alineación y estilos
+        frameVentanaInicio.columnconfigure([0, 1], weight=1)
+        frameVentanaInicio.rowconfigure([0, 1, 2], weight=1)
+        frameVentanaInicio.configure(bg="#E6E6FA")  # Color de fondo
+
+        root.update()  # Actualizar la ventana
 
     opcionSeleccionada = StringVar(ventanaInicio)
     opcionSeleccionada.set(opciones[0])  # Set the default option
-
     def mostrarInscribirAsignaturas():
         clearFrame()
         label = Label(frameVentanaInicio, text="Inscribir asignaturas")
@@ -290,11 +294,24 @@ def menuEstudiante(estudiante: Estudiante):
         def imprimirMateriasInscritas():
             materias_seleccionadas = [materia for materia, estado in materias_vars.items() if
                                       estado.get() == "Inscrita"]
+
+            bol = False
+            for materia_inscrita in materias_seleccionadas:
+                for materia_cursada in estudiante.getMaterias_cursadas():
+                    if materia_inscrita == materia_cursada.getNombre():
+                        bol = True
+                        break
+                if bol:
+                    break
+
             if not materias_seleccionadas:
                 messagebox.showerror("Erorr!", "Por favor, escoja materias que desea inscribir.")
                 ventanaInicio.destroy()
             elif estudiante.getMaterias_inscritas():
                 messagebox.showerror("Erorr!", "Usted ya ha inscrito las materias para este semestre.")
+                ventanaInicio.destroy()
+            elif bol:
+                messagebox.showerror("Erorr!", "Ya has cursado la/s materia/s seleccionada/s.")
                 ventanaInicio.destroy()
             else:
                 materias_seleccionadas = [materia for materia, estado in materias_vars.items() if
@@ -309,12 +326,16 @@ def menuEstudiante(estudiante: Estudiante):
                 for materia_sel in materias_encontradas:
                     estudiante.inscribir_materia(materia_sel.getNombre(), datos_sistema1.getMaterias())
 
+
                 salir_del_sistema(datos_sistema)
 
                 if not estudiante.getMaterias_inscritas():
                     messagebox.showerror("Erorr!",
                                          "Verifique que ya haya cursado el prerrequisito de las materias que intenta inscribir.")
                     ventanaInicio.destroy()
+
+
+
 
         # Botón para confirmar la inscripción y mostrar la lista de materias inscritas
         confirmar_btn = Button(frameVentanaInicio, text="Confirmar inscripción", command=imprimirMateriasInscritas)
@@ -399,29 +420,67 @@ def menuEstudiante(estudiante: Estudiante):
             respuesta_booleano = False
 
         # Botón para volver al menú principal
+        salir_del_sistema(datos_sistema)
         volver_btn = Button(frameVentanaInicio, text="Volver al menú principal", command=volverAlMenuPrincipal)
         volver_btn.config(font=("Times New Roman", 12, "bold"))
         volver_btn.pack()
 
+    selected_profesor = None  # Initialize selected_profesor variable globally
+
     def realizarCalificacionDocente():
         clearFrame()
 
-        # Aquí puedes agregar la lógica para realizar la calificación del docente
-        def submit():
+        # Create a label at the top of the frame
+        label_top = Label(frameVentanaInicio, text="Haga click sobre el docente que quisiera calificar")
+        label_top.config(font=("Times New Roman", 12, "bold"))
+        label_top.pack(fill=X, padx=10, pady=10)
+
+        # Create a list of teacher names and a variable to store the selected teacher
+        teacher_names = [profesor.getNombre() for profesor in estudiante.getProfesores_inscritos()]
+        selected_teacher = None
+
+        # Function to update the selected teacher when a button is clicked
+        def update_selected_teacher(name):
+            nonlocal selected_teacher
+            for profesor in estudiante.getProfesores_inscritos():
+                if profesor.getNombre() == name:
+                    selected_teacher = profesor
+                    break
+
+            # Check if the student has already submitted a score for this teacher
+            if selected_teacher in estudiante.getProfesores_calificados():
+                messagebox.showerror("Error", "Ya has realizado la evaluación docente.")
+                return
+
+            # Clear the frame and create a new frame for entering the score
+            clearFrame()
+            label_calificacion = Label(frameVentanaInicio,
+                                       text=f"Ingrese la calificación para el docente {selected_teacher.getNombre()}: ")
+            label_calificacion.config(font=("Times New Roman", 12, "bold"))
+            label_calificacion.pack(fill=X, padx=10, pady=10)
+
+            entry_calificacion = Entry(frameVentanaInicio)
+            entry_calificacion.pack(fill=X, padx=10, pady=10)
+
+            btn_submit = Button(frameVentanaInicio, text="Enviar", command=lambda: submit(entry_calificacion))
+            btn_submit.pack(fill=X, padx=10, pady=10)
+
+            btn_back = Button(frameVentanaInicio, text="Atrás", command=realizarCalificacionDocente)
+            btn_back.pack(fill=X, padx=10, pady=10)
+
+        # Create buttons for each teacher
+        for i, name in enumerate(teacher_names):
+            button = Button(frameVentanaInicio, text=name, command=lambda name=name: update_selected_teacher(name))
+            button.pack(fill=X, padx=10, pady=10)
+
+        # Function to submit the score for the selected teacher
+        def submit(entry_calificacion):
             calificacion = int(entry_calificacion.get())
-            estudiante.calificacion_docente.append(calificacion)
-            messagebox.showinfo("Éxito", "Calificación registrada correctamente")
+            selected_teacher.ingresar_calificacion(calificacion)
+            estudiante.addProfesor_calificado(selected_teacher)  # Add the selected teacher to the list of calificados
+            success_label = Label(frameVentanaInicio, text="Calificación registrada correctamente")
+            success_label.pack(fill=X, padx=10, pady=10)
             entry_calificacion.delete(0, END)
-
-        label_calificacion = Label(frameVentanaInicio, text="Calificación del docente (1-5): ")
-        label_calificacion.config(font=("Times New Roman", 12, "bold"))
-        label_calificacion.grid(row=0, column=0, padx=10, pady=10, sticky="w")
-
-        entry_calificacion = Entry(frameVentanaInicio)
-        entry_calificacion.grid(row=0, column=1, padx=10, pady=10, sticky="w")
-
-        btn_submit = Button(frameVentanaInicio, text="Enviar", command=submit)
-        btn_submit.grid(row=1, column=0, padx=10, pady=10)
 
     def mostrarHorario():
         clearFrame()
@@ -440,21 +499,18 @@ def menuEstudiante(estudiante: Estudiante):
         else:
             # Mostrar el horario del estudiante
             for materia in horario:
-                dia = materia.getHorario().getDia()
-                horas = f"{materia.getHorario().getHora_inicio()} - {materia.getHorario().getHora_fin()}"
+                dia = materia.getHorario()
 
                 dia_label = Label(frameVentanaInicio, text=f"Día: {dia}")
                 dia_label.config(font=("Times New Roman", 12, "bold"))
-                dia_label.pack()
-
-                horas_label = Label(frameVentanaInicio, text=f"Horas: {horas}")
-                horas_label.config(font=("Times New Roman", 12))
-                horas_label.pack()
+                dia_label.pack(pady=(0, 20))
 
         # Botón para volver al menú principal
         volver_btn = Button(frameVentanaInicio, text="Volver al menú principal", command=volverAlMenuPrincipal)
         volver_btn.config(font=("Times New Roman", 12, "bold"))
         volver_btn.pack()
+
+
 
     def mostrarMateriasCursadas():
         datos_sistema = gestionDatos()
@@ -473,24 +529,31 @@ def menuEstudiante(estudiante: Estudiante):
             label_materia.config(font=("Times New Roman", 12, "bold"))
             label_materia.pack()
 
+        salir_del_sistema(datos_sistema)
+
     def mostrarCalificacionDocente():
         clearFrame()
-        calificaciones = profesor.evaluacion_docente()
+        profesores = estudiante.getProfesores_inscritos()
 
-        if not calificaciones:
+        if not profesores:
             label_sin_calificaciones = Label(frameVentanaInicio, text="No se han registrado calificaciones de docentes")
             label_sin_calificaciones.config(font=("Times New Roman", 12, "bold"))
             label_sin_calificaciones.grid(row=0, column=0, padx=10, pady=10)
         else:
-            for i, calificacion in enumerate(calificaciones):
-                label_calificacion = Label(frameVentanaInicio, text=f"Calificación {i + 1}: {calificacion}")
-                label_calificacion.config(font=("Times New Roman", 12))
+            for i, profesor in enumerate(profesores):
+                calificacion = profesor.evaluacion_docente()
+                if calificacion is None:
+                    calificacion = "No disponible"
+                label_calificacion = Label(frameVentanaInicio,
+                                           text=f"{profesor.getNombre()}: Calificación actual del docente: {calificacion}")
+                label_calificacion.config(font=("Times New Roman", 15))
                 label_calificacion.grid(row=i, column=0, padx=10, pady=10)
 
-        btn_volver = Button(frameVentanaInicio, text="Volver al menú principal", command=menuEstudiante)
-        btn_volver.grid(row=len(calificaciones) + 1, column=0, padx=10, pady=10)
+        salir_del_sistema(datos_sistema)
+
 
     def volverAlMenuPrincipal():
+        salir_del_sistema(datos_sistema)
         clearFrame()
         VentanaPrincipal()
 
@@ -599,21 +662,23 @@ def ingresar_sistema():
 
         registro_frame.tkraise()
 
+    font = ("Times New Roman", 15, "bold")
 
-    contenido_principal = Label(root, text="¡Bienvenido a la Ventana Principal del Sistema!")
+    contenido_principal = Label(root, text="¡Bienvenido a la Ventana Principal del Sistema!", font=font)
     contenido_principal.grid(row=0, column=0, columnspan=2, padx=10, pady=10)
 
-    documento_label = Label(root, text="ID:")
+    documento_label = Label(root, text="ID:", font=font)
     documento_label.grid(row=1, column=0, padx=10, pady=10)
 
-    documento_entry = Entry(root)
+    documento_entry = Entry(root, font=font)
     documento_entry.grid(row=1, column=1, padx=10, pady=10)
 
-    sign_in_button = Button(root, text="Iniciar Sesion", command=sign_in)
+    sign_in_button = Button(root, text="Iniciar Sesión", font=font, command=sign_in)
     sign_in_button.grid(row=2, column=0, padx=10, pady=10)
 
-    sign_up_button = Button(root, text="Registrarse", command=sign_up)
+    sign_up_button = Button(root, text="Registrarse", font=font, command=sign_up)
     sign_up_button.grid(row=2, column=1, padx=10, pady=10)
+
 
 # Boton "ingresar"
 boton_ingresar = Button(frame4, text="Ingresar", command=ingresar_sistema)

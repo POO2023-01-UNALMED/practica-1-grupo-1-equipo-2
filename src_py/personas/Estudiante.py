@@ -20,6 +20,13 @@ class Estudiante(Persona):
         self.intento_materias = []
         self.__profesores_inscritos = []
         self.materias_seleccionadas = []
+        self.__profesores_calificados = []
+
+    def getProfesores_calificados(self):
+        return self.__profesores_calificados
+
+    def addProfesor_calificado(self, profesor):
+        self.__profesores_calificados.append(profesor)
 
     def getProfesores_inscritos(self):
         return self.__profesores_inscritos
