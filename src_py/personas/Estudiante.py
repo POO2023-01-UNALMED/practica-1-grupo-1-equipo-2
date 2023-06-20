@@ -245,10 +245,6 @@ class Estudiante(Persona):
 
         self.__materias_inscritas = materias_recomendadas
 
-
-
-
-
     def calcular_porcentaje_avance(self):
         self.porcentaje_avance = (1.0/9) * len(self.materias_cursadas)
         self.porcentaje_de_avance = round(self.porcentaje_avance * 100.0)

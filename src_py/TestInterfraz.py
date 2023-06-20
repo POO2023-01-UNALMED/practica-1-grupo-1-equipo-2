@@ -525,16 +525,18 @@ def menuEstudiante(estudiante: Estudiante):
             label_sin_calificaciones.grid(row=0, column=0, padx=10, pady=10)
         else:
             for i, profesor in enumerate(profesores):
-                calificacion = profesor.evaluacion_docente()
+                profesor.evaluacion_docente()  # Calculate the average score
+                calificacion = profesor.getCalificacion_docente()  # Get the average score
                 if calificacion is None:
                     calificacion = "No disponible"
                 label_calificacion = Label(frameVentanaInicio,
                                            text=f"{profesor.getNombre()}: Calificación actual del docente: {calificacion}")
-                label_calificacion.config(font=("Times New Roman", 15))
+                label_calificacion.config(font=("Times New Roman", 12))
                 label_calificacion.grid(row=i, column=0, padx=10, pady=10)
 
         salir_del_sistema(datos_sistema)
-
+        btn_volver = Button(frameVentanaInicio, text="Volver al menú principal", command=menuEstudiante)
+        btn_volver.grid(row=len(profesores) + 1, column=0, padx=10, pady=10)
 
     def volverAlMenuPrincipal():
         salir_del_sistema(datos_sistema)

@@ -39,5 +39,6 @@ class Profesor(Persona):
             total_calificaciones += calificacion
         self.calificacion_docente = round((total_calificaciones/len(self.calificaciones_docente))*10)/10.0
 
+
     def __str__(self):
         return f'Docente {self.getNombre()}'
