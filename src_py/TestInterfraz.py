@@ -294,24 +294,11 @@ def menuEstudiante(estudiante: Estudiante):
         def imprimirMateriasInscritas():
             materias_seleccionadas = [materia for materia, estado in materias_vars.items() if
                                       estado.get() == "Inscrita"]
-
-            bol = False
-            for materia_inscrita in materias_seleccionadas:
-                for materia_cursada in estudiante.getMaterias_cursadas():
-                    if materia_inscrita == materia_cursada.getNombre():
-                        bol = True
-                        break
-                if bol:
-                    break
-
             if not materias_seleccionadas:
-                messagebox.showerror("Erorr!", "Por favor, escoja materias que desea inscribir.")
+                messagebox.showerror("Error!", "Por favor, escoja materias que desea inscribir.")
                 ventanaInicio.destroy()
             elif estudiante.getMaterias_inscritas():
-                messagebox.showerror("Erorr!", "Usted ya ha inscrito las materias para este semestre.")
-                ventanaInicio.destroy()
-            elif bol:
-                messagebox.showerror("Erorr!", "Ya has cursado la/s materia/s seleccionada/s.")
+                messagebox.showerror("Error!", "Usted ya ha inscrito las materias para este semestre.")
                 ventanaInicio.destroy()
             else:
                 materias_seleccionadas = [materia for materia, estado in materias_vars.items() if
@@ -326,7 +313,6 @@ def menuEstudiante(estudiante: Estudiante):
                 for materia_sel in materias_encontradas:
                     estudiante.inscribir_materia(materia_sel.getNombre(), datos_sistema1.getMaterias())
 
-
                 salir_del_sistema(datos_sistema)
 
                 if not estudiante.getMaterias_inscritas():
@@ -334,10 +320,8 @@ def menuEstudiante(estudiante: Estudiante):
                                          "Verifique que ya haya cursado el prerrequisito de las materias que intenta inscribir.")
                     ventanaInicio.destroy()
 
+            # Botón para confirmar la inscripción y mostrar la lista de materias inscritas
 
-
-
-        # Botón para confirmar la inscripción y mostrar la lista de materias inscritas
         confirmar_btn = Button(frameVentanaInicio, text="Confirmar inscripción", command=imprimirMateriasInscritas)
         confirmar_btn.config(font=("Times New Roman", 12, "bold"))
         confirmar_btn.pack(side="bottom", pady=10)
